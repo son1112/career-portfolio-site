@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anderson Reinkordt - Resume</title>
+    <style>
+        /* PDF-Optimized Resume Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.4;
+            color: #333;
+            font-size: 11pt;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+            background: white;
+        }
+
+        /* Header Section */
+        .resume-header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .resume-header h1 {
+            font-size: 24pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .resume-header h2 {
+            font-size: 16pt;
+            color: #666;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        .resume-summary {
+            font-size: 10pt;
+            color: #555;
+            max-width: 6.5in;
+            margin: 0 auto;
+            line-height: 1.3;
+        }
+
+        .contact-info {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 10pt;
+        }
+
+        .contact-item {
+            color: #555;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 18px;
+        }
+
+        .section h3 {
+            font-size: 14pt;
+            color: #2c3e50;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 4px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        /* Experience Items */
+        .experience-item {
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2px;
+        }
+
+        .job-title {
+            flex: 1;
+        }
+
+        .job-title h4 {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 2px;
+        }
+
+        .company {
+            font-size: 11pt;
+            color: #666;
+            font-weight: normal;
+        }
+
+        .job-duration {
+            font-size: 10pt;
+            color: #888;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .job-location {
+            font-size: 9pt;
+            color: #999;
+            margin-bottom: 5px;
+            font-style: italic;
+        }
+
+        .job-achievements {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .job-achievements li {
+            margin-bottom: 3px;
+            padding-left: 12px;
+            position: relative;
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+
+        .job-achievements li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 8px;
+        }
+
+        .skill-category h4 {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .skill {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 9pt;
+            font-weight: 500;
+        }
+
+        .skill.expert {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .skill.advanced {
+            background: #3498db;
+            color: white;
+        }
+
+        .skill.intermediate {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .skill.beginner {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+
+        /* Education Grid */
+        .education-grid {
+            display: grid;
+            gap: 10px;
+        }
+
+        .education-item {
+            margin-bottom: 8px;
+        }
+
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+        }
+
+        .education-header h4 {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .duration {
+            font-size: 9pt;
+            color: #888;
+            font-weight: bold;
+        }
+
+        .institution {
+            font-size: 10pt;
+            color: #666;
+            margin-bottom: 2px;
+            font-weight: 600;
+        }
+
+        .education-item p {
+            font-size: 9pt;
+            color: #555;
+            line-height: 1.2;
+        }
+
+        /* Projects */
+        .project-item {
+            margin-bottom: 12px;
+            page-break-inside: avoid;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+        }
+
+        .project-header h4 {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .project-type {
+            font-size: 9pt;
+            color: #888;
+            font-style: italic;
+        }
+
+        .project-achievements {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .project-achievements li {
+            margin-bottom: 2px;
+            padding-left: 12px;
+            position: relative;
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+
+        .project-achievements li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        /* Print-specific styles */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0.5in;
+                font-size: 10pt;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+            
+            .experience-item {
+                page-break-inside: avoid;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+        }
+
+        /* Hide contact reveal elements in print */
+        @media print {
+            .contact-reveal-mini {
+                display: none;
+            }
+        }
+
+        /* No-print button for PDF generation trigger */
+        .pdf-actions {
+            text-align: center;
+            margin: 20px 0;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .pdf-actions button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12pt;
+            margin: 0 10px;
+        }
+
+        .pdf-actions button:hover {
+            background: #34495e;
+        }
+
+        @media print {
+            .pdf-actions {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Resume Header -->
+    <div class="resume-header">
+        <h1>Anderson Reinkordt</h1>
+        <h2>Senior Software Engineer</h2>
+        <p class="resume-summary">Founder & Technical Lead at Can.Code with 10+ years professional experience spanning Ruby on Rails development, AI integration, and enterprise-scale systems. Currently building innovative context engineering solutions and production AI platforms while maintaining proven track record of enabling 50,000+ users through technical innovation.</p>
+        <div class="contact-info">
+            <div class="contact-item">📍 Lincoln, NE, USA</div>
+            <div class="contact-item">💼 <a href="https://www.linkedin.com/in/anderson-reinkordt/" target="_blank">LinkedIn</a></div>
+            <div class="contact-item">💻 <a href="https://github.com/son1112" target="_blank">GitHub</a></div>
+            <div class="contact-item">💻 <a href="https://github.com/son1112" target="_blank">Code</a></div>
+            <div class="contact-item">📧 anderson.reinkordt@gmail.com</div>
+            <div class="contact-item">📞 +1-402-904-2933</div>
+        </div>
+    </div>
+
+    <!-- Core Technical Skills -->
+    <div class="section">
+        <h3>Core Technical Skills</h3>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h4>Backend Development</h4>
+                <div class="skills-list">
+                    <span class="skill expert">Ruby on Rails</span>
+                    <span class="skill expert">Ruby</span>
+                    <span class="skill advanced">Node.js</span>
+                    <span class="skill intermediate">Python</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Frontend Development</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">JavaScript</span>
+                    <span class="skill intermediate">TypeScript</span>
+                    <span class="skill intermediate">React</span>
+                    <span class="skill expert">HTML/CSS</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Database & Storage</h4>
+                <div class="skills-list">
+                    <span class="skill expert">PostgreSQL</span>
+                    <span class="skill expert">MySQL</span>
+                    <span class="skill advanced">Redis</span>
+                    <span class="skill advanced">ElasticSearch</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Cloud & DevOps</h4>
+                <div class="skills-list">
+                    <span class="skill expert">AWS</span>
+                    <span class="skill advanced">S3</span>
+                    <span class="skill intermediate">Lambda</span>
+                    <span class="skill advanced">CI/CD</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Tools & Practices</h4>
+                <div class="skills-list">
+                    <span class="skill expert">Git</span>
+                    <span class="skill expert">TDD/BDD</span>
+                    <span class="skill expert">Agile/Scrum</span>
+                    <span class="skill advanced">API Design</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Emerging Technologies</h4>
+                <div class="skills-list">
+                    <span class="skill intermediate">AI Integration</span>
+                    <span class="skill beginner">Machine Learning</span>
+                    <span class="skill intermediate">Microservices</span>
+                    <span class="skill advanced">REST APIs</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Professional Experience -->
+    <div class="section">
+        <h3>Professional Experience</h3>
+        
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Founder & Technical Lead</h4>
+                    <div class="company">Can.Code</div>
+                </div>
+                <div class="job-duration">Jan 2024 - Present</div>
+            </div>
+            <div class="job-location">Lincoln, NE & Remote</div>
+            <ul class="job-achievements">
+                <li><strong>Founded innovative AI company</strong> specializing in context engineering and intelligent business solutions</li>
+                <li>Built production <strong>🦆 rubberDucky platform</strong> using Next.js 15 with voice integration, real-time streaming, and 13+ specialized AI agents</li>
+                <li>Developed comprehensive <strong>context engineering methodology</strong> for optimizing AI prompt development and testing</li>
+                <li>Created AI-powered business strategy, security, and application development assistants</li>
+                <li>Implemented voice-enabled AI with AssemblyAI real-time streaming and WebSocket technology</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Senior Ruby on Rails Engineer</h4>
+                    <div class="company">Huntress Labs</div>
+                </div>
+                <div class="job-duration">Aug 2022 - Jan 2024</div>
+            </div>
+            <div class="job-location">Remote</div>
+            <ul class="job-achievements">
+                <li><strong>Engineered Microsoft 365 integration project</strong> enabling monitoring and threat hunting for malicious actors at ground zero for social engineering efforts</li>
+                <li>Advanced development in Cybersecurity, 3rd party Integrations, and engineering code standards</li>
+                <li>Acted as rotational SRE, monitoring for new and existing bugs, triaging and communicating to keep priorities aligned with development</li>
+                <li>Contributed to cybersecurity platform protecting thousands of organizations from advanced threats</li>
+            </ul>
+        </div>
+        
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Senior Ruby on Rails Engineer</h4>
+                    <div class="company">Stripe</div>
+                </div>
+                <div class="job-duration">Aug 2021 - Aug 2022</div>
+            </div>
+            <div class="job-location">Remote</div>
+            <ul class="job-achievements">
+                <li><strong>Enabled accurate tax compliance for 50,000+ TaxJar users</strong> by integrating Amazon Seller Partner API</li>
+                <li>Produced core discovery work for integration of TaxJar into Stripe systems</li>
+                <li>Advanced development in Fintech, Tax Compliance, Integrations, and Error Handling</li>
+                <li>Collaborated with cross-functional teams to deliver enterprise-scale solutions</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Senior Ruby on Rails Engineer</h4>
+                    <div class="company">TaxJar</div>
+                </div>
+                <div class="job-duration">Mar 2021 - Aug 2021</div>
+            </div>
+            <div class="job-location">Remote</div>
+            <ul class="job-achievements">
+                <li><strong>Saved 100+ developer hours annually</strong> by automating tax remediation analysis, enabling support staff to use a dashboard button</li>
+                <li>Regular rotation on SRE responsibilities, including monitoring Honey Badger, Splunk, Sentry, NewRelic</li>
+                <li>Advanced development in Tax Compliance, Integrations, and software reliability</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Full Stack Ruby on Rails Engineer</h4>
+                    <div class="company">PaymentSpring</div>
+                </div>
+                <div class="job-duration">Jul 2019 - Mar 2021</div>
+            </div>
+            <div class="job-location">Lincoln & Remote</div>
+            <ul class="job-achievements">
+                <li>Developed middleware for Account Updater service to AWS SAM state machine</li>
+                <li>Built integrations with S3 to keep customers' Credentials on File in sync with payment processors</li>
+                <li>Improved developer onboarding process and documentation, Agile practices</li>
+                <li>Advanced development in Fintech, Integrations, and microservices architecture</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Core Ruby on Rails Engineer</h4>
+                    <div class="company">CardFlight</div>
+                </div>
+                <div class="job-duration">Oct 2016 - Jul 2019</div>
+            </div>
+            <div class="job-location">Lincoln</div>
+            <ul class="job-achievements">
+                <li><strong>Engineered integration libraries for multiple payment systems</strong> achieving certifications with major payment processors including Vantiv (now Worldpay) and First Data</li>
+                <li>Developed comprehensive code testing (RSpec), coverage (SimpleCov), and analysis (RuboCop) practices</li>
+                <li>Advanced development in Fintech, Payment Processor Integrations, Testing, and Documentation</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Full Stack Ruby on Rails Developer</h4>
+                    <div class="company">Freelance & Prairie Hill Learning Center</div>
+                </div>
+                <div class="job-duration">Apr 2012 - Jun 2018</div>
+            </div>
+            <div class="job-location">Remote</div>
+            <ul class="job-achievements">
+                <li><strong>Launched successful freelance business</strong> securing 5 local clients by bootstrapping Ruby on Rails development</li>
+                <li>Built e-commerce and web services solutions using Ruby on Rails</li>
+                <li>Advanced development in WordPress, HTML, JavaScript, PHP, and jQuery</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Lead Guide</h4>
+                    <div class="company">Prairie Hill Learning Center</div>
+                </div>
+                <div class="job-duration">Aug 2006 - Sep 2014</div>
+            </div>
+            <div class="job-location">Roca, NE</div>
+            <ul class="job-achievements">
+                <li>Led early childhood education programs for 18-36 month old children</li>
+                <li>Certified AMI Assistant and Lead Guide, specializing in Assistance to Infancy</li>
+                <li>Developed systematic teaching methodologies and mentorship skills</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Education -->
+    <div class="section">
+        <h3>Education & Certifications</h3>
+        
+        <div class="education-grid">
+            <div class="education-item">
+                <div class="education-header">
+                    <h4>Front-End Developer Professional Certificate</h4>
+                    <span class="duration">Aug 2024 - Present</span>
+                </div>
+                <div class="institution">Meta (Facebook)</div>
+                <p>Web Development with React, modern JavaScript, and responsive design</p>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-header">
+                    <h4>Full Stack Ruby on Rails Development</h4>
+                    <span class="duration">Jul 2016 - Oct 2016</span>
+                </div>
+                <div class="institution">Viking Code School</div>
+                <p>Intensive full-stack development bootcamp focusing on Ruby on Rails</p>
+            </div>
+            
+            <div class="education-item">
+                <div class="education-header">
+                    <h4>AMI Certified Assistant to Infancy</h4>
+                    <span class="duration">Aug 2008 - May 2009</span>
+                </div>
+                <div class="institution">Montessori Training Center of Minnesota</div>
+                <p>Early Childhood Education and systematic learning methodologies</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Projects & Innovation -->
+    <div class="section">
+        <h3>Key Projects & Innovation</h3>
+        
+        <div class="project-item">
+            <div class="project-header">
+                <h4>🦆 AI-Powered Career Development System</h4>
+                <span class="project-type">RubberDucky Innovation Project</span>
+            </div>
+            <ul class="project-achievements">
+                <li>Built comprehensive AI system generating 500+ documents across multiple career domains</li>
+                <li>Developed 8 specialized AI agents for interview preparation, resume optimization, and technical coaching</li>
+                <li>Achieved 99%+ system reliability with multi-format output generation</li>
+                <li>Demonstrated advanced AI integration and natural language processing capabilities</li>
+            </ul>
+        </div>
+
+        <div class="project-item">
+            <div class="project-header">
+                <h4>Tax Compliance Automation Platform</h4>
+                <span class="project-type">Enterprise System</span>
+            </div>
+            <ul class="project-achievements">
+                <li>End-to-end system for archival data retrieval and secure delivery</li>
+                <li>Automated complex process reducing manual intervention by 90%</li>
+                <li>Integrated with sharded PostgreSQL databases and AWS S3 Glacier storage</li>
+                <li>Implemented secure data handling meeting TaxJar and Stripe security requirements</li>
+            </ul>
+        </div>
+
+        <div class="project-item">
+            <div class="project-header">
+                <h4>Payment Processor Integration Libraries</h4>
+                <span class="project-type">Financial Systems</span>
+            </div>
+            <ul class="project-achievements">
+                <li>Built integration libraries for multiple major payment processors</li>
+                <li>Achieved certifications with Vantiv (Worldpay) 610 host and First Data Omaha</li>
+                <li>Established comprehensive testing, coverage, and code analysis practices</li>
+                <li>Created maintainable, scalable financial transaction processing systems</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- PDF Action Buttons (Hidden in Print) -->
+    <div class="pdf-actions">
+        <button onclick="window.print()">🖨️ Print Resume</button>
+        <button onclick="window.close()">❌ Close Window</button>
+    </div>
+
+    <script>
+        // Auto-trigger print dialog when page loads
+        window.addEventListener('load', function() {
+            // Small delay to ensure page is fully rendered
+            setTimeout(function() {
+                window.print();
+            }, 500);
+        });
+
+        // Handle print dialog completion
+        window.addEventListener('afterprint', function() {
+            // Optionally close the window after printing
+            // window.close();
+        });
+    </script>
+</body>
+</html>
