@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://son1112.github.io/career-portfolio-site/sitemap.xml
+
+# Allow crawling of all resources
+Allow: /public/
+Allow: /styles.css
+Allow: /script.js
+Allow: /resume.html
+
+# Prevent crawling of development files
+Disallow: /lighthouse-report.json
+Disallow: /lighthouse-performance-test.json
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
