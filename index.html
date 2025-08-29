@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="cartoon-header.webp" type="image/webp">
+    <link rel="preload" as="image" href="cartoon-header.png" type="image/png">
 </head>
 <body>
     <!-- Navigation -->
@@ -36,7 +38,10 @@
     <!-- Hero Banner with Background -->
     <section class="hero-banner" id="profile">
         <div class="hero-background">
-            <img src="cartoon-header.png" alt="Developer Debugging Environment" class="hero-bg-image">
+            <picture>
+                <source srcset="cartoon-header.webp" type="image/webp">
+                <img src="cartoon-header.png" alt="Developer Debugging Environment" class="hero-bg-image">
+            </picture>
             <div class="hero-overlay"></div>
         </div>
         <div class="hero-content">
@@ -83,7 +88,10 @@
                     <div class="profile-card">
                         <div class="rubber-duck-container">
                             <div class="rubber-duck">
-                                <img src="rubber-duck.png" alt="Rubber Duck Debugging" class="duck-image">
+                                <picture>
+                                    <source srcset="rubber-duck.webp" type="image/webp">
+                                    <img src="rubber-duck.png" alt="Rubber Duck Debugging" class="duck-image" loading="lazy">
+                                </picture>
                                 <div class="code-bubble">
                                     <span class="code-text">if(problem &lt; solved) { }</span>
                                     <div class="bubble-tail"></div>
