@@ -55,7 +55,7 @@ function initializeNavigation() {
  * Update active navigation link based on scroll position
  */
 function updateActiveNavLink() {
-    const sections = ['profile', 'opportunities', 'assessments', 'ai-system', 'achievements', 'contact'];
+    const sections = ['profile', 'resume', 'case-studies', 'ai-system', 'achievements', 'contact'];
     const navLinks = document.querySelectorAll('.nav-link');
     
     let activeSection = '';
