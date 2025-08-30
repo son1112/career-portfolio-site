@@ -1,6 +1,53 @@
 // Career Portfolio Site - Interactive JavaScript
 
+// A/B Test Hero Message Variants
+const heroVariants = {
+    'ai-focused': {
+        title: 'AI-Focused Software Engineer',
+        subtitle: 'Building intelligent systems that scale from MVP to millions',
+        taglines: ['Ruby on Rails Expert', 'AI Tooling Specialist', 'Rapid Development'],
+        cta1: 'View Experience',
+        cta2: "Let's Debug Together",
+        bio: 'AI-focused Rails engineer with 10+ years building high-performance systems from rapid MVPs to enterprise scale. Expert in AI tooling integration, autonomous development, and shipping fast - currently building production AI platforms with Claude Code and modern Rails architecture.'
+    },
+    'rails-backend': {
+        title: 'Senior Rails Engineer',
+        subtitle: 'Architecting robust backend systems that power modern applications',
+        taglines: ['Ruby on Rails Expert', 'API Architecture', 'Database Optimization'],
+        cta1: 'View Portfolio',
+        cta2: 'Discuss Architecture',
+        bio: 'Senior Rails engineer with 10+ years building scalable backend systems. Expert in API design, database optimization, and payment processing - delivered enterprise solutions serving 50,000+ users with 99%+ uptime.'
+    },
+    'tech-lead': {
+        title: 'Technical Lead & Founder',
+        subtitle: 'Leading teams to build products that scale from zero to millions',
+        taglines: ['Team Leadership', 'Product Strategy', 'Technical Vision'],
+        cta1: 'View Leadership',
+        cta2: 'Schedule Coffee',
+        bio: 'Technical leader and founder with 10+ years building teams and products. Expert in scaling from MVP to enterprise, team mentorship, and strategic technical decisions - founded Can.Code and led engineering teams to deliver high-impact solutions.'
+    },
+    'fullstack': {
+        title: 'Full-Stack Engineer',
+        subtitle: 'End-to-end product development from concept to production',
+        taglines: ['Ruby on Rails', 'Modern Frontend', 'DevOps & Deployment'],
+        cta1: 'See Projects',
+        cta2: 'Start Building',
+        bio: 'Full-stack engineer with 10+ years building complete web applications. Expert in Rails backend, modern frontend frameworks, and deployment automation - delivered products from initial concept through production scale.'
+    },
+    'enterprise-fintech': {
+        title: 'Enterprise Fintech Engineer',
+        subtitle: 'Building secure, compliant financial systems at scale',
+        taglines: ['Payment Processing', 'Financial Compliance', 'Enterprise Scale'],
+        cta1: 'View Solutions',
+        cta2: 'Discuss Compliance',
+        bio: 'Enterprise software engineer with 10+ years in financial technology. Expert in payment processing, tax compliance automation, and PCI-compliant systems - architected solutions for 50,000+ users across multiple processors.'
+    }
+};
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize A/B testing
+    initializeHeroABTest();
+    
     // Navigation functionality
     initializeNavigation();
     
@@ -712,6 +759,157 @@ function debounce(func, wait) {
 
 // Apply debouncing to scroll-intensive functions
 window.addEventListener('scroll', debounce(updateActiveNavLink, 10));
+
+/**
+ * Initialize A/B testing for hero messages
+ */
+function initializeHeroABTest() {
+    // Get variant from URL parameter or use default
+    const urlParams = new URLSearchParams(window.location.search);
+    const variant = urlParams.get('variant') || 'ai-focused';
+    
+    // Apply the variant if it exists
+    if (heroVariants[variant]) {
+        applyHeroVariant(variant);
+        
+        // Track variant view with Analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'hero_variant_view', {
+                'variant_name': variant,
+                'event_category': 'A/B_Test'
+            });
+        }
+    }
+    
+    // Add admin controls in development/testing
+    if (urlParams.get('admin') === 'true') {
+        addHeroVariantControls();
+    }
+}
+
+/**
+ * Apply a hero variant to the page
+ */
+function applyHeroVariant(variantKey) {
+    const variant = heroVariants[variantKey];
+    if (!variant) return;
+    
+    // Update hero title
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) heroTitle.textContent = variant.title;
+    
+    // Update hero subtitle
+    const heroSubtitle = document.querySelector('.hero-subtitle');
+    if (heroSubtitle) heroSubtitle.textContent = variant.subtitle;
+    
+    // Update taglines
+    const heroTagline = document.querySelector('.hero-tagline');
+    if (heroTagline && variant.taglines) {
+        heroTagline.innerHTML = variant.taglines
+            .map(tag => `<span class="highlight">${tag}</span>`)
+            .join(' • ');
+    }
+    
+    // Update CTAs
+    const primaryCTA = document.querySelector('.hero-cta .btn-primary');
+    const secondaryCTA = document.querySelector('.hero-cta .btn-secondary');
+    if (primaryCTA) primaryCTA.textContent = variant.cta1;
+    if (secondaryCTA) secondaryCTA.textContent = variant.cta2;
+    
+    // Update profile bio
+    const profileBio = document.querySelector('.profile-bio');
+    if (profileBio) profileBio.textContent = variant.bio;
+    
+    // Store current variant for analytics
+    window.currentHeroVariant = variantKey;
+}
+
+/**
+ * Add admin controls for testing variants (development only)
+ */
+function addHeroVariantControls() {
+    const controlsDiv = document.createElement('div');
+    controlsDiv.id = 'hero-variant-controls';
+    controlsDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        z-index: 10000;
+        font-family: system-ui, sans-serif;
+        font-size: 14px;
+    `;
+    
+    const title = document.createElement('h4');
+    title.textContent = 'Hero Variants';
+    title.style.margin = '0 0 10px 0';
+    controlsDiv.appendChild(title);
+    
+    Object.keys(heroVariants).forEach(key => {
+        const button = document.createElement('button');
+        button.textContent = key.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
+        button.style.cssText = `
+            display: block;
+            width: 100%;
+            margin: 5px 0;
+            padding: 8px 12px;
+            border: 1px solid #2563eb;
+            background: #fff;
+            color: #2563eb;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        `;
+        
+        button.addEventListener('click', () => {
+            applyHeroVariant(key);
+            // Update URL without page reload
+            const url = new URL(window.location);
+            url.searchParams.set('variant', key);
+            window.history.replaceState({}, '', url);
+        });
+        
+        controlsDiv.appendChild(button);
+    });
+    
+    // Add close button
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = '×';
+    closeBtn.style.cssText = `
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: none;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        padding: 0;
+        width: 20px;
+        height: 20px;
+    `;
+    closeBtn.addEventListener('click', () => controlsDiv.remove());
+    controlsDiv.appendChild(closeBtn);
+    
+    document.body.appendChild(controlsDiv);
+}
+
+/**
+ * Get sharing URLs for different variants
+ */
+function getVariantURLs() {
+    const baseURL = window.location.origin + window.location.pathname;
+    const urls = {};
+    
+    Object.keys(heroVariants).forEach(variant => {
+        urls[variant] = `${baseURL}?variant=${variant}`;
+    });
+    
+    return urls;
+}
 
 // Service Worker registration for offline capabilities (optional)
 if ('serviceWorker' in navigator) {
