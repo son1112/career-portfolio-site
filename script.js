@@ -192,7 +192,7 @@ function initializeDynamicContent() {
 function copyToClipboard(text) {
     if (navigator.clipboard) {
         navigator.clipboard.writeText(text).then(() => {
-            console.log('Copied to clipboard:', text);
+            // Successfully copied to clipboard
         }).catch(err => {
             console.error('Failed to copy: ', err);
             fallbackCopyToClipboard(text);
@@ -217,7 +217,7 @@ function fallbackCopyToClipboard(text) {
     
     try {
         document.execCommand('copy');
-        console.log('Copied to clipboard (fallback):', text);
+        // Successfully copied using fallback method
     } catch (err) {
         console.error('Fallback copy failed: ', err);
     }
@@ -717,7 +717,7 @@ window.addEventListener('scroll', debounce(updateActiveNavLink, 10));
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
         navigator.serviceWorker.register('/sw.js').then(function(registration) {
-            console.log('ServiceWorker registration successful');
+            // ServiceWorker registered successfully
         }, function(err) {
             console.log('ServiceWorker registration failed: ', err);
         });

@@ -20,6 +20,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Development artifacts
+lighthouse*.json
+*lighthouse*report*
+
 # Runtime data
 pids
 *.pid
