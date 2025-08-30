@@ -68,7 +68,13 @@ function updateActiveNavLink() {
             const sectionHeight = section.offsetHeight;
             
             if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                activeSection = sectionId;
+                if (activeSection !== sectionId) {
+                    activeSection = sectionId;
+                    // Track section view for analytics
+                    if (typeof trackSectionView === 'function') {
+                        trackSectionView(sectionId);
+                    }
+                }
             }
         }
     });
@@ -336,6 +342,11 @@ function initializeContactReveal() {
                 // Update the display
                 valueElement.textContent = decoded;
                 this.classList.add('revealed');
+                
+                // Track contact reveal for analytics
+                if (typeof trackContactReveal === 'function') {
+                    trackContactReveal();
+                }
                 
                 // Add copy functionality
                 this.style.cursor = 'pointer';

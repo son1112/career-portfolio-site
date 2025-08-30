@@ -79,6 +79,61 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="preload" as="image" href="public/gemini-hero-v2.webp" type="image/webp">
     <link rel="preload" as="image" href="public/Gemini_Generated_Image_h5t5zrh5t5zrh5t5.png" type="image/png">
+    
+    <!-- Google Analytics 4 -->
+    <!-- Replace GA_MEASUREMENT_ID with your actual Google Analytics 4 Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        // Configure GA4 with enhanced measurement
+        gtag('config', 'GA_MEASUREMENT_ID', {
+            // Enhanced measurement automatically tracks:
+            // - Page views, scrolls, outbound clicks, site search, video engagement, file downloads
+            page_title: 'Anderson Reinkordt - AI-Focused Software Engineer',
+            custom_map: {
+                'custom_parameter_1': 'portfolio_section'
+            }
+        });
+        
+        // Custom event tracking for portfolio-specific actions
+        function trackPortfolioEvent(action, section) {
+            gtag('event', action, {
+                event_category: 'Portfolio Engagement',
+                event_label: section,
+                custom_parameter_1: section
+            });
+        }
+        
+        // Track resume downloads
+        function trackResumeDownload() {
+            gtag('event', 'resume_download', {
+                event_category: 'File Downloads',
+                event_label: 'Resume PDF',
+                value: 1
+            });
+        }
+        
+        // Track contact reveals
+        function trackContactReveal() {
+            gtag('event', 'contact_reveal', {
+                event_category: 'Lead Generation',
+                event_label: 'Email Revealed',
+                value: 1
+            });
+        }
+        
+        // Track section engagement
+        function trackSectionView(sectionName) {
+            gtag('event', 'section_view', {
+                event_category: 'Content Engagement',
+                event_label: sectionName,
+                custom_parameter_1: sectionName
+            });
+        }
+    </script>
 </head>
 <body>
     <!-- No JavaScript fallback -->
@@ -588,8 +643,8 @@
 
             <!-- Resume Actions -->
             <div class="resume-actions">
-                <button class="btn-primary" onclick="window.print()">📄 Print Resume</button>
-                <button class="btn-secondary" id="download-resume">💾 Download PDF</button>
+                <button class="btn-primary" onclick="window.print(); if(typeof trackResumeDownload === 'function') trackResumeDownload();">📄 Print Resume</button>
+                <button class="btn-secondary" id="download-resume" onclick="if(typeof trackResumeDownload === 'function') trackResumeDownload();">💾 Download PDF</button>
                 <a href="#contact" class="btn-secondary">📧 Contact Me</a>
             </div>
         </div>
