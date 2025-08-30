@@ -8,7 +8,12 @@ const heroVariants = {
         taglines: ['Ruby on Rails Expert', 'AI Tooling Specialist', 'Rapid Development'],
         cta1: 'View Experience',
         cta2: "Let's Debug Together",
-        bio: 'AI-focused Rails engineer with 10+ years building high-performance systems from rapid MVPs to enterprise scale. Expert in AI tooling integration, autonomous development, and shipping fast - currently building production AI platforms with Claude Code and modern Rails architecture.'
+        bio: 'AI-focused Rails engineer with 10+ years building high-performance systems from rapid MVPs to enterprise scale. Expert in AI tooling integration, autonomous development, and shipping fast - currently building production AI platforms with Claude Code and modern Rails architecture.',
+        heroImage: {
+            webp: 'public/gemini-hero-v2.webp',
+            fallback: 'public/Gemini_Generated_Image_h5t5zrh5t5zrh5t5.png',
+            alt: 'AI-Focused Software Engineer with Advanced Development Tools'
+        }
     },
     'rails-backend': {
         title: 'Senior Rails Engineer',
@@ -16,7 +21,12 @@ const heroVariants = {
         taglines: ['Ruby on Rails Expert', 'API Architecture', 'Database Optimization'],
         cta1: 'View Portfolio',
         cta2: 'Discuss Architecture',
-        bio: 'Senior Rails engineer with 10+ years building scalable backend systems. Expert in API design, database optimization, and payment processing - delivered enterprise solutions serving 50,000+ users with 99%+ uptime.'
+        bio: 'Senior Rails engineer with 10+ years building scalable backend systems. Expert in API design, database optimization, and payment processing - delivered enterprise solutions serving 50,000+ users with 99%+ uptime.',
+        heroImage: {
+            webp: 'public/gemeni-hero-banner.webp',
+            fallback: 'public/gemeni-hero-banner.png',
+            alt: 'Senior Rails Engineer Backend Architecture Focus'
+        }
     },
     'tech-lead': {
         title: 'Technical Lead & Founder',
@@ -24,7 +34,12 @@ const heroVariants = {
         taglines: ['Team Leadership', 'Product Strategy', 'Technical Vision'],
         cta1: 'View Leadership',
         cta2: 'Schedule Coffee',
-        bio: 'Technical leader and founder with 10+ years building teams and products. Expert in scaling from MVP to enterprise, team mentorship, and strategic technical decisions - founded Can.Code and led engineering teams to deliver high-impact solutions.'
+        bio: 'Technical leader and founder with 10+ years building teams and products. Expert in scaling from MVP to enterprise, team mentorship, and strategic technical decisions - founded Can.Code and led engineering teams to deliver high-impact solutions.',
+        heroImage: {
+            webp: 'public/gemini-hero-v2.webp',
+            fallback: 'public/Gemini_Generated_Image_h5t5zrh5t5zrh5t5.png',
+            alt: 'Technical Leader and Engineering Team Builder'
+        }
     },
     'fullstack': {
         title: 'Full-Stack Engineer',
@@ -32,7 +47,12 @@ const heroVariants = {
         taglines: ['Ruby on Rails', 'Modern Frontend', 'DevOps & Deployment'],
         cta1: 'See Projects',
         cta2: 'Start Building',
-        bio: 'Full-stack engineer with 10+ years building complete web applications. Expert in Rails backend, modern frontend frameworks, and deployment automation - delivered products from initial concept through production scale.'
+        bio: 'Full-stack engineer with 10+ years building complete web applications. Expert in Rails backend, modern frontend frameworks, and deployment automation - delivered products from initial concept through production scale.',
+        heroImage: {
+            webp: 'public/gemeni-hero-banner.webp',
+            fallback: 'public/gemeni-hero-banner.png',
+            alt: 'Full-Stack Engineer End-to-End Development'
+        }
     },
     'enterprise-fintech': {
         title: 'Enterprise Fintech Engineer',
@@ -40,7 +60,12 @@ const heroVariants = {
         taglines: ['Payment Processing', 'Financial Compliance', 'Enterprise Scale'],
         cta1: 'View Solutions',
         cta2: 'Discuss Compliance',
-        bio: 'Enterprise software engineer with 10+ years in financial technology. Expert in payment processing, tax compliance automation, and PCI-compliant systems - architected solutions for 50,000+ users across multiple processors.'
+        bio: 'Enterprise software engineer with 10+ years in financial technology. Expert in payment processing, tax compliance automation, and PCI-compliant systems - architected solutions for 50,000+ users across multiple processors.',
+        heroImage: {
+            webp: 'public/gemini-hero-v2.webp',
+            fallback: 'public/Gemini_Generated_Image_h5t5zrh5t5zrh5t5.png',
+            alt: 'Enterprise Fintech Engineer Security and Compliance Focus'
+        }
     }
 };
 
@@ -820,8 +845,76 @@ function applyHeroVariant(variantKey) {
     const profileBio = document.querySelector('.profile-bio');
     if (profileBio) profileBio.textContent = variant.bio;
     
+    // Update hero image
+    if (variant.heroImage) {
+        updateHeroImage(variant.heroImage);
+    }
+    
     // Store current variant for analytics
     window.currentHeroVariant = variantKey;
+}
+
+/**
+ * Update hero background image with smooth transition
+ */
+function updateHeroImage(imageConfig) {
+    const heroBackground = document.querySelector('.hero-background picture');
+    const heroImg = document.querySelector('.hero-bg-image');
+    
+    if (!heroBackground || !heroImg) return;
+    
+    // Create new picture element with WebP support
+    const newPicture = document.createElement('picture');
+    
+    // Add WebP source
+    const webpSource = document.createElement('source');
+    webpSource.srcset = imageConfig.webp;
+    webpSource.type = 'image/webp';
+    newPicture.appendChild(webpSource);
+    
+    // Add fallback image
+    const newImg = document.createElement('img');
+    newImg.src = imageConfig.fallback;
+    newImg.alt = imageConfig.alt;
+    newImg.className = 'hero-bg-image';
+    
+    // Add smooth transition effect
+    newImg.style.opacity = '0';
+    newImg.style.transition = 'opacity 0.5s ease-in-out';
+    
+    // Handle image load
+    newImg.onload = function() {
+        // Fade out old image
+        const currentImg = heroBackground.querySelector('img');
+        if (currentImg) {
+            currentImg.style.transition = 'opacity 0.3s ease-in-out';
+            currentImg.style.opacity = '0';
+            
+            setTimeout(() => {
+                // Replace entire picture element
+                heroBackground.replaceWith(newPicture);
+                // Fade in new image
+                newImg.style.opacity = '1';
+            }, 300);
+        } else {
+            // No existing image, just replace and fade in
+            heroBackground.replaceWith(newPicture);
+            newImg.style.opacity = '1';
+        }
+    };
+    
+    // Handle image error
+    newImg.onerror = function() {
+        console.warn('Failed to load hero image:', imageConfig.fallback);
+        // Still fade in, better than nothing
+        newImg.style.opacity = '1';
+    };
+    
+    newPicture.appendChild(newImg);
+    
+    // Preload the image
+    const preloadImg = new Image();
+    preloadImg.src = imageConfig.fallback;
 }
 
 /**

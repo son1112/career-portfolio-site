@@ -8,30 +8,35 @@ Your portfolio now includes an A/B testing system for hero messages, allowing yo
 ### 1. AI-Focused (Default)
 - **URL**: `?variant=ai-focused` 
 - **Title**: "AI-Focused Software Engineer"
+- **Hero Image**: Advanced AI development tools and automation
 - **Best for**: AI/ML companies, Claude Code roles, modern tech startups
 - **Focus**: AI tooling, intelligent systems, rapid development
 
 ### 2. Rails Backend
 - **URL**: `?variant=rails-backend`
 - **Title**: "Senior Rails Engineer" 
+- **Hero Image**: Backend architecture and system design focus
 - **Best for**: Ruby shops, backend-focused roles, API-heavy positions
 - **Focus**: Backend architecture, database optimization, API design
 
 ### 3. Technical Lead
 - **URL**: `?variant=tech-lead`
 - **Title**: "Technical Lead & Founder"
+- **Hero Image**: Leadership and team building theme
 - **Best for**: Leadership roles, CTO positions, startup opportunities
 - **Focus**: Team leadership, product strategy, technical vision
 
 ### 4. Full-Stack
 - **URL**: `?variant=fullstack`
 - **Title**: "Full-Stack Engineer"
+- **Hero Image**: End-to-end development and deployment
 - **Best for**: Full-stack roles, smaller teams, end-to-end development
 - **Focus**: Complete application development, modern frameworks, deployment
 
 ### 5. Enterprise Fintech
 - **URL**: `?variant=enterprise-fintech`
 - **Title**: "Enterprise Fintech Engineer"
+- **Hero Image**: Security, compliance, and enterprise systems
 - **Best for**: Financial companies, enterprise roles, compliance-focused positions  
 - **Focus**: Payment processing, financial compliance, enterprise scale
 
@@ -92,6 +97,9 @@ const heroVariants = {
 ## Technical Details
 
 - **No page reload**: Variants switch dynamically with JavaScript
+- **Smooth transitions**: Hero images fade between variants with smooth 0.5s transitions
+- **WebP optimization**: All hero images support modern WebP format with PNG fallbacks
 - **SEO friendly**: Default variant loads first, variants applied client-side
 - **Mobile responsive**: All variants work across devices
 - **Analytics integrated**: Automatic tracking of variant performance
+- **Image preloading**: Hero images preload for instant switching
