@@ -577,23 +577,141 @@ function initializeResumeActions() {
 }
 
 /**
- * Download resume as PDF by opening dedicated resume page
+ * Download resume as PDF with role-specific options
  */
 function downloadResumeAsPDF() {
-    // Open the dedicated resume page in a new window
+    // Get current hero variant to suggest matching resume role
+    const currentVariant = window.currentHeroVariant || 'ai-focused';
+    
+    // Create resume options modal
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        font-family: var(--font-family);
+    `;
+    
+    modal.innerHTML = `
+        <div style="
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        ">
+            <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 1.5rem;">
+                📄 Resume Download Options
+            </h3>
+            <p style="margin-bottom: 25px; color: var(--text-secondary); line-height: 1.6;">
+                Choose your preferred resume format:
+            </p>
+            
+            <div style="display: grid; gap: 15px; margin-bottom: 25px;">
+                <button onclick="openDynamicResume('${currentVariant}')" style="
+                    padding: 15px;
+                    background: var(--primary);
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    transition: var(--transition);
+                ">
+                    🎯 Role-Optimized Resume (${currentVariant.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())})
+                </button>
+                
+                <button onclick="openStaticResume()" style="
+                    padding: 15px;
+                    background: var(--secondary);
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    transition: var(--transition);
+                ">
+                    📋 Standard Resume
+                </button>
+            </div>
+            
+            <button onclick="closeResumeModal()" style="
+                padding: 8px 16px;
+                background: none;
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                cursor: pointer;
+                color: var(--text-muted);
+                font-size: 0.9rem;
+            ">
+                Cancel
+            </button>
+        </div>
+    `;
+    
+    // Add click outside to close
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeResumeModal();
+        }
+    });
+    
+    document.body.appendChild(modal);
+    
+    // Store modal reference
+    window.resumeModal = modal;
+}
+
+/**
+ * Open dynamic resume with role-specific content
+ */
+function openDynamicResume(role = 'ai-focused') {
+    closeResumeModal();
+    const resumeWindow = window.open(
+        `dynamic-resume.html?role=${role}&print=true`, 
+        '_blank', 
+        'width=900,height=1200,scrollbars=yes,resizable=yes'
+    );
+    
+    showNotification(`Role-optimized resume opened for ${role.replace('-', ' ')}! Print dialog will appear automatically.`, 'success');
+    
+    if (!resumeWindow || resumeWindow.closed || typeof resumeWindow.closed === 'undefined') {
+        showNotification('Please allow popups for this site to download resume.', 'warning');
+    }
+}
+
+/**
+ * Open static resume (original)
+ */
+function openStaticResume() {
+    closeResumeModal();
     const resumeWindow = window.open('resume.html', '_blank', 'width=900,height=1200,scrollbars=yes,resizable=yes');
     
-    // Show notification to user
-    showNotification('Resume page opened! The print dialog will appear automatically for PDF download.', 'info');
+    showNotification('Standard resume opened! Print dialog will appear automatically.', 'info');
     
-    // Fallback: If popup is blocked, show instructions
     if (!resumeWindow || resumeWindow.closed || typeof resumeWindow.closed === 'undefined') {
-        showNotification('Please allow popups for this site, or manually navigate to resume.html to download PDF.', 'warning');
-        
-        // Try to navigate to resume page as fallback
-        setTimeout(() => {
-            window.location.href = 'resume.html';
-        }, 3000);
+        showNotification('Please allow popups for this site to download resume.', 'warning');
+    }
+}
+
+/**
+ * Close resume options modal
+ */
+function closeResumeModal() {
+    if (window.resumeModal) {
+        document.body.removeChild(window.resumeModal);
+        window.resumeModal = null;
     }
 }
 
