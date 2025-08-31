@@ -105,6 +105,42 @@ Name: www
 Value: YOUR_USERNAME.github.io
 ```
 
+## 🌳 Branching Strategy
+
+### Branch Structure
+- **`main`** - Production branch (auto-deploys to sonander.dev)
+- **`develop`** - Integration branch for testing changes before production
+- **`feature/*`** - Feature branches for new development
+
+### Workflow
+1. **Create feature branch** from `develop`:
+   ```bash
+   git checkout develop
+   git pull origin develop
+   git checkout -b feature/your-feature-name
+   ```
+
+2. **Work on your changes** in the feature branch
+
+3. **Merge to develop** for integration testing:
+   ```bash
+   git checkout develop
+   git merge feature/your-feature-name
+   git push origin develop
+   ```
+
+4. **Merge develop to main** when ready for production:
+   ```bash
+   git checkout main
+   git merge develop
+   git push origin main
+   ```
+
+### Branch Protection
+- **`main`** - Protected branch, requires pull request reviews
+- **`develop`** - Integration testing branch
+- All production deployments go through `main` → GitHub Pages
+
 ## 📦 Local Development
 
 ### Prerequisites
