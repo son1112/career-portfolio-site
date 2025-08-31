@@ -4,66 +4,66 @@
 const heroVariants = {
     'ai-focused': {
         title: 'AI-Focused Software Engineer',
-        subtitle: 'Building intelligent systems that scale from MVP to millions',
+        subtitle: 'Building reliable systems that consistently exceed expectations',
         taglines: ['Ruby on Rails Expert', 'AI Tooling Specialist', 'Rapid Development'],
         cta1: 'View Experience',
         cta2: "Let's Debug Together",
         bio: 'AI-focused Rails engineer with 10+ years building high-performance systems from rapid MVPs to enterprise scale. Expert in AI tooling integration, autonomous development, and shipping fast - currently building production AI platforms with Claude Code and modern Rails architecture.',
         heroImage: {
-            webp: 'public/gemini-hero-v2.webp',
-            fallback: 'public/Gemini_Generated_Image_h5t5zrh5t5zrh5t5.png',
-            alt: 'AI-Focused Software Engineer with Advanced Development Tools'
+            webp: 'public/gemini-hero-v3.webp',
+            fallback: 'public/Gemini_Generated_Image_e0qca5e0qca5e0qc.png',
+            alt: 'AI-Focused Software Engineer with Natural Problem Solving'
         }
     },
     'rails-backend': {
         title: 'Senior Rails Engineer',
-        subtitle: 'Architecting robust backend systems that power modern applications',
+        subtitle: 'Architecting dependable backends with proven scalability',
         taglines: ['Ruby on Rails Expert', 'API Architecture', 'Database Optimization'],
         cta1: 'View Portfolio',
         cta2: 'Discuss Architecture',
         bio: 'Senior Rails engineer with 10+ years building scalable backend systems. Expert in API design, database optimization, and payment processing - delivered enterprise solutions serving 50,000+ users with 99%+ uptime.',
         heroImage: {
-            webp: 'public/gemeni-hero-banner.webp',
-            fallback: 'public/gemeni-hero-banner.png',
+            webp: 'public/gemini-hero-v3.webp',
+            fallback: 'public/Gemini_Generated_Image_e0qca5e0qca5e0qc.png',
             alt: 'Senior Rails Engineer Backend Architecture Focus'
         }
     },
     'tech-lead': {
         title: 'Technical Lead & Founder',
-        subtitle: 'Leading teams to build products that scale from zero to millions',
+        subtitle: 'Leading teams to consistently deliver beyond expectations',
         taglines: ['Team Leadership', 'Product Strategy', 'Technical Vision'],
         cta1: 'View Leadership',
         cta2: 'Schedule Coffee',
         bio: 'Technical leader and founder with 10+ years building teams and products. Expert in scaling from MVP to enterprise, team mentorship, and strategic technical decisions - founded Can.Code and led engineering teams to deliver high-impact solutions.',
         heroImage: {
-            webp: 'public/gemini-hero-v2.webp',
-            fallback: 'public/Gemini_Generated_Image_h5t5zrh5t5zrh5t5.png',
+            webp: 'public/gemini-hero-v3.webp',
+            fallback: 'public/Gemini_Generated_Image_e0qca5e0qca5e0qc.png',
             alt: 'Technical Leader and Engineering Team Builder'
         }
     },
     'fullstack': {
         title: 'Full-Stack Engineer',
-        subtitle: 'End-to-end product development from concept to production',
+        subtitle: 'Delivering complete solutions that reliably surpass requirements',
         taglines: ['Ruby on Rails', 'Modern Frontend', 'DevOps & Deployment'],
         cta1: 'See Projects',
         cta2: 'Start Building',
         bio: 'Full-stack engineer with 10+ years building complete web applications. Expert in Rails backend, modern frontend frameworks, and deployment automation - delivered products from initial concept through production scale.',
         heroImage: {
-            webp: 'public/gemeni-hero-banner.webp',
-            fallback: 'public/gemeni-hero-banner.png',
+            webp: 'public/gemini-hero-v3.webp',
+            fallback: 'public/Gemini_Generated_Image_e0qca5e0qca5e0qc.png',
             alt: 'Full-Stack Engineer End-to-End Development'
         }
     },
     'enterprise-fintech': {
         title: 'Enterprise Fintech Engineer',
-        subtitle: 'Building secure, compliant financial systems at scale',
+        subtitle: 'Building secure financial systems with proven compliance excellence',
         taglines: ['Payment Processing', 'Financial Compliance', 'Enterprise Scale'],
         cta1: 'View Solutions',
         cta2: 'Discuss Compliance',
         bio: 'Enterprise software engineer with 10+ years in financial technology. Expert in payment processing, tax compliance automation, and PCI-compliant systems - architected solutions for 50,000+ users across multiple processors.',
         heroImage: {
-            webp: 'public/gemini-hero-v2.webp',
-            fallback: 'public/Gemini_Generated_Image_h5t5zrh5t5zrh5t5.png',
+            webp: 'public/gemini-hero-v3.webp',
+            fallback: 'public/Gemini_Generated_Image_e0qca5e0qca5e0qc.png',
             alt: 'Enterprise Fintech Engineer Security and Compliance Focus'
         }
     }

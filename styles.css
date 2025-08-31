@@ -8,21 +8,21 @@
 }
 
 :root {
-    /* Color Palette - Professional Tech */
-    --primary: #2563eb;
-    --primary-dark: #1d4ed8;
-    --secondary: #64748b;
-    --accent: #06b6d4;
-    --success: #10b981;
-    --warning: #f59e0b;
-    --background: #ffffff;
-    --surface: #f8fafc;
+    /* Color Palette - Bright Modern Earth Tones */
+    --primary: #6bbf85;        /* Bright emerald green */
+    --primary-dark: #58a372;   /* Darker emerald green */
+    --secondary: #d4c8a8;      /* Bright warm beige */
+    --accent: #7ab3d3;         /* Bright sky blue */
+    --success: #72d687;        /* Bright success green */
+    --warning: #f7d078;        /* Bright golden yellow */
+    --background: #fefdfb;     /* Keep warm off-white */
+    --surface: #fcfbf8;        /* Brighter warm surface */
     --surface-elevated: #ffffff;
-    --text-primary: #0f172a;
-    --text-secondary: #475569;
-    --text-muted: #94a3b8;
-    --border: #e2e8f0;
-    --border-light: #f1f5f9;
+    --text-primary: #1a1812;   /* Strong contrast dark */
+    --text-secondary: #2d2923; /* Bright medium dark */
+    --text-muted: #5a544b;     /* Bright muted text */
+    --border: #f5f1e9;         /* Bright light border */
+    --border-light: #f9f6f2;   /* Bright very light border */
     
     /* Typography */
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -74,7 +74,7 @@ body {
 }
 
 .navbar.scrolled {
-    background: rgba(15, 23, 42, 0.98);
+    background: rgba(58, 56, 50, 0.98);
     box-shadow: var(--shadow-sm);
 }
 
@@ -88,7 +88,7 @@ body {
 
 .navbar.scrolled .nav-link:hover,
 .navbar.scrolled .nav-link.active {
-    color: #60a5fa;
+    color: var(--accent);
 }
 
 .navbar.scrolled .bar {
@@ -208,8 +208,11 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    filter: brightness(0.4) saturate(1.2);
+    object-position: center center;
+    filter: brightness(0.8) saturate(1.1);
+    /* Ensure proper scaling for square image in wide container */
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .hero-overlay {
@@ -220,9 +223,9 @@ body {
     height: 100%;
     background: linear-gradient(
         135deg,
-        rgba(37, 99, 235, 0.8) 0%,
-        rgba(6, 182, 212, 0.6) 50%,
-        rgba(15, 23, 42, 0.9) 100%
+        rgba(31, 29, 23, 0.85) 0%,
+        rgba(31, 29, 23, 0.75) 50%,
+        rgba(31, 29, 23, 0.85) 100%
     );
 }
 
@@ -258,12 +261,14 @@ body {
 .hero-tagline {
     font-size: 1.1rem;
     margin-bottom: 3rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
 }
 
 .hero-tagline .highlight {
-    color: #60a5fa;
+    color: var(--accent);
     font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .hero-banner .hero-cta {
@@ -318,17 +323,16 @@ body {
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, var(--text-primary), var(--primary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .hero-subtitle {
     font-size: 1.25rem;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 2rem;
     font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
 }
 
 .hero-stats {
