@@ -322,6 +322,198 @@
             background: #34495e;
         }
 
+        /* Mobile Responsive Design */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .role-selector {
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                min-width: auto;
+                padding: 20px;
+                font-size: 16px;
+                border-radius: 12px;
+                box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            }
+            
+            .role-selector h3 {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+            
+            .role-selector select {
+                padding: 15px 12px;
+                font-size: 16px;
+                margin-bottom: 15px;
+                border-radius: 8px;
+                -webkit-appearance: none;
+                appearance: none;
+                background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5'><path fill='%23666' d='m0 0 2 3 2-3z'/></svg>");
+                background-repeat: no-repeat;
+                background-position: right 12px center;
+                background-size: 12px;
+            }
+            
+            .role-selector button {
+                padding: 15px 20px;
+                font-size: 16px;
+                margin-bottom: 8px;
+                border-radius: 8px;
+                min-height: 48px;
+                touch-action: manipulation;
+            }
+            
+            .role-selector .close-btn {
+                top: 15px;
+                right: 20px;
+                font-size: 24px;
+                min-height: 44px;
+                min-width: 44px;
+                border-radius: 50%;
+                background: #f8f9fa;
+                color: #666;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            /* Header Section */
+            .header h1 {
+                font-size: 28px;
+                line-height: 1.2;
+            }
+            
+            .header .contact-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .header .contact-info span {
+                font-size: 16px;
+            }
+            
+            /* Skills Grid Mobile Layout */
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .skill-category h4 {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+            
+            .skill {
+                font-size: 14px;
+                padding: 8px 12px;
+                margin: 2px;
+                border-radius: 6px;
+                line-height: 1.2;
+            }
+            
+            /* Experience Section */
+            .experience-header {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 8px;
+            }
+            
+            .job-title h4 {
+                font-size: 18px;
+                margin-bottom: 4px;
+            }
+            
+            .company {
+                font-size: 16px;
+            }
+            
+            .job-duration {
+                font-size: 14px;
+                margin-top: 4px;
+            }
+            
+            .job-achievements li {
+                font-size: 15px;
+                line-height: 1.4;
+                margin-bottom: 8px;
+                padding-left: 16px;
+            }
+            
+            /* Projects Section */
+            .project-header h4 {
+                font-size: 18px;
+                margin-bottom: 4px;
+            }
+            
+            .project-type {
+                font-size: 14px;
+            }
+            
+            .project-achievements li {
+                font-size: 15px;
+                line-height: 1.4;
+                margin-bottom: 8px;
+                padding-left: 16px;
+            }
+            
+            /* PDF Actions Mobile */
+            .pdf-actions {
+                margin-top: 30px;
+                text-align: center;
+            }
+            
+            .pdf-actions button {
+                padding: 15px 25px;
+                font-size: 16px;
+                min-height: 48px;
+                border-radius: 8px;
+                touch-action: manipulation;
+            }
+            
+            /* Section Spacing */
+            .section {
+                margin-bottom: 30px;
+            }
+            
+            .section h2 {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+        }
+        
+        /* Small Mobile Devices */
+        @media screen and (max-width: 480px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .role-selector {
+                top: 5px;
+                right: 5px;
+                left: 5px;
+                padding: 15px;
+            }
+            
+            .skill {
+                font-size: 13px;
+                padding: 6px 10px;
+            }
+            
+            .job-title h4 {
+                font-size: 16px;
+            }
+            
+            .job-achievements li,
+            .project-achievements li {
+                font-size: 14px;
+            }
+        }
+
         /* Print-specific styles */
         @media print {
             body {
