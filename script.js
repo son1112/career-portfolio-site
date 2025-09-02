@@ -262,6 +262,9 @@ function initializeDynamicContent() {
     
     // Initialize skills visualization
     initializeSkillsVisualization();
+    
+    // Initialize career timeline
+    initializeCareerTimeline();
 }
 
 /**
@@ -1613,6 +1616,289 @@ function getProficiencyDescription(level) {
     } else {
         return 'Beginner level - Basic understanding with supervised experience.';
     }
+}
+
+/**
+ * Initialize interactive career timeline
+ */
+function initializeCareerTimeline() {
+    const timeline = document.getElementById('careerTimeline');
+    if (!timeline) return;
+
+    // Create intersection observer for timeline animations
+    const timelineObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('animate')) {
+                entry.target.classList.add('animate');
+            }
+        });
+    }, {
+        threshold: 0.2,
+        rootMargin: '0px 0px -100px 0px'
+    });
+
+    // Observe all timeline items
+    const timelineItems = timeline.querySelectorAll('.timeline-item');
+    timelineItems.forEach((item, index) => {
+        // Add stagger delay
+        item.style.setProperty('--animation-delay', `${index * 0.2}s`);
+        item.style.transitionDelay = `${index * 0.1}s`;
+        
+        timelineObserver.observe(item);
+        
+        // Add click handlers
+        const content = item.querySelector('.timeline-content');
+        const marker = item.querySelector('.timeline-marker');
+        
+        [content, marker].forEach(element => {
+            element.addEventListener('click', () => showTimelineModal(item));
+        });
+    });
+}
+
+/**
+ * Show detailed timeline modal
+ */
+function showTimelineModal(timelineItem) {
+    const company = timelineItem.dataset.company;
+    const role = timelineItem.dataset.role;
+    const duration = timelineItem.dataset.duration;
+    const location = timelineItem.dataset.location;
+    const year = timelineItem.dataset.year;
+    
+    // Get full job details from the original experience section
+    const jobDetails = getJobDetails(company, year);
+    
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        font-family: var(--font-family);
+        backdrop-filter: blur(4px);
+    `;
+    
+    modal.innerHTML = `
+        <div style="
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            position: relative;
+        ">
+            <button onclick="this.closest('div[style*=\"position: fixed\"]').remove()" style="
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                background: #f1f5f9;
+                border: none;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                color: #64748b;
+                transition: var(--transition);
+            " onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                ×
+            </button>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <div style="color: var(--primary); font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.9rem;">
+                    ${duration}
+                </div>
+                <h2 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1.6rem; line-height: 1.3;">
+                    ${role}
+                </h2>
+                <h3 style="color: var(--accent); margin-bottom: 0.5rem; font-size: 1.2rem; font-weight: 600;">
+                    ${company}
+                </h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                    📍 ${location}
+                </p>
+            </div>
+            
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1.1rem;">
+                    Key Achievements
+                </h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    ${jobDetails.achievements.map(achievement => `
+                        <li style="
+                            margin-bottom: 0.75rem;
+                            padding-left: 1.5rem;
+                            position: relative;
+                            color: var(--text-secondary);
+                            line-height: 1.6;
+                        ">
+                            <span style="
+                                position: absolute;
+                                left: 0;
+                                top: 0.5rem;
+                                width: 6px;
+                                height: 6px;
+                                background: var(--primary);
+                                border-radius: 50%;
+                            "></span>
+                            ${achievement}
+                        </li>
+                    `).join('')}
+                </ul>
+            </div>
+            
+            <div>
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1.1rem;">
+                    Technologies & Skills
+                </h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    ${jobDetails.technologies.map(tech => `
+                        <span style="
+                            background: var(--primary);
+                            color: white;
+                            padding: 0.4rem 0.8rem;
+                            border-radius: 20px;
+                            font-size: 0.85rem;
+                            font-weight: 500;
+                        ">${tech}</span>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Close on backdrop click
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
+    
+    // Close on escape key
+    const escHandler = (e) => {
+        if (e.key === 'Escape') {
+            modal.remove();
+            document.removeEventListener('keydown', escHandler);
+        }
+    };
+    document.addEventListener('keydown', escHandler);
+    
+    // Track timeline interaction
+    if (typeof gtag === 'function') {
+        gtag('event', 'timeline_interaction', {
+            event_category: 'Career Timeline',
+            event_label: `${company} - ${year}`,
+            value: 1
+        });
+    }
+}
+
+/**
+ * Get detailed job information
+ */
+function getJobDetails(company, year) {
+    const jobData = {
+        'Can.Code': {
+            achievements: [
+                'Founded innovative AI company specializing in context engineering and intelligent business solutions',
+                'Built production 🦆 rubberDucky platform from concept to deployment in 8-10 days using AI-augmented development',
+                'Developed context engineering methodology enabling rapid AI integration across business domains',
+                'Created autonomous AI agent system processing thousands of requests with Rails-like development velocity',
+                'Shipped MVP-to-production pipelines using modern Rails architecture with real-time AI capabilities'
+            ],
+            technologies: ['AI Integration', 'Claude Code', 'Ruby on Rails', 'Context Engineering', 'Leadership', 'Entrepreneurship']
+        },
+        'Huntress Labs': {
+            achievements: [
+                'Engineered Microsoft 365 integration for enterprise cybersecurity platform serving thousands of MSPs',
+                'Architected scalable Rails backend supporting real-time threat detection and response workflows',
+                'Led SRE rotations monitoring Honey Badger, Splunk, Sentry, and NewRelic across multiple platforms',
+                'Implemented automated security compliance reporting reducing manual oversight by 75%',
+                'Built high-performance API integrations handling millions of security events per day'
+            ],
+            technologies: ['Ruby on Rails', 'Microsoft 365', 'Cybersecurity', 'SRE', 'API Integration', 'Monitoring']
+        },
+        'Stripe': {
+            achievements: [
+                'Built middleware for Account Updater service to AWS SAM, processing millions of card updates monthly',
+                'Architected payment processing workflows with 99.99% uptime and sub-100ms response times',
+                'Implemented fraud detection algorithms reducing false positives by 40%',
+                'Developed merchant onboarding automation reducing manual review time by 60%',
+                'Collaborated with product teams on global payment method expansion initiatives'
+            ],
+            technologies: ['Ruby on Rails', 'AWS', 'Payment Processing', 'Microservices', 'Fraud Detection', 'API Design']
+        },
+        'TaxJar': {
+            achievements: [
+                'Enabled accurate tax compliance for 50,000+ users across multiple states and jurisdictions',
+                'Built automated tax calculation engine reducing processing time by 80%',
+                'Integrated with Amazon API for seamless e-commerce tax reporting',
+                'Implemented real-time tax rate updates supporting dynamic compliance requirements',
+                'Developed customer-facing dashboard improving user engagement by 45%'
+            ],
+            technologies: ['Ruby on Rails', 'Amazon API', 'Tax Systems', 'PostgreSQL', 'E-commerce Integration']
+        },
+        'PaymentSpring': {
+            achievements: [
+                'Developed payment processor integration libraries enabling secure transaction processing',
+                'Built comprehensive merchant dashboard with real-time analytics and reporting',
+                'Implemented PCI DSS compliant payment flows handling $50M+ in annual transaction volume',
+                'Created automated reconciliation system reducing accounting discrepancies by 90%',
+                'Led cross-functional team delivering mobile payment SDK used by 100+ merchants'
+            ],
+            technologies: ['Ruby on Rails', 'Full Stack', 'Payment APIs', 'JavaScript', 'PCI Compliance', 'Mobile SDK']
+        },
+        'CardFlight': {
+            achievements: [
+                'Built core payment infrastructure supporting mobile card readers and point-of-sale systems',
+                'Developed merchant API enabling seamless integration with third-party applications',
+                'Implemented real-time transaction processing with 99.5% success rate',
+                'Created comprehensive testing framework reducing deployment bugs by 70%',
+                'Led technical documentation initiative improving developer onboarding efficiency'
+            ],
+            technologies: ['Ruby on Rails', 'Core Systems', 'Mobile SDK', 'APIs', 'Point of Sale', 'Technical Documentation']
+        },
+        'Freelance': {
+            achievements: [
+                'Started Rails development career with freelance projects across multiple industries',
+                'Built custom web applications for small businesses and educational institutions',
+                'Developed systematic teaching methodologies and mentorship skills',
+                'Created automated workflows reducing manual administrative tasks by 60%',
+                'Established foundation for entrepreneurial and technical leadership skills'
+            ],
+            technologies: ['Rails Journey Begins', 'Freelance', 'Full Stack', 'Entrepreneurship', 'Web Applications']
+        },
+        'Prairie Hill Learning Center': {
+            achievements: [
+                'Developed systematic teaching methodologies and mentorship skills',
+                'Led educational programs for diverse learning environments',
+                'Created structured learning frameworks improving student outcomes',
+                'Built leadership foundation through team coordination and program management',
+                'Established systems thinking approach applied throughout technical career'
+            ],
+            technologies: ['Leadership Foundation', 'Mentorship', 'Education', 'Systems Thinking', 'Program Management']
+        }
+    };
+    
+    return jobData[company] || {
+        achievements: ['Key role in company operations and technical development'],
+        technologies: ['Professional Development']
+    };
 }
 
 // Service Worker registration for offline capabilities (optional)
