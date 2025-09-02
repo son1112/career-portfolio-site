@@ -267,62 +267,247 @@
             <!-- Resume Content -->
             <div class="resume-content">
                 
-                <!-- Technical Skills -->
+                <!-- Interactive Technical Skills Visualization -->
                 <div class="resume-section">
                     <h3>Core Technical Skills</h3>
-                    <div class="skills-grid">
-                        <div class="skill-category">
+                    <div class="skills-visualization" id="skillsVisualization">
+                        <div class="skill-category-interactive">
                             <h4>Backend Development</h4>
-                            <div class="skills-list">
-                                <span class="skill expert">Ruby on Rails</span>
-                                <span class="skill expert">Ruby</span>
-                                <span class="skill advanced">Node.js</span>
-                                <span class="skill intermediate">Python</span>
+                            <div class="skill-item" data-skill="Ruby on Rails" data-level="95" data-years="10+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Ruby on Rails</span>
+                                    <span class="skill-level">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="Ruby" data-level="95" data-years="10+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Ruby</span>
+                                    <span class="skill-level">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="Node.js" data-level="75" data-years="5+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Node.js</span>
+                                    <span class="skill-level">75%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="75"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="Python" data-level="60" data-years="3+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Python</span>
+                                    <span class="skill-level">60%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress intermediate" style="width: 0%;" data-width="60"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="skill-category">
+
+                        <div class="skill-category-interactive">
                             <h4>Frontend Development</h4>
-                            <div class="skills-list">
-                                <span class="skill advanced">JavaScript</span>
-                                <span class="skill intermediate">TypeScript</span>
-                                <span class="skill intermediate">React</span>
-                                <span class="skill expert">HTML/CSS</span>
+                            <div class="skill-item" data-skill="JavaScript" data-level="85" data-years="8+">
+                                <div class="skill-info">
+                                    <span class="skill-name">JavaScript</span>
+                                    <span class="skill-level">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="HTML/CSS" data-level="95" data-years="10+">
+                                <div class="skill-info">
+                                    <span class="skill-name">HTML/CSS</span>
+                                    <span class="skill-level">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="React" data-level="70" data-years="4+">
+                                <div class="skill-info">
+                                    <span class="skill-name">React</span>
+                                    <span class="skill-level">70%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress intermediate" style="width: 0%;" data-width="70"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="TypeScript" data-level="65" data-years="3+">
+                                <div class="skill-info">
+                                    <span class="skill-name">TypeScript</span>
+                                    <span class="skill-level">65%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress intermediate" style="width: 0%;" data-width="65"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="skill-category">
+
+                        <div class="skill-category-interactive">
                             <h4>Database & Storage</h4>
-                            <div class="skills-list">
-                                <span class="skill expert">PostgreSQL</span>
-                                <span class="skill expert">MySQL</span>
-                                <span class="skill advanced">Redis</span>
-                                <span class="skill advanced">ElasticSearch</span>
+                            <div class="skill-item" data-skill="PostgreSQL" data-level="90" data-years="8+">
+                                <div class="skill-info">
+                                    <span class="skill-name">PostgreSQL</span>
+                                    <span class="skill-level">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="MySQL" data-level="85" data-years="7+">
+                                <div class="skill-info">
+                                    <span class="skill-name">MySQL</span>
+                                    <span class="skill-level">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="Redis" data-level="80" data-years="5+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Redis</span>
+                                    <span class="skill-level">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="80"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="ElasticSearch" data-level="75" data-years="4+">
+                                <div class="skill-info">
+                                    <span class="skill-name">ElasticSearch</span>
+                                    <span class="skill-level">75%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="75"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="skill-category">
+
+                        <div class="skill-category-interactive">
                             <h4>Cloud & DevOps</h4>
-                            <div class="skills-list">
-                                <span class="skill expert">AWS</span>
-                                <span class="skill advanced">S3</span>
-                                <span class="skill intermediate">Lambda</span>
-                                <span class="skill advanced">CI/CD</span>
+                            <div class="skill-item" data-skill="AWS" data-level="90" data-years="8+">
+                                <div class="skill-info">
+                                    <span class="skill-name">AWS</span>
+                                    <span class="skill-level">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="CI/CD" data-level="85" data-years="6+">
+                                <div class="skill-info">
+                                    <span class="skill-name">CI/CD</span>
+                                    <span class="skill-level">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="S3" data-level="80" data-years="6+">
+                                <div class="skill-info">
+                                    <span class="skill-name">S3</span>
+                                    <span class="skill-level">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="80"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="Lambda" data-level="60" data-years="3+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Lambda</span>
+                                    <span class="skill-level">60%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress intermediate" style="width: 0%;" data-width="60"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="skill-category">
-                            <h4>Tools & Practices</h4>
-                            <div class="skills-list">
-                                <span class="skill expert">Git</span>
-                                <span class="skill expert">TDD/BDD</span>
-                                <span class="skill expert">Agile/Scrum</span>
-                                <span class="skill advanced">API Design</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
+
+                        <div class="skill-category-interactive">
                             <h4>AI & Modern Tools</h4>
-                            <div class="skills-list">
-                                <span class="skill expert">Claude Code</span>
-                                <span class="skill expert">AI Integration</span>
-                                <span class="skill advanced">Context Engineering</span>
-                                <span class="skill advanced">Rapid Prototyping</span>
+                            <div class="skill-item" data-skill="Claude Code" data-level="95" data-years="1+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Claude Code</span>
+                                    <span class="skill-level">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="AI Integration" data-level="90" data-years="2+">
+                                <div class="skill-info">
+                                    <span class="skill-name">AI Integration</span>
+                                    <span class="skill-level">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="Context Engineering" data-level="85" data-years="1+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Context Engineering</span>
+                                    <span class="skill-level">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="Rapid Prototyping" data-level="90" data-years="5+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Rapid Prototyping</span>
+                                    <span class="skill-level">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="90"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-category-interactive">
+                            <h4>Development Practices</h4>
+                            <div class="skill-item" data-skill="Git" data-level="95" data-years="10+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Git</span>
+                                    <span class="skill-level">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="TDD/BDD" data-level="90" data-years="8+">
+                                <div class="skill-info">
+                                    <span class="skill-name">TDD/BDD</span>
+                                    <span class="skill-level">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="Agile/Scrum" data-level="95" data-years="10+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Agile/Scrum</span>
+                                    <span class="skill-level">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="API Design" data-level="85" data-years="8+">
+                                <div class="skill-info">
+                                    <span class="skill-name">API Design</span>
+                                    <span class="skill-level">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="85"></div>
+                                </div>
                             </div>
                         </div>
                     </div>

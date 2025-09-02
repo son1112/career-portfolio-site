@@ -259,6 +259,9 @@ function initializeDynamicContent() {
     
     // Initialize external link monitoring
     initializeExternalLinkMonitoring();
+    
+    // Initialize skills visualization
+    initializeSkillsVisualization();
 }
 
 /**
@@ -1416,6 +1419,201 @@ window.addEventListener('unhandledrejection', function(e) {
         });
     }
 });
+
+/**
+ * Initialize interactive skills visualization
+ */
+function initializeSkillsVisualization() {
+    const skillsVisualization = document.getElementById('skillsVisualization');
+    if (!skillsVisualization) return;
+
+    // Create intersection observer for skill animations
+    const skillsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                animateSkillBars(entry.target);
+                entry.target.classList.add('animated');
+            }
+        });
+    }, {
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observe all skill categories
+    const skillCategories = skillsVisualization.querySelectorAll('.skill-category-interactive');
+    skillCategories.forEach(category => {
+        skillsObserver.observe(category);
+        
+        // Add stagger animation delay
+        const skillItems = category.querySelectorAll('.skill-item');
+        skillItems.forEach((item, index) => {
+            item.style.setProperty('--animation-delay', `${index * 0.1}s`);
+        });
+    });
+
+    // Add click tracking for skill items
+    const skillItems = skillsVisualization.querySelectorAll('.skill-item');
+    skillItems.forEach(skillItem => {
+        skillItem.addEventListener('click', function() {
+            const skillName = this.dataset.skill;
+            const skillLevel = this.dataset.level;
+            
+            // Track skill interaction
+            if (typeof gtag === 'function') {
+                gtag('event', 'skill_interaction', {
+                    event_category: 'Skills Visualization',
+                    event_label: skillName,
+                    value: parseInt(skillLevel)
+                });
+            }
+            
+            // Show detailed skill info
+            showSkillDetails(this);
+        });
+    });
+}
+
+/**
+ * Animate skill progress bars in a category
+ */
+function animateSkillBars(category) {
+    const skillItems = category.querySelectorAll('.skill-item');
+    
+    skillItems.forEach((item, index) => {
+        const progressBar = item.querySelector('.skill-progress');
+        const targetWidth = progressBar.dataset.width;
+        
+        // Stagger animations
+        setTimeout(() => {
+            progressBar.style.width = targetWidth + '%';
+            
+            // Add pulse effect for high skill levels
+            if (parseInt(targetWidth) >= 90) {
+                setTimeout(() => {
+                    progressBar.style.animation = 'skillPulse 0.6s ease-in-out';
+                }, 1500);
+            }
+        }, index * 100);
+    });
+}
+
+/**
+ * Show detailed skill information
+ */
+function showSkillDetails(skillItem) {
+    const skillName = skillItem.dataset.skill;
+    const skillLevel = skillItem.dataset.level;
+    const skillYears = skillItem.dataset.years;
+    
+    // Create skill detail modal
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        font-family: var(--font-family);
+    `;
+    
+    const proficiencyDescription = getProficiencyDescription(parseInt(skillLevel));
+    
+    modal.innerHTML = `
+        <div style="
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        ">
+            <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.5rem;">
+                ${skillName}
+            </h3>
+            <div style="margin-bottom: 1.5rem;">
+                <div style="
+                    width: 100%;
+                    height: 12px;
+                    background: #f1f5f9;
+                    border-radius: 6px;
+                    overflow: hidden;
+                    margin-bottom: 1rem;
+                ">
+                    <div style="
+                        width: ${skillLevel}%;
+                        height: 100%;
+                        background: linear-gradient(90deg, var(--primary), var(--accent));
+                        border-radius: 6px;
+                        transition: width 1s ease-out;
+                    "></div>
+                </div>
+                <p style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">
+                    ${skillLevel}% Proficiency
+                </p>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    ${skillYears} years experience
+                </p>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5;">
+                    ${proficiencyDescription}
+                </p>
+            </div>
+            <button onclick="this.closest('div[style*=\"position: fixed\"]').remove()" style="
+                padding: 0.75rem 1.5rem;
+                background: var(--primary);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 1rem;
+                transition: var(--transition);
+            ">
+                Close
+            </button>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Close on backdrop click
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
+    
+    // Close on escape key
+    const escHandler = (e) => {
+        if (e.key === 'Escape') {
+            modal.remove();
+            document.removeEventListener('keydown', escHandler);
+        }
+    };
+    document.addEventListener('keydown', escHandler);
+}
+
+/**
+ * Get proficiency description based on skill level
+ */
+function getProficiencyDescription(level) {
+    if (level >= 95) {
+        return 'Expert level - Can architect complex systems, mentor others, and innovate in this technology.';
+    } else if (level >= 85) {
+        return 'Advanced level - Highly proficient with deep understanding and ability to solve complex problems.';
+    } else if (level >= 70) {
+        return 'Intermediate level - Solid working knowledge with ability to work independently on most tasks.';
+    } else if (level >= 50) {
+        return 'Developing level - Good foundation with growing experience and confidence.';
+    } else {
+        return 'Beginner level - Basic understanding with supervised experience.';
+    }
+}
 
 // Service Worker registration for offline capabilities (optional)
 if ('serviceWorker' in navigator) {

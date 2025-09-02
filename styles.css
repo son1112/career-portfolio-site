@@ -1083,6 +1083,7 @@ section {
 }
 
 /* Skills Grid */
+/* Original Skills Grid (for resume pages) */
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1100,6 +1101,214 @@ section {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+}
+
+/* Interactive Skills Visualization */
+.skills-visualization {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+    margin-top: 1.5rem;
+}
+
+.skill-category-interactive {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-category-interactive::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.skill-category-interactive:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    border-color: var(--primary);
+}
+
+.skill-category-interactive h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+.skill-item {
+    margin-bottom: 1.2rem;
+    position: relative;
+    cursor: pointer;
+    transition: var(--transition);
+    padding: 0.5rem;
+    border-radius: 8px;
+}
+
+.skill-item:hover {
+    background: rgba(var(--primary-rgb), 0.05);
+    transform: translateX(4px);
+}
+
+.skill-item:last-child {
+    margin-bottom: 0;
+}
+
+.skill-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.skill-name {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.skill-level {
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+.skill-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--surface-alt);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.skill-progress {
+    height: 100%;
+    border-radius: 4px;
+    position: relative;
+    transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    background: linear-gradient(90deg, 
+        var(--color-start, var(--primary)), 
+        var(--color-end, var(--accent))
+    );
+}
+
+.skill-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent
+    );
+    animation: shimmer 2s infinite;
+    animation-delay: var(--shimmer-delay, 0s);
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Proficiency Level Colors */
+.skill-progress.expert {
+    --color-start: #059669;
+    --color-end: #10b981;
+    --shimmer-delay: 0.2s;
+}
+
+.skill-progress.advanced {
+    --color-start: #0284c7;
+    --color-end: #0ea5e9;
+    --shimmer-delay: 0.4s;
+}
+
+.skill-progress.intermediate {
+    --color-start: #d97706;
+    --color-end: #f59e0b;
+    --shimmer-delay: 0.6s;
+}
+
+.skill-progress.beginner {
+    --color-start: #64748b;
+    --color-end: #94a3b8;
+    --shimmer-delay: 0.8s;
+}
+
+/* Skill Item Tooltip */
+.skill-item::after {
+    content: attr(data-years) ' years experience';
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text-primary);
+    color: var(--surface);
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.skill-item::before {
+    content: '';
+    position: absolute;
+    bottom: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-bottom-color: var(--text-primary);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition);
+    z-index: 1000;
+}
+
+.skill-item:hover::after,
+.skill-item:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Animation for skill bars on scroll */
+.skill-item.animate .skill-progress {
+    animation: fillBar 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fillBar {
+    from { width: 0%; }
+    to { width: var(--target-width); }
+}
+
+@keyframes skillPulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.7);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(var(--primary-rgb), 0);
+    }
 }
 
 .skill {
@@ -1772,6 +1981,45 @@ section {
     
     .skills-grid {
         grid-template-columns: 1fr;
+    }
+    
+    /* Interactive Skills Mobile */
+    .skills-visualization {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .skill-category-interactive {
+        padding: 1rem;
+    }
+    
+    .skill-category-interactive h4 {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .skill-item {
+        margin-bottom: 1rem;
+        padding: 0.4rem;
+    }
+    
+    .skill-info {
+        font-size: 0.85rem;
+    }
+    
+    .skill-bar {
+        height: 6px;
+    }
+    
+    /* Tooltip adjustments for mobile */
+    .skill-item::after {
+        bottom: -40px;
+        font-size: 0.7rem;
+        padding: 0.4rem 0.6rem;
+    }
+    
+    .skill-item::before {
+        bottom: -30px;
     }
     
     .education-grid {
