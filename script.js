@@ -256,6 +256,9 @@ function initializeDynamicContent() {
     
     // Initialize typing effect for hero title
     initializeTypingEffect();
+    
+    // Initialize external link monitoring
+    initializeExternalLinkMonitoring();
 }
 
 /**
@@ -267,6 +270,7 @@ function copyToClipboard(text) {
             // Successfully copied to clipboard
         }).catch(err => {
             console.error('Failed to copy: ', err);
+            showNotification('Copy failed. Trying alternative method...', 'warning');
             fallbackCopyToClipboard(text);
         });
     } else {
@@ -288,10 +292,14 @@ function fallbackCopyToClipboard(text) {
     textArea.select();
     
     try {
-        document.execCommand('copy');
+        const successful = document.execCommand('copy');
+        if (!successful) {
+            throw new Error('Copy command failed');
+        }
         // Successfully copied using fallback method
     } catch (err) {
         console.error('Fallback copy failed: ', err);
+        showNotification('Unable to copy to clipboard. Please copy manually.', 'error');
     }
     
     document.body.removeChild(textArea);
@@ -408,12 +416,26 @@ function initializeContactReveal() {
         
         element.addEventListener('click', function() {
             if (!this.classList.contains('revealed')) {
-                // Decode the contact information
-                const decoded = atob(encoded);
-                
-                // Update the display
-                valueElement.textContent = decoded;
-                this.classList.add('revealed');
+                try {
+                    // Validate required data attributes
+                    if (!encoded) {
+                        throw new Error('Contact data not found');
+                    }
+                    if (!valueElement) {
+                        throw new Error('Contact display element not found');
+                    }
+                    
+                    // Decode the contact information
+                    const decoded = atob(encoded);
+                    
+                    // Validate decoded content
+                    if (!decoded || decoded.trim() === '') {
+                        throw new Error('Invalid contact data');
+                    }
+                    
+                    // Update the display
+                    valueElement.textContent = decoded;
+                    this.classList.add('revealed');
                 
                 // Track contact reveal for analytics
                 if (typeof trackContactReveal === 'function') {
@@ -445,6 +467,29 @@ function initializeContactReveal() {
                 
                 // Show reveal notification
                 showRevealNotification(this, type);
+                
+                } catch (error) {
+                    // Handle errors gracefully
+                    console.error('Contact reveal error:', error);
+                    
+                    // Show user-friendly error message
+                    valueElement.textContent = 'Contact info temporarily unavailable';
+                    this.classList.add('error-state');
+                    this.style.cursor = 'not-allowed';
+                    this.title = 'Contact information could not be loaded';
+                    
+                    // Show error notification
+                    showNotification('Unable to load contact information. Please try refreshing the page.', 'error');
+                    
+                    // Track error for analytics
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'contact_reveal_error', {
+                            event_category: 'Error',
+                            event_label: error.message,
+                            value: 1
+                        });
+                    }
+                }
             }
         });
         
@@ -677,17 +722,73 @@ function downloadResumeAsPDF() {
  * Open dynamic resume with role-specific content
  */
 function openDynamicResume(role = 'ai-focused') {
-    closeResumeModal();
-    const resumeWindow = window.open(
-        `dynamic-resume.html?role=${role}&print=true`, 
-        '_blank', 
-        'width=900,height=1200,scrollbars=yes,resizable=yes'
-    );
-    
-    showNotification(`Role-optimized resume opened for ${role.replace('-', ' ')}! Print dialog will appear automatically.`, 'success');
-    
-    if (!resumeWindow || resumeWindow.closed || typeof resumeWindow.closed === 'undefined') {
-        showNotification('Please allow popups for this site to download resume.', 'warning');
+    try {
+        // Validate role parameter
+        const validRoles = ['ai-focused', 'rails-backend', 'tech-lead', 'fullstack', 'enterprise-fintech'];
+        if (!validRoles.includes(role)) {
+            throw new Error(`Invalid role: ${role}`);
+        }
+        
+        closeResumeModal();
+        
+        // Attempt to open resume window
+        const resumeWindow = window.open(
+            `dynamic-resume.html?role=${role}&print=true`, 
+            '_blank', 
+            'width=900,height=1200,scrollbars=yes,resizable=yes'
+        );
+        
+        if (!resumeWindow || resumeWindow.closed || typeof resumeWindow.closed === 'undefined') {
+            // Popup blocked - offer alternative
+            showNotification('Popup blocked. Please allow popups or try the direct link below.', 'warning');
+            
+            // Create alternative link
+            const linkNotification = document.createElement('div');
+            linkNotification.innerHTML = `
+                <p>Popup blocked! <a href="dynamic-resume.html?role=${role}&print=true" target="_blank" 
+                   style="color: var(--primary); text-decoration: underline;">
+                   Click here to open your ${role.replace('-', ' ')} resume
+                </a></p>
+            `;
+            linkNotification.style.cssText = `
+                position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 10001; border: 2px solid var(--warning);
+            `;
+            
+            document.body.appendChild(linkNotification);
+            
+            // Auto-remove after 10 seconds
+            setTimeout(() => {
+                if (linkNotification && linkNotification.parentNode) {
+                    linkNotification.parentNode.removeChild(linkNotification);
+                }
+            }, 10000);
+            
+            // Track popup blocked event
+            if (typeof gtag === 'function') {
+                gtag('event', 'popup_blocked', {
+                    event_category: 'User Experience',
+                    event_label: 'Dynamic Resume',
+                    value: 1
+                });
+            }
+        } else {
+            showNotification(`Role-optimized resume opened for ${role.replace('-', ' ')}! Print dialog will appear automatically.`, 'success');
+        }
+        
+    } catch (error) {
+        console.error('Dynamic resume error:', error);
+        showNotification('Unable to open dynamic resume. Please try again or use the standard resume option.', 'error');
+        
+        // Track error
+        if (typeof gtag === 'function') {
+            gtag('event', 'dynamic_resume_error', {
+                event_category: 'Error',
+                event_label: error.message,
+                value: 1
+            });
+        }
     }
 }
 
@@ -695,13 +796,62 @@ function openDynamicResume(role = 'ai-focused') {
  * Open static resume (original)
  */
 function openStaticResume() {
-    closeResumeModal();
-    const resumeWindow = window.open('resume.html', '_blank', 'width=900,height=1200,scrollbars=yes,resizable=yes');
-    
-    showNotification('Standard resume opened! Print dialog will appear automatically.', 'info');
-    
-    if (!resumeWindow || resumeWindow.closed || typeof resumeWindow.closed === 'undefined') {
-        showNotification('Please allow popups for this site to download resume.', 'warning');
+    try {
+        closeResumeModal();
+        
+        const resumeWindow = window.open('resume.html', '_blank', 'width=900,height=1200,scrollbars=yes,resizable=yes');
+        
+        if (!resumeWindow || resumeWindow.closed || typeof resumeWindow.closed === 'undefined') {
+            // Popup blocked - offer alternative
+            showNotification('Popup blocked. Please allow popups or try the direct link below.', 'warning');
+            
+            // Create alternative link
+            const linkNotification = document.createElement('div');
+            linkNotification.innerHTML = `
+                <p>Popup blocked! <a href="resume.html" target="_blank" 
+                   style="color: var(--primary); text-decoration: underline;">
+                   Click here to open your standard resume
+                </a></p>
+            `;
+            linkNotification.style.cssText = `
+                position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 10001; border: 2px solid var(--warning);
+            `;
+            
+            document.body.appendChild(linkNotification);
+            
+            // Auto-remove after 10 seconds
+            setTimeout(() => {
+                if (linkNotification && linkNotification.parentNode) {
+                    linkNotification.parentNode.removeChild(linkNotification);
+                }
+            }, 10000);
+            
+            // Track popup blocked event
+            if (typeof gtag === 'function') {
+                gtag('event', 'popup_blocked', {
+                    event_category: 'User Experience',
+                    event_label: 'Static Resume',
+                    value: 1
+                });
+            }
+        } else {
+            showNotification('Standard resume opened! Print dialog will appear automatically.', 'info');
+        }
+        
+    } catch (error) {
+        console.error('Static resume error:', error);
+        showNotification('Unable to open resume. Please try refreshing the page.', 'error');
+        
+        // Track error
+        if (typeof gtag === 'function') {
+            gtag('event', 'static_resume_error', {
+                event_category: 'Error',
+                event_label: error.message,
+                value: 1
+            });
+        }
     }
 }
 
@@ -1121,6 +1271,151 @@ function getVariantURLs() {
     
     return urls;
 }
+
+/**
+ * Initialize external link monitoring for error handling
+ */
+function initializeExternalLinkMonitoring() {
+    // Monitor external links for potential failures
+    const externalLinks = document.querySelectorAll('a[href^="http"], a[href^="mailto"], a[href^="tel"]');
+    
+    externalLinks.forEach(link => {
+        // Add error handling for external links
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            try {
+                // For mailto and tel links, validate format
+                if (href.startsWith('mailto:')) {
+                    const email = href.substring(7);
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(email)) {
+                        e.preventDefault();
+                        showNotification('Invalid email address. Please check the contact information.', 'error');
+                        return false;
+                    }
+                }
+                
+                if (href.startsWith('tel:')) {
+                    const phone = href.substring(4);
+                    const phoneRegex = /^[\+]?[\d\-\(\)\s]+$/;
+                    if (!phoneRegex.test(phone) || phone.length < 10) {
+                        e.preventDefault();
+                        showNotification('Invalid phone number format.', 'error');
+                        return false;
+                    }
+                }
+                
+                // For external HTTP links, add visual feedback
+                if (href.startsWith('http') && !href.includes(window.location.hostname)) {
+                    // Add loading state
+                    this.classList.add('loading');
+                    
+                    // Remove loading state after 3 seconds
+                    setTimeout(() => {
+                        this.classList.remove('loading');
+                    }, 3000);
+                    
+                    // Track external link clicks
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'external_link_click', {
+                            event_category: 'Outbound Link',
+                            event_label: href,
+                            value: 1
+                        });
+                    }
+                }
+                
+            } catch (error) {
+                console.error('Link validation error:', error);
+                showNotification('Link validation failed. Proceeding anyway...', 'warning');
+                
+                // Track link errors
+                if (typeof gtag === 'function') {
+                    gtag('event', 'link_validation_error', {
+                        event_category: 'Error',
+                        event_label: error.message,
+                        value: 1
+                    });
+                }
+            }
+        });
+        
+        // Add network error detection for HTTP links
+        if (link.href.startsWith('http') && !link.href.includes(window.location.hostname)) {
+            link.addEventListener('mouseenter', function() {
+                // Preload check - try to fetch favicon to test connectivity
+                if (!this.classList.contains('network-checked')) {
+                    const url = new URL(this.href);
+                    const faviconUrl = `${url.protocol}//${url.hostname}/favicon.ico`;
+                    
+                    const testImg = new Image();
+                    testImg.onload = () => {
+                        this.classList.remove('network-error');
+                    };
+                    testImg.onerror = () => {
+                        this.classList.add('network-error');
+                        this.title = 'This link may not be available right now';
+                    };
+                    testImg.src = faviconUrl;
+                    
+                    this.classList.add('network-checked');
+                }
+            });
+        }
+    });
+    
+    // Monitor for global network connectivity
+    window.addEventListener('online', function() {
+        showNotification('Network connection restored.', 'success');
+        // Remove network error indicators
+        document.querySelectorAll('.network-error').forEach(el => {
+            el.classList.remove('network-error');
+            el.classList.remove('network-checked');
+        });
+    });
+    
+    window.addEventListener('offline', function() {
+        showNotification('Network connection lost. Some features may be unavailable.', 'warning');
+    });
+}
+
+/**
+ * Global error handler for unhandled JavaScript errors
+ */
+window.addEventListener('error', function(e) {
+    console.error('Global error:', e.error);
+    
+    // Show user-friendly error message for critical errors
+    if (e.error && e.error.stack) {
+        showNotification('A technical error occurred. Please refresh the page if you experience issues.', 'error');
+        
+        // Track JavaScript errors
+        if (typeof gtag === 'function') {
+            gtag('event', 'javascript_error', {
+                event_category: 'Error',
+                event_label: e.error.message || 'Unknown error',
+                value: 1
+            });
+        }
+    }
+});
+
+/**
+ * Global promise rejection handler
+ */
+window.addEventListener('unhandledrejection', function(e) {
+    console.error('Unhandled promise rejection:', e.reason);
+    
+    // Track promise rejections
+    if (typeof gtag === 'function') {
+        gtag('event', 'promise_rejection', {
+            event_category: 'Error',
+            event_label: e.reason?.message || 'Unknown promise rejection',
+            value: 1
+        });
+    }
+});
 
 // Service Worker registration for offline capabilities (optional)
 if ('serviceWorker' in navigator) {
