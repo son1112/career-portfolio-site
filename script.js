@@ -84,6 +84,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Dynamic content loading
     initializeDynamicContent();
+    
+    // Contact form functionality
+    initializeContactForm();
 });
 
 /**
@@ -1901,8 +1904,135 @@ function getJobDetails(company, year) {
     };
 }
 
+/**
+ * Initialize Contact Form functionality
+ */
+function initializeContactForm() {
+    const form = document.getElementById('contactForm');
+    const statusDiv = document.getElementById('formStatus');
+    
+    if (!form || !statusDiv) return;
+    
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        // Show loading state
+        const submitBtn = form.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
+        
+        statusDiv.className = 'form-status loading';
+        statusDiv.textContent = 'Sending your message...';
+        
+        // Get form data for display
+        const name = form.querySelector('#name').value;
+        const email = form.querySelector('#email').value;
+        const company = form.querySelector('#company').value;
+        const role = form.querySelector('#role').value;
+        const message = form.querySelector('#message').value;
+        
+        // Track contact form submission
+        if (typeof gtag === 'function') {
+            gtag('event', 'contact_form_submit', {
+                event_category: 'Contact',
+                event_label: 'Form Submission',
+                value: 1
+            });
+        }
+        
+        // Create email content
+        let emailSubject = `Portfolio Contact from ${name}`;
+        if (company && role) {
+            emailSubject += ` - ${role} at ${company}`;
+        }
+        
+        let emailBody = `Hello Anderson,\n\n`;
+        emailBody += `${message}\n\n`;
+        emailBody += `Best regards,\n${name}`;
+        if (company) emailBody += `\n${role ? role + ' at ' : ''}${company}`;
+        emailBody += `\nEmail: ${email}`;
+        
+        // Create mailto link
+        const mailtoLink = `mailto:anderson@sonander.dev?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+        
+        // Show success message with direct contact options
+        statusDiv.className = 'form-status success';
+        statusDiv.innerHTML = `
+            <strong>Thank you for your message, ${name}!</strong><br><br>
+            <div style="margin: 1rem 0;">
+                <a href="${mailtoLink}" 
+                   style="background: #059669; color: white; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 6px; display: inline-block; margin: 0.5rem 0; font-weight: 500;">
+                    📧 Send Email
+                </a>
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #6b7280;">
+                Your message has been prepared. Click "Send Email" to open your email client with the pre-filled message.
+            </p>
+        `;
+        
+        // Scroll to the success message
+        statusDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Reset form after a delay so user can see the success message
+        setTimeout(() => {
+            form.reset();
+        }, 100);
+        
+        // Track successful form completion
+        if (typeof gtag === 'function') {
+            gtag('event', 'contact_form_success', {
+                event_category: 'Contact',
+                event_label: 'Contact Info Provided',
+                value: 1
+            });
+        }
+        
+        // Show success notification
+        showNotification('Contact information ready!', 'success');
+        
+        // Reset button state
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    });
+    
+    // Add form validation feedback
+    const inputs = form.querySelectorAll('input[required], textarea[required]');
+    inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            if (!this.value.trim()) {
+                this.style.borderColor = '#dc2626';
+            } else {
+                this.style.borderColor = '';
+            }
+        });
+        
+        input.addEventListener('input', function() {
+            if (this.value.trim()) {
+                this.style.borderColor = '';
+            }
+        });
+    });
+    
+    // Email validation
+    const emailInput = form.querySelector('input[type="email"]');
+    if (emailInput) {
+        emailInput.addEventListener('blur', function() {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (this.value && !emailRegex.test(this.value)) {
+                this.style.borderColor = '#dc2626';
+                statusDiv.className = 'form-status error';
+                statusDiv.textContent = 'Please enter a valid email address.';
+            } else if (this.value) {
+                this.style.borderColor = '#059669';
+                statusDiv.className = 'form-status';
+                statusDiv.style.display = 'none';
+            }
+        });
+    }
+}
+
 // Service Worker registration for offline capabilities (optional)
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
     window.addEventListener('load', function() {
         navigator.serviceWorker.register('/sw.js').then(function(registration) {
             // ServiceWorker registered successfully
