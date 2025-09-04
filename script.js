@@ -2031,13 +2031,180 @@ function initializeContactForm() {
     }
 }
 
-// Service Worker registration for offline capabilities (optional)
+// PWA Install Functionality
+let deferredPrompt;
+let installButton;
+
+// Create install button
+function createInstallButton() {
+    installButton = document.createElement('button');
+    installButton.id = 'pwa-install-btn';
+    installButton.innerHTML = `
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor"/>
+        </svg>
+        Install App
+    `;
+    installButton.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 50px;
+        font-weight: 500;
+        font-size: 14px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        transform: translateY(100px);
+        opacity: 0;
+    `;
+    
+    installButton.addEventListener('click', installApp);
+    document.body.appendChild(installButton);
+}
+
+// Show install button with animation
+function showInstallButton() {
+    if (installButton) {
+        installButton.style.transform = 'translateY(0)';
+        installButton.style.opacity = '1';
+    }
+}
+
+// Hide install button with animation
+function hideInstallButton() {
+    if (installButton) {
+        installButton.style.transform = 'translateY(100px)';
+        installButton.style.opacity = '0';
+        setTimeout(() => {
+            if (installButton && installButton.parentNode) {
+                installButton.parentNode.removeChild(installButton);
+                installButton = null;
+            }
+        }, 300);
+    }
+}
+
+// Install app function
+async function installApp() {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        
+        // Track install attempt
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'pwa_install_attempt', {
+                event_category: 'PWA',
+                event_label: outcome,
+                value: outcome === 'accepted' ? 1 : 0
+            });
+        }
+        
+        if (outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+            hideInstallButton();
+        }
+        
+        deferredPrompt = null;
+    }
+}
+
+// Listen for beforeinstallprompt event
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    
+    // Show install button after a delay to avoid overwhelming users
+    setTimeout(() => {
+        if (!installButton) {
+            createInstallButton();
+        }
+        showInstallButton();
+    }, 3000);
+});
+
+// Listen for successful app installation
+window.addEventListener('appinstalled', () => {
+    console.log('PWA was installed');
+    hideInstallButton();
+    
+    // Track successful installation
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'pwa_installed', {
+            event_category: 'PWA',
+            event_label: 'successful_install',
+            value: 1
+        });
+    }
+});
+
+// Check if app is already installed
+window.addEventListener('DOMContentLoaded', () => {
+    // Hide install button if app is already installed
+    if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) {
+        console.log('App is running in standalone mode');
+        hideInstallButton();
+    }
+    
+    // Also check for iOS standalone mode
+    if (window.navigator.standalone === true) {
+        console.log('App is running in iOS standalone mode');
+        hideInstallButton();
+    }
+});
+
+// Service Worker registration and updates
 if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
     window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js').then(function(registration) {
-            // ServiceWorker registered successfully
-        }, function(err) {
-            console.log('ServiceWorker registration failed: ', err);
-        });
+        navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+                console.log('ServiceWorker registered successfully');
+                
+                // Check for updates
+                registration.addEventListener('updatefound', () => {
+                    const newWorker = registration.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            // New content is available
+                            showUpdateNotification();
+                        }
+                    });
+                });
+            })
+            .catch(function(err) {
+                console.log('ServiceWorker registration failed: ', err);
+            });
     });
+}
+
+// Show update notification
+function showUpdateNotification() {
+    const updateBanner = document.createElement('div');
+    updateBanner.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #667eea;
+        color: white;
+        padding: 12px;
+        text-align: center;
+        z-index: 10000;
+        font-size: 14px;
+    `;
+    updateBanner.innerHTML = `
+        New content is available! 
+        <button onclick="window.location.reload()" style="margin-left: 10px; background: white; color: #667eea; border: none; padding: 4px 12px; border-radius: 4px; cursor: pointer;">
+            Refresh
+        </button>
+    `;
+    document.body.insertBefore(updateBanner, document.body.firstChild);
 }

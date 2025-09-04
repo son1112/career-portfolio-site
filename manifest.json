@@ -1,0 +1,65 @@
+{
+  "name": "Anderson Reinkordt - AI-Focused Software Engineer",
+  "short_name": "Anderson Portfolio",
+  "description": "Professional portfolio showcasing AI-focused software engineering expertise with Ruby on Rails and rapid development capabilities",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#0f3460",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-US",
+  "categories": ["portfolio", "developer", "technology"],
+  "icons": [
+    {
+      "src": "rubber-duck.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "rubber-duck.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "cartoon-header.webp",
+      "sizes": "1920x1080",
+      "type": "image/webp",
+      "platform": "wide",
+      "label": "Portfolio Hero Section"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Resume",
+      "short_name": "Resume",
+      "description": "View and download professional resume",
+      "url": "/resume.html",
+      "icons": [
+        {
+          "src": "rubber-duck.webp",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Dynamic Resume",
+      "short_name": "Dynamic Resume",
+      "description": "Role-specific resume builder",
+      "url": "/dynamic-resume.html",
+      "icons": [
+        {
+          "src": "rubber-duck.webp",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "edge_side_includes": false
+}

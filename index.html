@@ -134,6 +134,34 @@
             });
         }
     </script>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Anderson Portfolio">
+    <link rel="apple-touch-icon" href="rubber-duck.png">
+    
+    <!-- Microsoft PWA -->
+    <meta name="msapplication-TileImage" content="rubber-duck.png">
+    <meta name="msapplication-TileColor" content="#1a1a2e">
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
 </head>
 <body>
     <!-- No JavaScript fallback -->
