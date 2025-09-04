@@ -1,0 +1,35 @@
+name: Claude Code Action
+
+on:
+  issues:
+    types: [opened, edited]
+  issue_comment:
+    types: [created, edited]
+  pull_request:
+    types: [opened, edited, synchronize]
+  pull_request_review_comment:
+    types: [created, edited]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  actions: read
+
+jobs:
+  claude:
+    # Only run when Claude is mentioned
+    if: contains(github.event.comment.body, '@claude') || contains(github.event.issue.body, '@claude') || contains(github.event.pull_request.body, '@claude') || contains(github.event.review.body, '@claude')
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Claude Code Action
+      uses: anthropics/claude-code-action@v1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+        # Optional: Set a custom model (defaults to claude-3-5-sonnet-20241022)
+        # anthropic-model: claude-3-5-sonnet-20241022
+        # Optional: Set a custom max tokens (defaults to 8192)
+        # max-tokens: 8192
