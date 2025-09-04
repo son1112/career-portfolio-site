@@ -560,7 +560,7 @@ With Priority 1 complete, recommended Priority 2 focuses:
 **8 Career Milestones**:
 - 2024-Present: Can.Code (Founder & Technical Lead) - Current with pulsing animation
 - 2022-2024: Huntress Labs (Senior Rails) - Cybersecurity focus
-- 2021-2022: Stripe (Senior Rails) - Payment processing expertise  
+- 2021-2022: Stripe (Senior Ruby) - Payment processing expertise  
 - 2021: TaxJar (Senior Rails) - Tax compliance systems
 - 2019-2021: PaymentSpring (Full Stack) - Payment infrastructure
 - 2016-2019: CardFlight (Rails Core) - Core systems development
@@ -646,4 +646,31 @@ With Priority 1 complete, recommended Priority 2 focuses:
 
 ---
 
+## 🚀 **SEPTEMBER 4, 2025 UPDATE - STRIPE TECHNICAL STACK CORRECTION**
+
+### ✅ **Technical Accuracy Update**
+- **Stripe Role Correction**: Updated all references from "Rails" to "Ruby" to accurately reflect Stripe's Ruby/Rack stack architecture
+- **Files Modified**: index.html timeline component, SESSION_NOTES.md career descriptions, script.js modal data
+- **Technical Precision**: Corrected timeline role from "Senior Software Engineer (Rails)" to "Senior Software Engineer (Ruby)"
+- **Tech Stack Accuracy**: Updated technology tags from "Ruby on Rails" to "Ruby" for Stripe-specific timeline item
+
+### 🔧 **Changes Implemented**
+**Timeline Component Updates**:
+- Role title corrected in data attributes and display headers
+- Technology tags updated to reflect actual Ruby/Rack stack used at Stripe
+- Modal detail data synchronized with accurate technology stack
+
+**Documentation Updates**:
+- Session notes career milestone descriptions corrected
+- Maintained technical accuracy across all portfolio representations
+- Preserved Rails expertise for other roles while accurately representing Stripe experience
+
+### 💡 **Technical Stack Clarity**
+**Stripe Experience**: Ruby-based microservices and payment processing systems
+**Other Roles**: Maintained accurate Rails framework references where applicable
+**Portfolio Accuracy**: Technical stack representations now precisely match actual experience
+
+---
+
 *Session completed by Claude Code with interactive timeline component and Priority 2 advancement - September 2, 2025*
+*Technical accuracy update completed - September 4, 2025*

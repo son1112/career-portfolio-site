@@ -1844,7 +1844,7 @@ function getJobDetails(company, year) {
                 'Developed merchant onboarding automation reducing manual review time by 60%',
                 'Collaborated with product teams on global payment method expansion initiatives'
             ],
-            technologies: ['Ruby on Rails', 'AWS', 'Payment Processing', 'Microservices', 'Fraud Detection', 'API Design']
+            technologies: ['Ruby', 'AWS', 'Payment Processing', 'Microservices', 'Fraud Detection', 'API Design']
         },
         'TaxJar': {
             achievements: [
