@@ -3160,3 +3160,86 @@ section {
         padding: 0.75rem 1rem;
     }
 }
+
+/* ===============================================
+   COLLAPSIBLE SECTIONS
+   =============================================== */
+
+.collapsible-section {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.collapsible-section.collapsed {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    transform: translateY(-20px);
+}
+
+.collapsible-section.expanded {
+    max-height: none;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.collapsible-section.expanding {
+    max-height: 5000px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Section Headers with Expand/Collapse Indicators */
+.section-header {
+    cursor: pointer;
+    position: relative;
+    padding: 1rem 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.section-header:hover {
+    border-bottom-color: var(--primary);
+}
+
+.section-header::after {
+    content: '▼';
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s ease;
+    font-size: 0.8rem;
+    color: var(--primary);
+}
+
+.section-header.expanded::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+/* Hero banner is always visible */
+.hero-banner {
+    opacity: 1 !important;
+    max-height: none !important;
+    transform: none !important;
+}
+
+/* Navigation active state for expanded sections */
+.nav-link.active-section {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Smooth focus transitions for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .collapsible-section {
+        transition: none;
+    }
+    
+    .section-header::after {
+        transition: none;
+    }
+}

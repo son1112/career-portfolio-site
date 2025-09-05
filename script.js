@@ -87,6 +87,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Contact form functionality
     initializeContactForm();
+    
+    // Collapsible sections functionality
+    initializeCollapsibleSections();
 });
 
 /**
@@ -2457,6 +2460,154 @@ function createProjectCard(project) {
     });
     
     return card;
+}
+
+/**
+ * Initialize Collapsible Sections Functionality
+ */
+function initializeCollapsibleSections() {
+    const sections = document.querySelectorAll('.collapsible-section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const heroButtons = document.querySelectorAll('.hero-cta .btn-primary, .hero-cta .btn-secondary');
+    
+    // Function to expand a section
+    function expandSection(sectionId) {
+        const section = document.querySelector(sectionId);
+        if (!section) return;
+        
+        // Collapse all other sections
+        sections.forEach(s => {
+            if (s !== section) {
+                s.classList.remove('expanded', 'expanding');
+                s.classList.add('collapsed');
+            }
+        });
+        
+        // Expand target section
+        section.classList.remove('collapsed');
+        section.classList.add('expanding');
+        
+        // Add expanded class after animation starts
+        setTimeout(() => {
+            section.classList.remove('expanding');
+            section.classList.add('expanded');
+        }, 50);
+        
+        // Update navigation active states
+        navLinks.forEach(link => link.classList.remove('active-section'));
+        const activeNavLink = document.querySelector(`a[href="${sectionId}"]`);
+        if (activeNavLink) {
+            activeNavLink.classList.add('active-section');
+        }
+        
+        // Smooth scroll to section
+        setTimeout(() => {
+            section.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start',
+                inline: 'nearest'
+            });
+        }, 100);
+    }
+    
+    // Function to toggle section
+    function toggleSection(sectionId) {
+        const section = document.querySelector(sectionId);
+        if (!section) return;
+        
+        if (section.classList.contains('expanded')) {
+            // Collapse if already expanded
+            section.classList.remove('expanded');
+            section.classList.add('collapsed');
+            
+            // Remove active state
+            const activeNavLink = document.querySelector(`a[href="${sectionId}"]`);
+            if (activeNavLink) {
+                activeNavLink.classList.remove('active-section');
+            }
+        } else {
+            // Expand section
+            expandSection(sectionId);
+        }
+    }
+    
+    // Add click handlers to navigation links
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const href = link.getAttribute('href');
+            
+            // Skip hero link (always visible)
+            if (href === '#profile') {
+                document.querySelector('#profile').scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+                return;
+            }
+            
+            expandSection(href);
+            
+            // Track section expansion
+            trackEvent('section_expanded', {
+                section_id: href,
+                trigger: 'navigation'
+            });
+        });
+    });
+    
+    // Add click handlers to hero buttons
+    heroButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const href = button.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                expandSection(href);
+                
+                // Track section expansion
+                trackEvent('section_expanded', {
+                    section_id: href,
+                    trigger: 'hero_button'
+                });
+            }
+        });
+    });
+    
+    // Add section header click functionality
+    sections.forEach(section => {
+        const sectionTitle = section.querySelector('.section-title');
+        if (sectionTitle) {
+            sectionTitle.classList.add('section-header');
+            sectionTitle.addEventListener('click', () => {
+                const sectionId = `#${section.id}`;
+                toggleSection(sectionId);
+                
+                // Track section toggle
+                trackEvent('section_toggled', {
+                    section_id: sectionId,
+                    trigger: 'header_click'
+                });
+            });
+        }
+    });
+    
+    // Handle URL hash on page load
+    if (window.location.hash) {
+        const hash = window.location.hash;
+        if (hash !== '#profile') {
+            setTimeout(() => {
+                expandSection(hash);
+            }, 500); // Wait for page to settle
+        }
+    }
+    
+    // Handle browser back/forward navigation
+    window.addEventListener('hashchange', (e) => {
+        const hash = window.location.hash;
+        if (hash && hash !== '#profile') {
+            expandSection(hash);
+        }
+    });
 }
 
 // Initialize portfolio when DOM is loaded
