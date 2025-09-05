@@ -2387,11 +2387,8 @@ function createProjectCard(project) {
     const statusClass = project.status === 'active' ? 'status-active' : 'status-development';
     const statusText = project.status === 'active' ? 'Live' : 'In Development';
     
-    const liveLink = project.liveUrl ? 
-        `<a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer" class="project-link">
-            <span>🌐</span> Live Site
-        </a>` : 
-        `<span class="project-link disabled">
+    // Hide live site buttons until projects are ready for public access
+    const liveLink = `<span class="project-link disabled">
             <span>🌐</span> Coming Soon
         </span>`;
     
