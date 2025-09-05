@@ -2208,3 +2208,261 @@ function showUpdateNotification() {
     `;
     document.body.insertBefore(updateBanner, document.body.firstChild);
 }
+
+// Portfolio Projects Data
+const portfolioProjects = [
+    {
+        id: 'rubber-ducky-live',
+        title: 'Rubber Ducky Live',
+        category: 'AI-Powered Development Platform',
+        technologies: ['Next.js', 'React', 'Node.js', 'Anthropic Claude', 'TypeScript', 'Tailwind CSS'],
+        linesOfCode: '24.3K LOC',
+        description: 'AI-powered development companion featuring voice-first technical conversations, Claude 4 integration, and professional export capabilities. Built for software developers and technical professionals.',
+        highlights: [
+            'Voice-first AI conversations with technical context',
+            'Claude 4 intelligence integration',
+            'Professional export and session management',
+            'Sub-150ms response times',
+            'Enterprise-grade security'
+        ],
+        screenshot: 'screenshots/rubber-ducky-live.png',
+        githubUrl: 'https://github.com/son1112/rubber-ducky-live',
+        liveUrl: 'https://rubberducklive.com',
+        status: 'active'
+    },
+    {
+        id: 'storytimestar',
+        title: 'StoryTimeStar',
+        category: 'AI Storytelling Platform',
+        technologies: ['React', 'Node.js', 'AI/ML', 'MongoDB', 'Express', 'TypeScript'],
+        linesOfCode: '18.5K LOC',
+        description: 'AI-powered storytelling platform that generates personalized narratives with multi-language support and analytics dashboard for content creators.',
+        highlights: [
+            'AI-powered story generation and personalization',
+            'Multi-language narrative support',
+            'Analytics dashboard for content insights',
+            'Responsive cross-platform design',
+            'Real-time story collaboration features'
+        ],
+        screenshot: 'screenshots/storytimestar.png',
+        githubUrl: 'https://github.com/son1112/storytimestar',
+        liveUrl: 'https://storytimestar.com',
+        status: 'active'
+    },
+    {
+        id: 'replayready',
+        title: 'ReplayReady',
+        category: 'A/B Testing Analytics Platform',
+        technologies: ['React', 'MongoDB', 'Express', 'Node.js', 'Chart.js', 'AssemblyAI'],
+        linesOfCode: '22.1K LOC',
+        description: 'Advanced A/B testing platform with speech-to-text integration, real-time analytics, and comprehensive test result visualization.',
+        highlights: [
+            'Advanced A/B testing with statistical significance',
+            'AssemblyAI speech-to-text integration',
+            'Real-time analytics dashboard',
+            'MongoDB-based session data consistency',
+            'Interactive result visualization'
+        ],
+        screenshot: 'screenshots/replayready.png',
+        githubUrl: 'https://github.com/son1112/replayready',
+        liveUrl: 'https://replayready.com',
+        status: 'active'
+    },
+    {
+        id: 'project-universe',
+        title: 'Project Universe',
+        category: 'Meta-Development Intelligence',
+        technologies: ['Node.js', 'TypeScript', 'Knowledge Graphs', 'AI Analysis', 'Data Visualization'],
+        linesOfCode: '28.3K LOC',
+        description: 'Meta-development intelligence system that analyzes 128+ project portfolios, providing strategic insights and cross-project pattern recognition for the CAN.CODE ecosystem.',
+        highlights: [
+            'Portfolio analysis across 128+ projects',
+            'Strategic meta-development intelligence',
+            'Cross-project pattern recognition',
+            'Business development insights',
+            'Knowledge graph technology'
+        ],
+        screenshot: 'screenshots/project-universe.png',
+        githubUrl: 'https://github.com/son1112/project-universe',
+        liveUrl: 'https://project-universe.com',
+        status: 'active'
+    },
+    {
+        id: 'job-automation',
+        title: 'Job Application Automation',
+        category: 'Career Development System',
+        technologies: ['Ruby on Rails', 'Sidekiq', 'AI/ML', 'PostgreSQL', 'Redis', 'OpenAI'],
+        linesOfCode: '15.7K LOC',
+        description: 'Intelligent job application system with AI-powered cover letter generation, 22-skill matching algorithm, and automated response tracking for Rails + AI positions.',
+        highlights: [
+            'AI-powered personalized cover letter generation',
+            '22-skill weighted scoring algorithm',
+            'Rails 8 + Sidekiq infrastructure',
+            'OpenAI GPT-4 integration',
+            'Automated employer communication tracking'
+        ],
+        screenshot: null, // No screenshot available yet
+        githubUrl: 'https://github.com/son1112/job-application-automation',
+        liveUrl: null,
+        status: 'development'
+    },
+    {
+        id: 'career-portfolio-site',
+        title: 'Career Portfolio Site',
+        category: 'Professional Portfolio Platform',
+        technologies: ['HTML5', 'CSS3', 'JavaScript', 'PWA', 'WebP', 'GitHub Pages'],
+        linesOfCode: '1.4K LOC',
+        description: 'This very portfolio! A high-performance, PWA-enabled professional portfolio with dynamic resume generation, interactive timeline, and comprehensive A/B testing system.',
+        highlights: [
+            'Progressive Web App with offline capabilities',
+            '5-variant dynamic resume system',
+            'Interactive career timeline visualization',
+            'Performance optimization (5.7MB reduction)',
+            'Professional A/B testing implementation'
+        ],
+        screenshot: 'screenshots/career-portfolio.png',
+        githubUrl: 'https://github.com/son1112/career-portfolio-site',
+        liveUrl: 'https://sonander.dev',
+        status: 'active'
+    }
+];
+
+// Portfolio initialization
+function initializePortfolio() {
+    console.log('Initializing portfolio section...');
+    const portfolioGrid = document.getElementById('portfolio-grid');
+    
+    if (!portfolioGrid) {
+        console.log('Portfolio grid not found');
+        return;
+    }
+    
+    // Clear existing content
+    portfolioGrid.innerHTML = '';
+    
+    // Generate project cards
+    portfolioProjects.forEach(project => {
+        const projectCard = createProjectCard(project);
+        portfolioGrid.appendChild(projectCard);
+    });
+    
+    // Add scroll animations for portfolio cards
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    // Observe all portfolio cards
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(50px)';
+        card.style.transition = 'all 0.6s ease';
+        observer.observe(card);
+    });
+    
+    console.log(`Portfolio initialized with ${portfolioProjects.length} projects`);
+}
+
+function createProjectCard(project) {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.setAttribute('data-project-id', project.id);
+    
+    const screenshot = project.screenshot ? 
+        `<img src="${project.screenshot}" alt="${project.title} Screenshot" class="project-screenshot" loading="lazy">` :
+        `<div class="project-placeholder">🚧</div>`;
+    
+    const techTags = project.technologies.map(tech => 
+        `<span class="tech-tag">${tech}</span>`
+    ).join('');
+    
+    const highlightsList = project.highlights.map(highlight => 
+        `<li>${highlight}</li>`
+    ).join('');
+    
+    const statusClass = project.status === 'active' ? 'status-active' : 'status-development';
+    const statusText = project.status === 'active' ? 'Live' : 'In Development';
+    
+    const liveLink = project.liveUrl ? 
+        `<a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer" class="project-link">
+            <span>🌐</span> Live Site
+        </a>` : 
+        `<span class="project-link disabled">
+            <span>🌐</span> Coming Soon
+        </span>`;
+    
+    const githubLink = project.githubUrl ? 
+        `<a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="project-link">
+            <span>👨‍💻</span> GitHub
+        </a>` : '';
+    
+    card.innerHTML = `
+        ${screenshot}
+        <div class="project-content">
+            <div class="project-header">
+                <div>
+                    <h3 class="project-title">${project.title}</h3>
+                    <div class="project-category">${project.category}</div>
+                </div>
+            </div>
+            
+            <p class="project-description">${project.description}</p>
+            
+            <div class="project-tech">
+                ${techTags}
+            </div>
+            
+            <div class="project-highlights">
+                <h4>Key Features:</h4>
+                <ul class="highlight-list">
+                    ${highlightsList}
+                </ul>
+            </div>
+            
+            <div class="project-stats">
+                <span class="project-loc">${project.linesOfCode}</span>
+                <span class="project-status ${statusClass}">${statusText}</span>
+            </div>
+            
+            <div class="project-links">
+                ${liveLink}
+                ${githubLink}
+            </div>
+        </div>
+    `;
+    
+    // Add analytics tracking for project interactions
+    card.addEventListener('click', (e) => {
+        if (e.target.tagName !== 'A') {
+            trackEvent('portfolio_project_view', {
+                project_id: project.id,
+                project_title: project.title,
+                project_category: project.category
+            });
+        }
+    });
+    
+    // Track link clicks
+    card.querySelectorAll('.project-link:not(.disabled)').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const linkType = e.currentTarget.textContent.includes('Live Site') ? 'live_site' : 'github';
+            trackEvent('portfolio_link_click', {
+                project_id: project.id,
+                project_title: project.title,
+                link_type: linkType,
+                url: e.currentTarget.href
+            });
+        });
+    });
+    
+    return card;
+}
+
+// Initialize portfolio when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initializePortfolio();
+});
