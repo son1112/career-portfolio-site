@@ -84,6 +84,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Dynamic content loading
     initializeDynamicContent();
+    
+    // Contact form functionality
+    initializeContactForm();
 });
 
 /**
@@ -256,6 +259,15 @@ function initializeDynamicContent() {
     
     // Initialize typing effect for hero title
     initializeTypingEffect();
+    
+    // Initialize external link monitoring
+    initializeExternalLinkMonitoring();
+    
+    // Initialize skills visualization
+    initializeSkillsVisualization();
+    
+    // Initialize career timeline
+    initializeCareerTimeline();
 }
 
 /**
@@ -267,6 +279,7 @@ function copyToClipboard(text) {
             // Successfully copied to clipboard
         }).catch(err => {
             console.error('Failed to copy: ', err);
+            showNotification('Copy failed. Trying alternative method...', 'warning');
             fallbackCopyToClipboard(text);
         });
     } else {
@@ -288,10 +301,14 @@ function fallbackCopyToClipboard(text) {
     textArea.select();
     
     try {
-        document.execCommand('copy');
+        const successful = document.execCommand('copy');
+        if (!successful) {
+            throw new Error('Copy command failed');
+        }
         // Successfully copied using fallback method
     } catch (err) {
         console.error('Fallback copy failed: ', err);
+        showNotification('Unable to copy to clipboard. Please copy manually.', 'error');
     }
     
     document.body.removeChild(textArea);
@@ -408,12 +425,26 @@ function initializeContactReveal() {
         
         element.addEventListener('click', function() {
             if (!this.classList.contains('revealed')) {
-                // Decode the contact information
-                const decoded = atob(encoded);
-                
-                // Update the display
-                valueElement.textContent = decoded;
-                this.classList.add('revealed');
+                try {
+                    // Validate required data attributes
+                    if (!encoded) {
+                        throw new Error('Contact data not found');
+                    }
+                    if (!valueElement) {
+                        throw new Error('Contact display element not found');
+                    }
+                    
+                    // Decode the contact information
+                    const decoded = atob(encoded);
+                    
+                    // Validate decoded content
+                    if (!decoded || decoded.trim() === '') {
+                        throw new Error('Invalid contact data');
+                    }
+                    
+                    // Update the display
+                    valueElement.textContent = decoded;
+                    this.classList.add('revealed');
                 
                 // Track contact reveal for analytics
                 if (typeof trackContactReveal === 'function') {
@@ -445,6 +476,29 @@ function initializeContactReveal() {
                 
                 // Show reveal notification
                 showRevealNotification(this, type);
+                
+                } catch (error) {
+                    // Handle errors gracefully
+                    console.error('Contact reveal error:', error);
+                    
+                    // Show user-friendly error message
+                    valueElement.textContent = 'Contact info temporarily unavailable';
+                    this.classList.add('error-state');
+                    this.style.cursor = 'not-allowed';
+                    this.title = 'Contact information could not be loaded';
+                    
+                    // Show error notification
+                    showNotification('Unable to load contact information. Please try refreshing the page.', 'error');
+                    
+                    // Track error for analytics
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'contact_reveal_error', {
+                            event_category: 'Error',
+                            event_label: error.message,
+                            value: 1
+                        });
+                    }
+                }
             }
         });
         
@@ -577,23 +631,246 @@ function initializeResumeActions() {
 }
 
 /**
- * Download resume as PDF by opening dedicated resume page
+ * Download resume as PDF with role-specific options
  */
 function downloadResumeAsPDF() {
-    // Open the dedicated resume page in a new window
-    const resumeWindow = window.open('resume.html', '_blank', 'width=900,height=1200,scrollbars=yes,resizable=yes');
+    // Get current hero variant to suggest matching resume role
+    const currentVariant = window.currentHeroVariant || 'ai-focused';
     
-    // Show notification to user
-    showNotification('Resume page opened! The print dialog will appear automatically for PDF download.', 'info');
+    // Create resume options modal
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        font-family: var(--font-family);
+    `;
     
-    // Fallback: If popup is blocked, show instructions
-    if (!resumeWindow || resumeWindow.closed || typeof resumeWindow.closed === 'undefined') {
-        showNotification('Please allow popups for this site, or manually navigate to resume.html to download PDF.', 'warning');
+    modal.innerHTML = `
+        <div style="
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        ">
+            <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 1.5rem;">
+                📄 Resume Download Options
+            </h3>
+            <p style="margin-bottom: 25px; color: var(--text-secondary); line-height: 1.6;">
+                Choose your preferred resume format:
+            </p>
+            
+            <div style="display: grid; gap: 15px; margin-bottom: 25px;">
+                <button onclick="openDynamicResume('${currentVariant}')" style="
+                    padding: 15px;
+                    background: var(--primary);
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    transition: var(--transition);
+                ">
+                    🎯 Role-Optimized Resume (${currentVariant.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())})
+                </button>
+                
+                <button onclick="openStaticResume()" style="
+                    padding: 15px;
+                    background: var(--secondary);
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    transition: var(--transition);
+                ">
+                    📋 Standard Resume
+                </button>
+            </div>
+            
+            <button onclick="closeResumeModal()" style="
+                padding: 8px 16px;
+                background: none;
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                cursor: pointer;
+                color: var(--text-muted);
+                font-size: 0.9rem;
+            ">
+                Cancel
+            </button>
+        </div>
+    `;
+    
+    // Add click outside to close
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeResumeModal();
+        }
+    });
+    
+    document.body.appendChild(modal);
+    
+    // Store modal reference
+    window.resumeModal = modal;
+}
+
+/**
+ * Open dynamic resume with role-specific content
+ */
+function openDynamicResume(role = 'ai-focused') {
+    try {
+        // Validate role parameter
+        const validRoles = ['ai-focused', 'rails-backend', 'tech-lead', 'fullstack', 'enterprise-fintech'];
+        if (!validRoles.includes(role)) {
+            throw new Error(`Invalid role: ${role}`);
+        }
         
-        // Try to navigate to resume page as fallback
-        setTimeout(() => {
-            window.location.href = 'resume.html';
-        }, 3000);
+        closeResumeModal();
+        
+        // Attempt to open resume window
+        const resumeWindow = window.open(
+            `dynamic-resume.html?role=${role}&print=true`, 
+            '_blank', 
+            'width=900,height=1200,scrollbars=yes,resizable=yes'
+        );
+        
+        if (!resumeWindow || resumeWindow.closed || typeof resumeWindow.closed === 'undefined') {
+            // Popup blocked - offer alternative
+            showNotification('Popup blocked. Please allow popups or try the direct link below.', 'warning');
+            
+            // Create alternative link
+            const linkNotification = document.createElement('div');
+            linkNotification.innerHTML = `
+                <p>Popup blocked! <a href="dynamic-resume.html?role=${role}&print=true" target="_blank" 
+                   style="color: var(--primary); text-decoration: underline;">
+                   Click here to open your ${role.replace('-', ' ')} resume
+                </a></p>
+            `;
+            linkNotification.style.cssText = `
+                position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 10001; border: 2px solid var(--warning);
+            `;
+            
+            document.body.appendChild(linkNotification);
+            
+            // Auto-remove after 10 seconds
+            setTimeout(() => {
+                if (linkNotification && linkNotification.parentNode) {
+                    linkNotification.parentNode.removeChild(linkNotification);
+                }
+            }, 10000);
+            
+            // Track popup blocked event
+            if (typeof gtag === 'function') {
+                gtag('event', 'popup_blocked', {
+                    event_category: 'User Experience',
+                    event_label: 'Dynamic Resume',
+                    value: 1
+                });
+            }
+        } else {
+            showNotification(`Role-optimized resume opened for ${role.replace('-', ' ')}! Print dialog will appear automatically.`, 'success');
+        }
+        
+    } catch (error) {
+        console.error('Dynamic resume error:', error);
+        showNotification('Unable to open dynamic resume. Please try again or use the standard resume option.', 'error');
+        
+        // Track error
+        if (typeof gtag === 'function') {
+            gtag('event', 'dynamic_resume_error', {
+                event_category: 'Error',
+                event_label: error.message,
+                value: 1
+            });
+        }
+    }
+}
+
+/**
+ * Open static resume (original)
+ */
+function openStaticResume() {
+    try {
+        closeResumeModal();
+        
+        const resumeWindow = window.open('resume.html', '_blank', 'width=900,height=1200,scrollbars=yes,resizable=yes');
+        
+        if (!resumeWindow || resumeWindow.closed || typeof resumeWindow.closed === 'undefined') {
+            // Popup blocked - offer alternative
+            showNotification('Popup blocked. Please allow popups or try the direct link below.', 'warning');
+            
+            // Create alternative link
+            const linkNotification = document.createElement('div');
+            linkNotification.innerHTML = `
+                <p>Popup blocked! <a href="resume.html" target="_blank" 
+                   style="color: var(--primary); text-decoration: underline;">
+                   Click here to open your standard resume
+                </a></p>
+            `;
+            linkNotification.style.cssText = `
+                position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 10001; border: 2px solid var(--warning);
+            `;
+            
+            document.body.appendChild(linkNotification);
+            
+            // Auto-remove after 10 seconds
+            setTimeout(() => {
+                if (linkNotification && linkNotification.parentNode) {
+                    linkNotification.parentNode.removeChild(linkNotification);
+                }
+            }, 10000);
+            
+            // Track popup blocked event
+            if (typeof gtag === 'function') {
+                gtag('event', 'popup_blocked', {
+                    event_category: 'User Experience',
+                    event_label: 'Static Resume',
+                    value: 1
+                });
+            }
+        } else {
+            showNotification('Standard resume opened! Print dialog will appear automatically.', 'info');
+        }
+        
+    } catch (error) {
+        console.error('Static resume error:', error);
+        showNotification('Unable to open resume. Please try refreshing the page.', 'error');
+        
+        // Track error
+        if (typeof gtag === 'function') {
+            gtag('event', 'static_resume_error', {
+                event_category: 'Error',
+                event_label: error.message,
+                value: 1
+            });
+        }
+    }
+}
+
+/**
+ * Close resume options modal
+ */
+function closeResumeModal() {
+    if (window.resumeModal) {
+        document.body.removeChild(window.resumeModal);
+        window.resumeModal = null;
     }
 }
 
@@ -1004,13 +1281,1185 @@ function getVariantURLs() {
     return urls;
 }
 
-// Service Worker registration for offline capabilities (optional)
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js').then(function(registration) {
-            // ServiceWorker registered successfully
-        }, function(err) {
-            console.log('ServiceWorker registration failed: ', err);
+/**
+ * Initialize external link monitoring for error handling
+ */
+function initializeExternalLinkMonitoring() {
+    // Monitor external links for potential failures
+    const externalLinks = document.querySelectorAll('a[href^="http"], a[href^="mailto"], a[href^="tel"]');
+    
+    externalLinks.forEach(link => {
+        // Add error handling for external links
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            
+            try {
+                // For mailto and tel links, validate format
+                if (href.startsWith('mailto:')) {
+                    const email = href.substring(7);
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(email)) {
+                        e.preventDefault();
+                        showNotification('Invalid email address. Please check the contact information.', 'error');
+                        return false;
+                    }
+                }
+                
+                if (href.startsWith('tel:')) {
+                    const phone = href.substring(4);
+                    const phoneRegex = /^[\+]?[\d\-\(\)\s]+$/;
+                    if (!phoneRegex.test(phone) || phone.length < 10) {
+                        e.preventDefault();
+                        showNotification('Invalid phone number format.', 'error');
+                        return false;
+                    }
+                }
+                
+                // For external HTTP links, add visual feedback
+                if (href.startsWith('http') && !href.includes(window.location.hostname)) {
+                    // Add loading state
+                    this.classList.add('loading');
+                    
+                    // Remove loading state after 3 seconds
+                    setTimeout(() => {
+                        this.classList.remove('loading');
+                    }, 3000);
+                    
+                    // Track external link clicks
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'external_link_click', {
+                            event_category: 'Outbound Link',
+                            event_label: href,
+                            value: 1
+                        });
+                    }
+                }
+                
+            } catch (error) {
+                console.error('Link validation error:', error);
+                showNotification('Link validation failed. Proceeding anyway...', 'warning');
+                
+                // Track link errors
+                if (typeof gtag === 'function') {
+                    gtag('event', 'link_validation_error', {
+                        event_category: 'Error',
+                        event_label: error.message,
+                        value: 1
+                    });
+                }
+            }
+        });
+        
+        // Add network error detection for HTTP links
+        if (link.href.startsWith('http') && !link.href.includes(window.location.hostname)) {
+            link.addEventListener('mouseenter', function() {
+                // Preload check - try to fetch favicon to test connectivity
+                if (!this.classList.contains('network-checked')) {
+                    const url = new URL(this.href);
+                    const faviconUrl = `${url.protocol}//${url.hostname}/favicon.ico`;
+                    
+                    const testImg = new Image();
+                    testImg.onload = () => {
+                        this.classList.remove('network-error');
+                    };
+                    testImg.onerror = () => {
+                        this.classList.add('network-error');
+                        this.title = 'This link may not be available right now';
+                    };
+                    testImg.src = faviconUrl;
+                    
+                    this.classList.add('network-checked');
+                }
+            });
+        }
+    });
+    
+    // Monitor for global network connectivity
+    window.addEventListener('online', function() {
+        showNotification('Network connection restored.', 'success');
+        // Remove network error indicators
+        document.querySelectorAll('.network-error').forEach(el => {
+            el.classList.remove('network-error');
+            el.classList.remove('network-checked');
+        });
+    });
+    
+    window.addEventListener('offline', function() {
+        showNotification('Network connection lost. Some features may be unavailable.', 'warning');
+    });
+}
+
+/**
+ * Global error handler for unhandled JavaScript errors
+ */
+window.addEventListener('error', function(e) {
+    console.error('Global error:', e.error);
+    
+    // Show user-friendly error message for critical errors
+    if (e.error && e.error.stack) {
+        showNotification('A technical error occurred. Please refresh the page if you experience issues.', 'error');
+        
+        // Track JavaScript errors
+        if (typeof gtag === 'function') {
+            gtag('event', 'javascript_error', {
+                event_category: 'Error',
+                event_label: e.error.message || 'Unknown error',
+                value: 1
+            });
+        }
+    }
+});
+
+/**
+ * Global promise rejection handler
+ */
+window.addEventListener('unhandledrejection', function(e) {
+    console.error('Unhandled promise rejection:', e.reason);
+    
+    // Track promise rejections
+    if (typeof gtag === 'function') {
+        gtag('event', 'promise_rejection', {
+            event_category: 'Error',
+            event_label: e.reason?.message || 'Unknown promise rejection',
+            value: 1
+        });
+    }
+});
+
+/**
+ * Initialize interactive skills visualization
+ */
+function initializeSkillsVisualization() {
+    const skillsVisualization = document.getElementById('skillsVisualization');
+    if (!skillsVisualization) return;
+
+    // Create intersection observer for skill animations
+    const skillsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+                animateSkillBars(entry.target);
+                entry.target.classList.add('animated');
+            }
+        });
+    }, {
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observe all skill categories
+    const skillCategories = skillsVisualization.querySelectorAll('.skill-category-interactive');
+    skillCategories.forEach(category => {
+        skillsObserver.observe(category);
+        
+        // Add stagger animation delay
+        const skillItems = category.querySelectorAll('.skill-item');
+        skillItems.forEach((item, index) => {
+            item.style.setProperty('--animation-delay', `${index * 0.1}s`);
+        });
+    });
+
+    // Add click tracking for skill items
+    const skillItems = skillsVisualization.querySelectorAll('.skill-item');
+    skillItems.forEach(skillItem => {
+        skillItem.addEventListener('click', function() {
+            const skillName = this.dataset.skill;
+            const skillLevel = this.dataset.level;
+            
+            // Track skill interaction
+            if (typeof gtag === 'function') {
+                gtag('event', 'skill_interaction', {
+                    event_category: 'Skills Visualization',
+                    event_label: skillName,
+                    value: parseInt(skillLevel)
+                });
+            }
+            
+            // Show detailed skill info
+            showSkillDetails(this);
         });
     });
 }
+
+/**
+ * Animate skill progress bars in a category
+ */
+function animateSkillBars(category) {
+    const skillItems = category.querySelectorAll('.skill-item');
+    
+    skillItems.forEach((item, index) => {
+        const progressBar = item.querySelector('.skill-progress');
+        const targetWidth = progressBar.dataset.width;
+        
+        // Stagger animations
+        setTimeout(() => {
+            progressBar.style.width = targetWidth + '%';
+            
+            // Add pulse effect for high skill levels
+            if (parseInt(targetWidth) >= 90) {
+                setTimeout(() => {
+                    progressBar.style.animation = 'skillPulse 0.6s ease-in-out';
+                }, 1500);
+            }
+        }, index * 100);
+    });
+}
+
+/**
+ * Show detailed skill information
+ */
+function showSkillDetails(skillItem) {
+    const skillName = skillItem.dataset.skill;
+    const skillLevel = skillItem.dataset.level;
+    const skillYears = skillItem.dataset.years;
+    
+    // Create skill detail modal
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        font-family: var(--font-family);
+    `;
+    
+    const proficiencyDescription = getProficiencyDescription(parseInt(skillLevel));
+    
+    modal.innerHTML = `
+        <div style="
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        ">
+            <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.5rem;">
+                ${skillName}
+            </h3>
+            <div style="margin-bottom: 1.5rem;">
+                <div style="
+                    width: 100%;
+                    height: 12px;
+                    background: #f1f5f9;
+                    border-radius: 6px;
+                    overflow: hidden;
+                    margin-bottom: 1rem;
+                ">
+                    <div style="
+                        width: ${skillLevel}%;
+                        height: 100%;
+                        background: linear-gradient(90deg, var(--primary), var(--accent));
+                        border-radius: 6px;
+                        transition: width 1s ease-out;
+                    "></div>
+                </div>
+                <p style="font-size: 1.1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.5rem;">
+                    ${skillLevel}% Proficiency
+                </p>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">
+                    ${skillYears} years experience
+                </p>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5;">
+                    ${proficiencyDescription}
+                </p>
+            </div>
+            <button onclick="this.closest('div[style*=\"position: fixed\"]').remove()" style="
+                padding: 0.75rem 1.5rem;
+                background: var(--primary);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 1rem;
+                transition: var(--transition);
+            ">
+                Close
+            </button>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Close on backdrop click
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
+    
+    // Close on escape key
+    const escHandler = (e) => {
+        if (e.key === 'Escape') {
+            modal.remove();
+            document.removeEventListener('keydown', escHandler);
+        }
+    };
+    document.addEventListener('keydown', escHandler);
+}
+
+/**
+ * Get proficiency description based on skill level
+ */
+function getProficiencyDescription(level) {
+    if (level >= 95) {
+        return 'Expert level - Can architect complex systems, mentor others, and innovate in this technology.';
+    } else if (level >= 85) {
+        return 'Advanced level - Highly proficient with deep understanding and ability to solve complex problems.';
+    } else if (level >= 70) {
+        return 'Intermediate level - Solid working knowledge with ability to work independently on most tasks.';
+    } else if (level >= 50) {
+        return 'Developing level - Good foundation with growing experience and confidence.';
+    } else {
+        return 'Beginner level - Basic understanding with supervised experience.';
+    }
+}
+
+/**
+ * Initialize interactive career timeline
+ */
+function initializeCareerTimeline() {
+    const timeline = document.getElementById('careerTimeline');
+    if (!timeline) return;
+
+    // Create intersection observer for timeline animations
+    const timelineObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('animate')) {
+                entry.target.classList.add('animate');
+            }
+        });
+    }, {
+        threshold: 0.2,
+        rootMargin: '0px 0px -100px 0px'
+    });
+
+    // Observe all timeline items
+    const timelineItems = timeline.querySelectorAll('.timeline-item');
+    timelineItems.forEach((item, index) => {
+        // Add stagger delay
+        item.style.setProperty('--animation-delay', `${index * 0.2}s`);
+        item.style.transitionDelay = `${index * 0.1}s`;
+        
+        timelineObserver.observe(item);
+        
+        // Add click handlers
+        const content = item.querySelector('.timeline-content');
+        const marker = item.querySelector('.timeline-marker');
+        
+        [content, marker].forEach(element => {
+            element.addEventListener('click', () => showTimelineModal(item));
+        });
+    });
+}
+
+/**
+ * Show detailed timeline modal
+ */
+function showTimelineModal(timelineItem) {
+    const company = timelineItem.dataset.company;
+    const role = timelineItem.dataset.role;
+    const duration = timelineItem.dataset.duration;
+    const location = timelineItem.dataset.location;
+    const year = timelineItem.dataset.year;
+    
+    // Get full job details from the original experience section
+    const jobDetails = getJobDetails(company, year);
+    
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        font-family: var(--font-family);
+        backdrop-filter: blur(4px);
+    `;
+    
+    modal.innerHTML = `
+        <div style="
+            background: white;
+            padding: 2.5rem;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            position: relative;
+        ">
+            <button onclick="this.closest('div[style*=\"position: fixed\"]').remove()" style="
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                background: #f1f5f9;
+                border: none;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.2rem;
+                color: #64748b;
+                transition: var(--transition);
+            " onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">
+                ×
+            </button>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <div style="color: var(--primary); font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase; font-size: 0.9rem;">
+                    ${duration}
+                </div>
+                <h2 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 1.6rem; line-height: 1.3;">
+                    ${role}
+                </h2>
+                <h3 style="color: var(--accent); margin-bottom: 0.5rem; font-size: 1.2rem; font-weight: 600;">
+                    ${company}
+                </h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                    📍 ${location}
+                </p>
+            </div>
+            
+            <div style="margin-bottom: 2rem;">
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1.1rem;">
+                    Key Achievements
+                </h4>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    ${jobDetails.achievements.map(achievement => `
+                        <li style="
+                            margin-bottom: 0.75rem;
+                            padding-left: 1.5rem;
+                            position: relative;
+                            color: var(--text-secondary);
+                            line-height: 1.6;
+                        ">
+                            <span style="
+                                position: absolute;
+                                left: 0;
+                                top: 0.5rem;
+                                width: 6px;
+                                height: 6px;
+                                background: var(--primary);
+                                border-radius: 50%;
+                            "></span>
+                            ${achievement}
+                        </li>
+                    `).join('')}
+                </ul>
+            </div>
+            
+            <div>
+                <h4 style="color: var(--text-primary); margin-bottom: 1rem; font-size: 1.1rem;">
+                    Technologies & Skills
+                </h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    ${jobDetails.technologies.map(tech => `
+                        <span style="
+                            background: var(--primary);
+                            color: white;
+                            padding: 0.4rem 0.8rem;
+                            border-radius: 20px;
+                            font-size: 0.85rem;
+                            font-weight: 500;
+                        ">${tech}</span>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Close on backdrop click
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    });
+    
+    // Close on escape key
+    const escHandler = (e) => {
+        if (e.key === 'Escape') {
+            modal.remove();
+            document.removeEventListener('keydown', escHandler);
+        }
+    };
+    document.addEventListener('keydown', escHandler);
+    
+    // Track timeline interaction
+    if (typeof gtag === 'function') {
+        gtag('event', 'timeline_interaction', {
+            event_category: 'Career Timeline',
+            event_label: `${company} - ${year}`,
+            value: 1
+        });
+    }
+}
+
+/**
+ * Get detailed job information
+ */
+function getJobDetails(company, year) {
+    const jobData = {
+        'Can.Code': {
+            achievements: [
+                'Founded innovative AI company specializing in context engineering and intelligent business solutions',
+                'Built production 🦆 rubberDucky platform from concept to deployment in 8-10 days using AI-augmented development',
+                'Developed context engineering methodology enabling rapid AI integration across business domains',
+                'Created autonomous AI agent system processing thousands of requests with Rails-like development velocity',
+                'Shipped MVP-to-production pipelines using modern Rails architecture with real-time AI capabilities'
+            ],
+            technologies: ['AI Integration', 'Claude Code', 'Ruby on Rails', 'Context Engineering', 'Leadership', 'Entrepreneurship']
+        },
+        'Huntress Labs': {
+            achievements: [
+                'Engineered Microsoft 365 integration for enterprise cybersecurity platform serving thousands of MSPs',
+                'Architected scalable Rails backend supporting real-time threat detection and response workflows',
+                'Led SRE rotations monitoring Honey Badger, Splunk, Sentry, and NewRelic across multiple platforms',
+                'Implemented automated security compliance reporting reducing manual oversight by 75%',
+                'Built high-performance API integrations handling millions of security events per day'
+            ],
+            technologies: ['Ruby on Rails', 'Microsoft 365', 'Cybersecurity', 'SRE', 'API Integration', 'Monitoring']
+        },
+        'Stripe': {
+            achievements: [
+                'Built middleware for Account Updater service to AWS SAM, processing millions of card updates monthly',
+                'Architected payment processing workflows with 99.99% uptime and sub-100ms response times',
+                'Implemented fraud detection algorithms reducing false positives by 40%',
+                'Developed merchant onboarding automation reducing manual review time by 60%',
+                'Collaborated with product teams on global payment method expansion initiatives'
+            ],
+            technologies: ['Ruby', 'AWS', 'Payment Processing', 'Microservices', 'Fraud Detection', 'API Design']
+        },
+        'TaxJar': {
+            achievements: [
+                'Enabled accurate tax compliance for 50,000+ users across multiple states and jurisdictions',
+                'Built automated tax calculation engine reducing processing time by 80%',
+                'Integrated with Amazon API for seamless e-commerce tax reporting',
+                'Implemented real-time tax rate updates supporting dynamic compliance requirements',
+                'Developed customer-facing dashboard improving user engagement by 45%'
+            ],
+            technologies: ['Ruby on Rails', 'Amazon API', 'Tax Systems', 'PostgreSQL', 'E-commerce Integration']
+        },
+        'PaymentSpring': {
+            achievements: [
+                'Developed payment processor integration libraries enabling secure transaction processing',
+                'Built comprehensive merchant dashboard with real-time analytics and reporting',
+                'Implemented PCI DSS compliant payment flows handling $50M+ in annual transaction volume',
+                'Created automated reconciliation system reducing accounting discrepancies by 90%',
+                'Led cross-functional team delivering mobile payment SDK used by 100+ merchants'
+            ],
+            technologies: ['Ruby on Rails', 'Full Stack', 'Payment APIs', 'JavaScript', 'PCI Compliance', 'Mobile SDK']
+        },
+        'CardFlight': {
+            achievements: [
+                'Built core payment infrastructure supporting mobile card readers and point-of-sale systems',
+                'Developed merchant API enabling seamless integration with third-party applications',
+                'Implemented real-time transaction processing with 99.5% success rate',
+                'Created comprehensive testing framework reducing deployment bugs by 70%',
+                'Led technical documentation initiative improving developer onboarding efficiency'
+            ],
+            technologies: ['Ruby on Rails', 'Core Systems', 'Mobile SDK', 'APIs', 'Point of Sale', 'Technical Documentation']
+        },
+        'Freelance': {
+            achievements: [
+                'Started Rails development career with freelance projects across multiple industries',
+                'Built custom web applications for small businesses and educational institutions',
+                'Developed systematic teaching methodologies and mentorship skills',
+                'Created automated workflows reducing manual administrative tasks by 60%',
+                'Established foundation for entrepreneurial and technical leadership skills'
+            ],
+            technologies: ['Rails Journey Begins', 'Freelance', 'Full Stack', 'Entrepreneurship', 'Web Applications']
+        },
+        'Prairie Hill Learning Center': {
+            achievements: [
+                'Developed systematic teaching methodologies and mentorship skills',
+                'Led educational programs for diverse learning environments',
+                'Created structured learning frameworks improving student outcomes',
+                'Built leadership foundation through team coordination and program management',
+                'Established systems thinking approach applied throughout technical career'
+            ],
+            technologies: ['Leadership Foundation', 'Mentorship', 'Education', 'Systems Thinking', 'Program Management']
+        }
+    };
+    
+    return jobData[company] || {
+        achievements: ['Key role in company operations and technical development'],
+        technologies: ['Professional Development']
+    };
+}
+
+/**
+ * Initialize Contact Form functionality
+ */
+function initializeContactForm() {
+    const form = document.getElementById('contactForm');
+    const statusDiv = document.getElementById('formStatus');
+    
+    if (!form || !statusDiv) return;
+    
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        // Show loading state
+        const submitBtn = form.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
+        
+        statusDiv.className = 'form-status loading';
+        statusDiv.textContent = 'Sending your message...';
+        
+        // Get form data for display
+        const name = form.querySelector('#name').value;
+        const email = form.querySelector('#email').value;
+        const company = form.querySelector('#company').value;
+        const role = form.querySelector('#role').value;
+        const message = form.querySelector('#message').value;
+        
+        // Track contact form submission
+        if (typeof gtag === 'function') {
+            gtag('event', 'contact_form_submit', {
+                event_category: 'Contact',
+                event_label: 'Form Submission',
+                value: 1
+            });
+        }
+        
+        // Create email content
+        let emailSubject = `Portfolio Contact from ${name}`;
+        if (company && role) {
+            emailSubject += ` - ${role} at ${company}`;
+        }
+        
+        let emailBody = `Hello Anderson,\n\n`;
+        emailBody += `${message}\n\n`;
+        emailBody += `Best regards,\n${name}`;
+        if (company) emailBody += `\n${role ? role + ' at ' : ''}${company}`;
+        emailBody += `\nEmail: ${email}`;
+        
+        // Create mailto link
+        const mailtoLink = `mailto:anderson@sonander.dev?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+        
+        // Show success message with direct contact options
+        statusDiv.className = 'form-status success';
+        statusDiv.innerHTML = `
+            <strong>Thank you for your message, ${name}!</strong><br><br>
+            <div style="margin: 1rem 0;">
+                <a href="${mailtoLink}" 
+                   style="background: #059669; color: white; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 6px; display: inline-block; margin: 0.5rem 0; font-weight: 500;">
+                    📧 Send Email
+                </a>
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #6b7280;">
+                Your message has been prepared. Click "Send Email" to open your email client with the pre-filled message.
+            </p>
+        `;
+        
+        // Scroll to the success message
+        statusDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Reset form after a delay so user can see the success message
+        setTimeout(() => {
+            form.reset();
+        }, 100);
+        
+        // Track successful form completion
+        if (typeof gtag === 'function') {
+            gtag('event', 'contact_form_success', {
+                event_category: 'Contact',
+                event_label: 'Contact Info Provided',
+                value: 1
+            });
+        }
+        
+        // Show success notification
+        showNotification('Contact information ready!', 'success');
+        
+        // Reset button state
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    });
+    
+    // Add form validation feedback
+    const inputs = form.querySelectorAll('input[required], textarea[required]');
+    inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            if (!this.value.trim()) {
+                this.style.borderColor = '#dc2626';
+            } else {
+                this.style.borderColor = '';
+            }
+        });
+        
+        input.addEventListener('input', function() {
+            if (this.value.trim()) {
+                this.style.borderColor = '';
+            }
+        });
+    });
+    
+    // Email validation
+    const emailInput = form.querySelector('input[type="email"]');
+    if (emailInput) {
+        emailInput.addEventListener('blur', function() {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (this.value && !emailRegex.test(this.value)) {
+                this.style.borderColor = '#dc2626';
+                statusDiv.className = 'form-status error';
+                statusDiv.textContent = 'Please enter a valid email address.';
+            } else if (this.value) {
+                this.style.borderColor = '#059669';
+                statusDiv.className = 'form-status';
+                statusDiv.style.display = 'none';
+            }
+        });
+    }
+}
+
+// PWA Install Functionality
+let deferredPrompt;
+let installButton;
+
+// Create install button
+function createInstallButton() {
+    installButton = document.createElement('button');
+    installButton.id = 'pwa-install-btn';
+    installButton.innerHTML = `
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor"/>
+        </svg>
+        Install App
+    `;
+    installButton.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 50px;
+        font-weight: 500;
+        font-size: 14px;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        transform: translateY(100px);
+        opacity: 0;
+    `;
+    
+    installButton.addEventListener('click', installApp);
+    document.body.appendChild(installButton);
+}
+
+// Show install button with animation
+function showInstallButton() {
+    if (installButton) {
+        installButton.style.transform = 'translateY(0)';
+        installButton.style.opacity = '1';
+    }
+}
+
+// Hide install button with animation
+function hideInstallButton() {
+    if (installButton) {
+        installButton.style.transform = 'translateY(100px)';
+        installButton.style.opacity = '0';
+        setTimeout(() => {
+            if (installButton && installButton.parentNode) {
+                installButton.parentNode.removeChild(installButton);
+                installButton = null;
+            }
+        }, 300);
+    }
+}
+
+// Install app function
+async function installApp() {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        
+        // Track install attempt
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'pwa_install_attempt', {
+                event_category: 'PWA',
+                event_label: outcome,
+                value: outcome === 'accepted' ? 1 : 0
+            });
+        }
+        
+        if (outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+            hideInstallButton();
+        }
+        
+        deferredPrompt = null;
+    }
+}
+
+// Listen for beforeinstallprompt event
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    
+    // Show install button after a delay to avoid overwhelming users
+    setTimeout(() => {
+        if (!installButton) {
+            createInstallButton();
+        }
+        showInstallButton();
+    }, 3000);
+});
+
+// Listen for successful app installation
+window.addEventListener('appinstalled', () => {
+    console.log('PWA was installed');
+    hideInstallButton();
+    
+    // Track successful installation
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'pwa_installed', {
+            event_category: 'PWA',
+            event_label: 'successful_install',
+            value: 1
+        });
+    }
+});
+
+// Check if app is already installed
+window.addEventListener('DOMContentLoaded', () => {
+    // Hide install button if app is already installed
+    if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) {
+        console.log('App is running in standalone mode');
+        hideInstallButton();
+    }
+    
+    // Also check for iOS standalone mode
+    if (window.navigator.standalone === true) {
+        console.log('App is running in iOS standalone mode');
+        hideInstallButton();
+    }
+});
+
+// Service Worker registration and updates
+if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+    window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js')
+            .then(function(registration) {
+                console.log('ServiceWorker registered successfully');
+                
+                // Check for updates
+                registration.addEventListener('updatefound', () => {
+                    const newWorker = registration.installing;
+                    newWorker.addEventListener('statechange', () => {
+                        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                            // New content is available
+                            showUpdateNotification();
+                        }
+                    });
+                });
+            })
+            .catch(function(err) {
+                console.log('ServiceWorker registration failed: ', err);
+            });
+    });
+}
+
+// Show update notification
+function showUpdateNotification() {
+    const updateBanner = document.createElement('div');
+    updateBanner.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #667eea;
+        color: white;
+        padding: 12px;
+        text-align: center;
+        z-index: 10000;
+        font-size: 14px;
+    `;
+    updateBanner.innerHTML = `
+        New content is available! 
+        <button onclick="window.location.reload()" style="margin-left: 10px; background: white; color: #667eea; border: none; padding: 4px 12px; border-radius: 4px; cursor: pointer;">
+            Refresh
+        </button>
+    `;
+    document.body.insertBefore(updateBanner, document.body.firstChild);
+}
+
+// Portfolio Projects Data
+const portfolioProjects = [
+    {
+        id: 'rubber-ducky-live',
+        title: 'Rubber Ducky Live',
+        category: 'AI-Powered Development Platform',
+        technologies: ['Next.js', 'React', 'Node.js', 'Anthropic Claude', 'TypeScript', 'Tailwind CSS'],
+        linesOfCode: '24.3K LOC',
+        description: 'AI-powered development companion featuring voice-first technical conversations, Claude 4 integration, and professional export capabilities. Built for software developers and technical professionals.',
+        highlights: [
+            'Voice-first AI conversations with technical context',
+            'Claude 4 intelligence integration',
+            'Professional export and session management',
+            'Sub-150ms response times',
+            'Enterprise-grade security'
+        ],
+        screenshot: 'screenshots/rubber-ducky-live.png',
+        githubUrl: 'https://github.com/son1112/rubber-ducky-live',
+        liveUrl: 'https://rubberducklive.com',
+        status: 'active'
+    },
+    {
+        id: 'storytimestar',
+        title: 'StoryTimeStar',
+        category: 'AI Storytelling Platform',
+        technologies: ['React', 'Node.js', 'AI/ML', 'MongoDB', 'Express', 'TypeScript'],
+        linesOfCode: '18.5K LOC',
+        description: 'AI-powered storytelling platform that generates personalized narratives with multi-language support and analytics dashboard for content creators.',
+        highlights: [
+            'AI-powered story generation and personalization',
+            'Multi-language narrative support',
+            'Analytics dashboard for content insights',
+            'Responsive cross-platform design',
+            'Real-time story collaboration features'
+        ],
+        screenshot: 'screenshots/storytimestar.png',
+        githubUrl: 'https://github.com/son1112/storytimestar',
+        liveUrl: 'https://storytimestar.com',
+        status: 'active'
+    },
+    {
+        id: 'replayready',
+        title: 'ReplayReady',
+        category: 'A/B Testing Analytics Platform',
+        technologies: ['React', 'MongoDB', 'Express', 'Node.js', 'Chart.js', 'AssemblyAI'],
+        linesOfCode: '22.1K LOC',
+        description: 'Advanced A/B testing platform with speech-to-text integration, real-time analytics, and comprehensive test result visualization.',
+        highlights: [
+            'Advanced A/B testing with statistical significance',
+            'AssemblyAI speech-to-text integration',
+            'Real-time analytics dashboard',
+            'MongoDB-based session data consistency',
+            'Interactive result visualization'
+        ],
+        screenshot: 'screenshots/replayready.png',
+        githubUrl: 'https://github.com/son1112/replayready',
+        liveUrl: 'https://replayready.com',
+        status: 'active'
+    },
+    {
+        id: 'project-universe',
+        title: 'Project Universe',
+        category: 'Meta-Development Intelligence',
+        technologies: ['Node.js', 'TypeScript', 'Knowledge Graphs', 'AI Analysis', 'Data Visualization'],
+        linesOfCode: '28.3K LOC',
+        description: 'Meta-development intelligence system that analyzes 128+ project portfolios, providing strategic insights and cross-project pattern recognition for the CAN.CODE ecosystem.',
+        highlights: [
+            'Portfolio analysis across 128+ projects',
+            'Strategic meta-development intelligence',
+            'Cross-project pattern recognition',
+            'Business development insights',
+            'Knowledge graph technology'
+        ],
+        screenshot: 'screenshots/project-universe.png',
+        githubUrl: 'https://github.com/son1112/project-universe',
+        liveUrl: 'https://project-universe.com',
+        status: 'active'
+    },
+    {
+        id: 'job-automation',
+        title: 'Job Application Automation',
+        category: 'Career Development System',
+        technologies: ['Ruby on Rails', 'Sidekiq', 'AI/ML', 'PostgreSQL', 'Redis', 'OpenAI'],
+        linesOfCode: '15.7K LOC',
+        description: 'Intelligent job application system with AI-powered cover letter generation, 22-skill matching algorithm, and automated response tracking for Rails + AI positions.',
+        highlights: [
+            'AI-powered personalized cover letter generation',
+            '22-skill weighted scoring algorithm',
+            'Rails 8 + Sidekiq infrastructure',
+            'OpenAI GPT-4 integration',
+            'Automated employer communication tracking'
+        ],
+        screenshot: null, // No screenshot available yet
+        githubUrl: 'https://github.com/son1112/job-application-automation',
+        liveUrl: null,
+        status: 'development'
+    },
+    {
+        id: 'career-portfolio-site',
+        title: 'Career Portfolio Site',
+        category: 'Professional Portfolio Platform',
+        technologies: ['HTML5', 'CSS3', 'JavaScript', 'PWA', 'WebP', 'GitHub Pages'],
+        linesOfCode: '1.4K LOC',
+        description: 'This very portfolio! A high-performance, PWA-enabled professional portfolio with dynamic resume generation, interactive timeline, and comprehensive A/B testing system.',
+        highlights: [
+            'Progressive Web App with offline capabilities',
+            '5-variant dynamic resume system',
+            'Interactive career timeline visualization',
+            'Performance optimization (5.7MB reduction)',
+            'Professional A/B testing implementation'
+        ],
+        screenshot: 'screenshots/career-portfolio.png',
+        githubUrl: 'https://github.com/son1112/career-portfolio-site',
+        liveUrl: 'https://sonander.dev',
+        status: 'active'
+    }
+];
+
+// Portfolio initialization
+function initializePortfolio() {
+    console.log('Initializing portfolio section...');
+    const portfolioGrid = document.getElementById('portfolio-grid');
+    
+    if (!portfolioGrid) {
+        console.log('Portfolio grid not found');
+        return;
+    }
+    
+    // Clear existing content
+    portfolioGrid.innerHTML = '';
+    
+    // Generate project cards
+    portfolioProjects.forEach(project => {
+        const projectCard = createProjectCard(project);
+        portfolioGrid.appendChild(projectCard);
+    });
+    
+    // Add scroll animations for portfolio cards
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    // Observe all portfolio cards
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(50px)';
+        card.style.transition = 'all 0.6s ease';
+        observer.observe(card);
+    });
+    
+    console.log(`Portfolio initialized with ${portfolioProjects.length} projects`);
+}
+
+function createProjectCard(project) {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.setAttribute('data-project-id', project.id);
+    
+    const screenshot = project.screenshot ? 
+        `<img src="${project.screenshot}" alt="${project.title} Screenshot" class="project-screenshot" loading="lazy">` :
+        `<div class="project-placeholder">🚧</div>`;
+    
+    const techTags = project.technologies.map(tech => 
+        `<span class="tech-tag">${tech}</span>`
+    ).join('');
+    
+    const highlightsList = project.highlights.map(highlight => 
+        `<li>${highlight}</li>`
+    ).join('');
+    
+    const statusClass = project.status === 'active' ? 'status-active' : 'status-development';
+    const statusText = project.status === 'active' ? 'Live' : 'In Development';
+    
+    // Hide live site buttons until projects are ready for public access
+    const liveLink = `<span class="project-link disabled">
+            <span>🌐</span> Coming Soon
+        </span>`;
+    
+    const githubLink = project.githubUrl ? 
+        `<a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="project-link">
+            <span>👨‍💻</span> GitHub
+        </a>` : '';
+    
+    card.innerHTML = `
+        ${screenshot}
+        <div class="project-content">
+            <div class="project-header">
+                <div>
+                    <h3 class="project-title">${project.title}</h3>
+                    <div class="project-category">${project.category}</div>
+                </div>
+            </div>
+            
+            <p class="project-description">${project.description}</p>
+            
+            <div class="project-tech">
+                ${techTags}
+            </div>
+            
+            <div class="project-highlights">
+                <h4>Key Features:</h4>
+                <ul class="highlight-list">
+                    ${highlightsList}
+                </ul>
+            </div>
+            
+            <div class="project-stats">
+                <span class="project-loc">${project.linesOfCode}</span>
+                <span class="project-status ${statusClass}">${statusText}</span>
+            </div>
+            
+            <div class="project-links">
+                ${liveLink}
+                ${githubLink}
+            </div>
+        </div>
+    `;
+    
+    // Add analytics tracking for project interactions
+    card.addEventListener('click', (e) => {
+        if (e.target.tagName !== 'A') {
+            trackEvent('portfolio_project_view', {
+                project_id: project.id,
+                project_title: project.title,
+                project_category: project.category
+            });
+        }
+    });
+    
+    // Track link clicks
+    card.querySelectorAll('.project-link:not(.disabled)').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const linkType = e.currentTarget.textContent.includes('Live Site') ? 'live_site' : 'github';
+            trackEvent('portfolio_link_click', {
+                project_id: project.id,
+                project_title: project.title,
+                link_type: linkType,
+                url: e.currentTarget.href
+            });
+        });
+    });
+    
+    return card;
+}
+
+// Initialize portfolio when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initializePortfolio();
+});

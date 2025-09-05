@@ -134,6 +134,34 @@
             });
         }
     </script>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Anderson Portfolio">
+    <link rel="apple-touch-icon" href="rubber-duck.png">
+    
+    <!-- Microsoft PWA -->
+    <meta name="msapplication-TileImage" content="rubber-duck.png">
+    <meta name="msapplication-TileColor" content="#1a1a2e">
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
 </head>
 <body>
     <!-- No JavaScript fallback -->
@@ -155,6 +183,7 @@
                 <li><a href="#profile" class="nav-link">Profile</a></li>
                 <li><a href="#resume" class="nav-link">Resume</a></li>
                 <li><a href="#case-studies" class="nav-link">Case Studies</a></li>
+                <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
                 <li><a href="#ai-system" class="nav-link">AI System</a></li>
                 <li><a href="#achievements" class="nav-link">Achievements</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -260,69 +289,406 @@
                     <div class="contact-item">💻 <a href="https://github.com/son1112" target="_blank">GitHub</a></div>
                     <div class="contact-item">💻 <a href="https://github.com/son1112" target="_blank">Code</a></div>
                     <div class="contact-reveal-mini" data-type="email" data-encoded="YW5kZXJzb24ucmVpbmtvcmR0QGdtYWlsLmNvbQ==">📧 Email</div>
-                    <div class="contact-reveal-mini" data-type="phone" data-encoded="KzE0MDI5MDQyOTMz">📞 Phone</div>
                 </div>
             </div>
 
             <!-- Resume Content -->
             <div class="resume-content">
                 
-                <!-- Technical Skills -->
+                <!-- Interactive Technical Skills Visualization -->
                 <div class="resume-section">
                     <h3>Core Technical Skills</h3>
-                    <div class="skills-grid">
-                        <div class="skill-category">
+                    <div class="skills-visualization" id="skillsVisualization">
+                        <div class="skill-category-interactive">
                             <h4>Backend Development</h4>
-                            <div class="skills-list">
-                                <span class="skill expert">Ruby on Rails</span>
-                                <span class="skill expert">Ruby</span>
-                                <span class="skill advanced">Node.js</span>
-                                <span class="skill intermediate">Python</span>
+                            <div class="skill-item" data-skill="Ruby on Rails" data-level="95" data-years="10+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Ruby on Rails</span>
+                                    <span class="skill-level">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="Ruby" data-level="95" data-years="10+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Ruby</span>
+                                    <span class="skill-level">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="Node.js" data-level="75" data-years="5+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Node.js</span>
+                                    <span class="skill-level">75%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="75"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="Python" data-level="60" data-years="3+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Python</span>
+                                    <span class="skill-level">60%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress intermediate" style="width: 0%;" data-width="60"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="skill-category">
+
+                        <div class="skill-category-interactive">
                             <h4>Frontend Development</h4>
-                            <div class="skills-list">
-                                <span class="skill advanced">JavaScript</span>
-                                <span class="skill intermediate">TypeScript</span>
-                                <span class="skill intermediate">React</span>
-                                <span class="skill expert">HTML/CSS</span>
+                            <div class="skill-item" data-skill="JavaScript" data-level="85" data-years="8+">
+                                <div class="skill-info">
+                                    <span class="skill-name">JavaScript</span>
+                                    <span class="skill-level">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="HTML/CSS" data-level="95" data-years="10+">
+                                <div class="skill-info">
+                                    <span class="skill-name">HTML/CSS</span>
+                                    <span class="skill-level">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="React" data-level="70" data-years="4+">
+                                <div class="skill-info">
+                                    <span class="skill-name">React</span>
+                                    <span class="skill-level">70%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress intermediate" style="width: 0%;" data-width="70"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="TypeScript" data-level="65" data-years="3+">
+                                <div class="skill-info">
+                                    <span class="skill-name">TypeScript</span>
+                                    <span class="skill-level">65%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress intermediate" style="width: 0%;" data-width="65"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="skill-category">
+
+                        <div class="skill-category-interactive">
                             <h4>Database & Storage</h4>
-                            <div class="skills-list">
-                                <span class="skill expert">PostgreSQL</span>
-                                <span class="skill expert">MySQL</span>
-                                <span class="skill advanced">Redis</span>
-                                <span class="skill advanced">ElasticSearch</span>
+                            <div class="skill-item" data-skill="PostgreSQL" data-level="90" data-years="8+">
+                                <div class="skill-info">
+                                    <span class="skill-name">PostgreSQL</span>
+                                    <span class="skill-level">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="MySQL" data-level="85" data-years="7+">
+                                <div class="skill-info">
+                                    <span class="skill-name">MySQL</span>
+                                    <span class="skill-level">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="Redis" data-level="80" data-years="5+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Redis</span>
+                                    <span class="skill-level">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="80"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="ElasticSearch" data-level="75" data-years="4+">
+                                <div class="skill-info">
+                                    <span class="skill-name">ElasticSearch</span>
+                                    <span class="skill-level">75%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="75"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="skill-category">
+
+                        <div class="skill-category-interactive">
                             <h4>Cloud & DevOps</h4>
-                            <div class="skills-list">
-                                <span class="skill expert">AWS</span>
-                                <span class="skill advanced">S3</span>
-                                <span class="skill intermediate">Lambda</span>
-                                <span class="skill advanced">CI/CD</span>
+                            <div class="skill-item" data-skill="AWS" data-level="90" data-years="8+">
+                                <div class="skill-info">
+                                    <span class="skill-name">AWS</span>
+                                    <span class="skill-level">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="CI/CD" data-level="85" data-years="6+">
+                                <div class="skill-info">
+                                    <span class="skill-name">CI/CD</span>
+                                    <span class="skill-level">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="S3" data-level="80" data-years="6+">
+                                <div class="skill-info">
+                                    <span class="skill-name">S3</span>
+                                    <span class="skill-level">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="80"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="Lambda" data-level="60" data-years="3+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Lambda</span>
+                                    <span class="skill-level">60%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress intermediate" style="width: 0%;" data-width="60"></div>
+                                </div>
                             </div>
                         </div>
-                        <div class="skill-category">
-                            <h4>Tools & Practices</h4>
-                            <div class="skills-list">
-                                <span class="skill expert">Git</span>
-                                <span class="skill expert">TDD/BDD</span>
-                                <span class="skill expert">Agile/Scrum</span>
-                                <span class="skill advanced">API Design</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
+
+                        <div class="skill-category-interactive">
                             <h4>AI & Modern Tools</h4>
-                            <div class="skills-list">
-                                <span class="skill expert">Claude Code</span>
-                                <span class="skill expert">AI Integration</span>
-                                <span class="skill advanced">Context Engineering</span>
-                                <span class="skill advanced">Rapid Prototyping</span>
+                            <div class="skill-item" data-skill="Claude Code" data-level="95" data-years="1+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Claude Code</span>
+                                    <span class="skill-level">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="AI Integration" data-level="90" data-years="2+">
+                                <div class="skill-info">
+                                    <span class="skill-name">AI Integration</span>
+                                    <span class="skill-level">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="Context Engineering" data-level="85" data-years="1+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Context Engineering</span>
+                                    <span class="skill-level">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="Rapid Prototyping" data-level="90" data-years="5+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Rapid Prototyping</span>
+                                    <span class="skill-level">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="90"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-category-interactive">
+                            <h4>Development Practices</h4>
+                            <div class="skill-item" data-skill="Git" data-level="95" data-years="10+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Git</span>
+                                    <span class="skill-level">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="TDD/BDD" data-level="90" data-years="8+">
+                                <div class="skill-info">
+                                    <span class="skill-name">TDD/BDD</span>
+                                    <span class="skill-level">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="Agile/Scrum" data-level="95" data-years="10+">
+                                <div class="skill-info">
+                                    <span class="skill-name">Agile/Scrum</span>
+                                    <span class="skill-level">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress expert" style="width: 0%;" data-width="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item" data-skill="API Design" data-level="85" data-years="8+">
+                                <div class="skill-info">
+                                    <span class="skill-name">API Design</span>
+                                    <span class="skill-level">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress advanced" style="width: 0%;" data-width="85"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Career Timeline -->
+                <div class="resume-section">
+                    <h3>Career Progression Timeline</h3>
+                    <div class="timeline-container" id="careerTimeline">
+                        <div class="timeline-line"></div>
+                        
+                        <div class="timeline-item" data-year="2024" data-company="Can.Code" data-role="Founder & Technical Lead" data-duration="Jan 2024 - Present" data-location="Lincoln, NE & Remote">
+                            <div class="timeline-marker current">
+                                <div class="timeline-icon">🚀</div>
+                                <div class="timeline-pulse"></div>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">2024 - Present</div>
+                                <h4>Founder & Technical Lead</h4>
+                                <p class="timeline-company">Can.Code</p>
+                                <div class="timeline-preview">Founded innovative AI company specializing in context engineering...</div>
+                                <div class="timeline-tech-tags">
+                                    <span class="tech-tag">AI Integration</span>
+                                    <span class="tech-tag">Claude Code</span>
+                                    <span class="tech-tag">Ruby on Rails</span>
+                                    <span class="tech-tag">Leadership</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item" data-year="2022" data-company="Huntress Labs" data-role="Senior Software Engineer (Rails)" data-duration="Aug 2022 - Jan 2024" data-location="Remote">
+                            <div class="timeline-marker">
+                                <div class="timeline-icon">🛡️</div>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">2022 - 2024</div>
+                                <h4>Senior Software Engineer (Rails)</h4>
+                                <p class="timeline-company">Huntress Labs</p>
+                                <div class="timeline-preview">Engineered Microsoft 365 integration for enterprise security...</div>
+                                <div class="timeline-tech-tags">
+                                    <span class="tech-tag">Ruby on Rails</span>
+                                    <span class="tech-tag">Microsoft 365</span>
+                                    <span class="tech-tag">Cybersecurity</span>
+                                    <span class="tech-tag">SRE</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item" data-year="2021" data-company="Stripe" data-role="Senior Software Engineer (Ruby)" data-duration="Aug 2021 - Aug 2022" data-location="Remote">
+                            <div class="timeline-marker">
+                                <div class="timeline-icon">💳</div>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">2021 - 2022</div>
+                                <h4>Senior Software Engineer (Ruby)</h4>
+                                <p class="timeline-company">Stripe</p>
+                                <div class="timeline-preview">Built middleware for Account Updater service to AWS SAM...</div>
+                                <div class="timeline-tech-tags">
+                                    <span class="tech-tag">Ruby</span>
+                                    <span class="tech-tag">AWS</span>
+                                    <span class="tech-tag">Payment Processing</span>
+                                    <span class="tech-tag">Microservices</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item" data-year="2021" data-company="TaxJar" data-role="Senior Software Engineer (Rails)" data-duration="Mar 2021 - Aug 2021" data-location="Remote">
+                            <div class="timeline-marker">
+                                <div class="timeline-icon">📊</div>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">Mar - Aug 2021</div>
+                                <h4>Senior Software Engineer (Rails)</h4>
+                                <p class="timeline-company">TaxJar</p>
+                                <div class="timeline-preview">Enabled accurate tax compliance for 50,000+ users...</div>
+                                <div class="timeline-tech-tags">
+                                    <span class="tech-tag">Ruby on Rails</span>
+                                    <span class="tech-tag">Amazon API</span>
+                                    <span class="tech-tag">Tax Systems</span>
+                                    <span class="tech-tag">PostgreSQL</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item" data-year="2019" data-company="PaymentSpring" data-role="Full Stack Software Engineer (Rails)" data-duration="Jul 2019 - Mar 2021" data-location="Lincoln & Remote">
+                            <div class="timeline-marker">
+                                <div class="timeline-icon">💰</div>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">2019 - 2021</div>
+                                <h4>Full Stack Software Engineer (Rails)</h4>
+                                <p class="timeline-company">PaymentSpring</p>
+                                <div class="timeline-preview">Developed payment processor integration libraries...</div>
+                                <div class="timeline-tech-tags">
+                                    <span class="tech-tag">Ruby on Rails</span>
+                                    <span class="tech-tag">Full Stack</span>
+                                    <span class="tech-tag">Payment APIs</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item" data-year="2016" data-company="CardFlight" data-role="Software Engineer (Rails Core)" data-duration="Oct 2016 - Jul 2019" data-location="Lincoln">
+                            <div class="timeline-marker">
+                                <div class="timeline-icon">📱</div>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">2016 - 2019</div>
+                                <h4>Software Engineer (Rails Core)</h4>
+                                <p class="timeline-company">CardFlight</p>
+                                <div class="timeline-preview">Built core payment infrastructure and mobile SDK support...</div>
+                                <div class="timeline-tech-tags">
+                                    <span class="tech-tag">Ruby on Rails</span>
+                                    <span class="tech-tag">Core Systems</span>
+                                    <span class="tech-tag">Mobile SDK</span>
+                                    <span class="tech-tag">APIs</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item milestone" data-year="2012" data-company="Freelance" data-role="Full Stack Ruby on Rails Developer" data-duration="Apr 2012 - Jun 2018" data-location="Remote">
+                            <div class="timeline-marker milestone-marker">
+                                <div class="timeline-icon">💻</div>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">2012 - 2018</div>
+                                <h4>Full Stack Ruby on Rails Developer</h4>
+                                <p class="timeline-company">Freelance & Prairie Hill Learning Center</p>
+                                <div class="timeline-preview">Started Rails development career with freelance projects...</div>
+                                <div class="timeline-tech-tags">
+                                    <span class="tech-tag milestone-tag">Rails Journey Begins</span>
+                                    <span class="tech-tag">Freelance</span>
+                                    <span class="tech-tag">Full Stack</span>
+                                    <span class="tech-tag">Entrepreneurship</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item foundation" data-year="2006" data-company="Prairie Hill Learning Center" data-role="Lead Guide" data-duration="Aug 2006 - Sep 2014" data-location="Roca, NE">
+                            <div class="timeline-marker foundation-marker">
+                                <div class="timeline-icon">🌱</div>
+                            </div>
+                            <div class="timeline-content">
+                                <div class="timeline-date">2006 - 2014</div>
+                                <h4>Lead Guide</h4>
+                                <p class="timeline-company">Prairie Hill Learning Center</p>
+                                <div class="timeline-preview">Developed systematic teaching methodologies and mentorship skills...</div>
+                                <div class="timeline-tech-tags">
+                                    <span class="tech-tag foundation-tag">Leadership Foundation</span>
+                                    <span class="tech-tag">Mentorship</span>
+                                    <span class="tech-tag">Education</span>
+                                    <span class="tech-tag">Systems Thinking</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -828,6 +1194,40 @@
         </div>
     </section>
 
+    <!-- Portfolio Showcase -->
+    <section class="portfolio" id="portfolio">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="title-icon">🚀</span>
+                Featured Projects
+                <span class="title-badge">Live Systems</span>
+            </h2>
+            
+            <div class="portfolio-stats">
+                <div class="stat-card">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Active Projects</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">110K+</div>
+                    <div class="stat-label">Lines of Code</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Live Platforms</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Users Served</div>
+                </div>
+            </div>
+
+            <div class="portfolio-grid" id="portfolio-grid">
+                <!-- Project cards will be dynamically generated -->
+            </div>
+        </div>
+    </section>
+
     <!-- AI Tooling & Rapid Development -->
     <section class="ai-tooling" id="ai-tooling">
         <div class="container">
@@ -1178,18 +1578,41 @@
                                 <div class="contact-value">Click to reveal</div>
                             </div>
                         </div>
-                        <div class="contact-method contact-reveal" data-type="phone" data-encoded="KzE0MDI5MDQyOTMz">
-                            <div class="contact-icon">📞</div>
-                            <div class="contact-details">
-                                <div class="contact-label">Phone</div>
-                                <div class="contact-value">Click to reveal</div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="contact-cta">
                         <p><strong>Available for:</strong> Senior/Staff Engineer roles, Technical Leadership positions, AI Integration projects</p>
                     </div>
+                </div>
+
+                <div class="contact-form-section">
+                    <h3>Send a Message</h3>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="_replyto" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Role/Position</label>
+                            <input type="text" id="role" name="role" placeholder="e.g., Senior Software Engineer, Technical Lead">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Tell me about the opportunity, project, or how I can help..."></textarea>
+                        </div>
+                        <input type="hidden" name="_subject" value="New Portfolio Contact">
+                        <input type="hidden" name="_next" value="https://sonander.dev?message=sent">
+                        <button type="submit" class="submit-btn">Send Message</button>
+                        <div class="form-status" id="formStatus"></div>
+                    </form>
                 </div>
 
                 <div class="contact-summary">

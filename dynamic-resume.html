@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anderson Reinkordt - Dynamic Resume</title>
+    <style>
+        /* PDF-Optimized Resume Styles - Enhanced for Dynamic Content */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.4;
+            color: #333;
+            font-size: 11pt;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+            background: white;
+        }
+
+        /* Role Selector Styles (Hidden in Print) */
+        .role-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 1000;
+            font-size: 12px;
+            min-width: 250px;
+        }
+
+        .role-selector h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        .role-selector select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .role-selector button {
+            width: 100%;
+            padding: 8px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .role-selector button:hover {
+            background: #34495e;
+        }
+
+        .role-selector .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            width: auto;
+            padding: 0;
+            color: #666;
+        }
+
+        /* Header Section */
+        .resume-header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .resume-header h1 {
+            font-size: 24pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .resume-header h2 {
+            font-size: 16pt;
+            color: #666;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        .resume-summary {
+            font-size: 10pt;
+            color: #555;
+            max-width: 6.5in;
+            margin: 0 auto;
+            line-height: 1.3;
+        }
+
+        .contact-info {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 10pt;
+        }
+
+        .contact-item {
+            color: #555;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 18px;
+        }
+
+        .section h3 {
+            font-size: 14pt;
+            color: #2c3e50;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 4px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        /* Experience Items */
+        .experience-item {
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2px;
+        }
+
+        .job-title {
+            flex: 1;
+        }
+
+        .job-title h4 {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 2px;
+        }
+
+        .company {
+            font-size: 11pt;
+            color: #666;
+            font-weight: normal;
+        }
+
+        .job-duration {
+            font-size: 10pt;
+            color: #888;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .job-location {
+            font-size: 9pt;
+            color: #999;
+            margin-bottom: 5px;
+            font-style: italic;
+        }
+
+        .job-achievements {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .job-achievements li {
+            margin-bottom: 3px;
+            padding-left: 12px;
+            position: relative;
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+
+        .job-achievements li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        /* Skills Grid - Enhanced for Dynamic Content */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 8px;
+        }
+
+        .skill-category h4 {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .skill {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 9pt;
+            font-weight: 500;
+        }
+
+        .skill.expert {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .skill.advanced {
+            background: #3498db;
+            color: white;
+        }
+
+        .skill.intermediate {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .skill.beginner {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+
+        /* Projects */
+        .project-item {
+            margin-bottom: 12px;
+            page-break-inside: avoid;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+        }
+
+        .project-header h4 {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .project-type {
+            font-size: 9pt;
+            color: #888;
+            font-style: italic;
+        }
+
+        .project-achievements {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .project-achievements li {
+            margin-bottom: 2px;
+            padding-left: 12px;
+            position: relative;
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+
+        .project-achievements li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        /* PDF Action Buttons */
+        .pdf-actions {
+            text-align: center;
+            margin: 20px 0;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .pdf-actions button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12pt;
+            margin: 0 10px;
+        }
+
+        .pdf-actions button:hover {
+            background: #34495e;
+        }
+
+        /* Mobile Responsive Design */
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .role-selector {
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                min-width: auto;
+                padding: 20px;
+                font-size: 16px;
+                border-radius: 12px;
+                box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            }
+            
+            .role-selector h3 {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+            
+            .role-selector select {
+                padding: 15px 12px;
+                font-size: 16px;
+                margin-bottom: 15px;
+                border-radius: 8px;
+                -webkit-appearance: none;
+                appearance: none;
+                background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='5'><path fill='%23666' d='m0 0 2 3 2-3z'/></svg>");
+                background-repeat: no-repeat;
+                background-position: right 12px center;
+                background-size: 12px;
+            }
+            
+            .role-selector button {
+                padding: 15px 20px;
+                font-size: 16px;
+                margin-bottom: 8px;
+                border-radius: 8px;
+                min-height: 48px;
+                touch-action: manipulation;
+            }
+            
+            .role-selector .close-btn {
+                top: 15px;
+                right: 20px;
+                font-size: 24px;
+                min-height: 44px;
+                min-width: 44px;
+                border-radius: 50%;
+                background: #f8f9fa;
+                color: #666;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            /* Header Section */
+            .header h1 {
+                font-size: 28px;
+                line-height: 1.2;
+            }
+            
+            .header .contact-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .header .contact-info span {
+                font-size: 16px;
+            }
+            
+            /* Skills Grid Mobile Layout */
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .skill-category h4 {
+                font-size: 16px;
+                margin-bottom: 10px;
+            }
+            
+            .skill {
+                font-size: 14px;
+                padding: 8px 12px;
+                margin: 2px;
+                border-radius: 6px;
+                line-height: 1.2;
+            }
+            
+            /* Experience Section */
+            .experience-header {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 8px;
+            }
+            
+            .job-title h4 {
+                font-size: 18px;
+                margin-bottom: 4px;
+            }
+            
+            .company {
+                font-size: 16px;
+            }
+            
+            .job-duration {
+                font-size: 14px;
+                margin-top: 4px;
+            }
+            
+            .job-achievements li {
+                font-size: 15px;
+                line-height: 1.4;
+                margin-bottom: 8px;
+                padding-left: 16px;
+            }
+            
+            /* Projects Section */
+            .project-header h4 {
+                font-size: 18px;
+                margin-bottom: 4px;
+            }
+            
+            .project-type {
+                font-size: 14px;
+            }
+            
+            .project-achievements li {
+                font-size: 15px;
+                line-height: 1.4;
+                margin-bottom: 8px;
+                padding-left: 16px;
+            }
+            
+            /* PDF Actions Mobile */
+            .pdf-actions {
+                margin-top: 30px;
+                text-align: center;
+            }
+            
+            .pdf-actions button {
+                padding: 15px 25px;
+                font-size: 16px;
+                min-height: 48px;
+                border-radius: 8px;
+                touch-action: manipulation;
+            }
+            
+            /* Section Spacing */
+            .section {
+                margin-bottom: 30px;
+            }
+            
+            .section h2 {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+        }
+        
+        /* Small Mobile Devices */
+        @media screen and (max-width: 480px) {
+            .header h1 {
+                font-size: 24px;
+            }
+            
+            .role-selector {
+                top: 5px;
+                right: 5px;
+                left: 5px;
+                padding: 15px;
+            }
+            
+            .skill {
+                font-size: 13px;
+                padding: 6px 10px;
+            }
+            
+            .job-title h4 {
+                font-size: 16px;
+            }
+            
+            .job-achievements li,
+            .project-achievements li {
+                font-size: 14px;
+            }
+        }
+
+        /* Print-specific styles */
+        @media print {
+            body {
+                margin: 0;
+                padding: 0.5in;
+                font-size: 10pt;
+            }
+            
+            .role-selector {
+                display: none !important;
+            }
+            
+            .pdf-actions {
+                display: none !important;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+            }
+            
+            .experience-item {
+                page-break-inside: avoid;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+        }
+
+        /* Loading state */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* Fade transition for content updates */
+        .content-section {
+            transition: opacity 0.3s ease;
+        }
+
+        .content-section.updating {
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Role Selector (Hidden in Print) -->
+    <div class="role-selector" id="roleSelector">
+        <button class="close-btn" onclick="toggleRoleSelector()">&times;</button>
+        <h3>🎯 Resume Role Focus</h3>
+        <select id="roleSelect">
+            <option value="ai-focused">AI-Focused Software Engineer</option>
+            <option value="rails-backend">Senior Rails Engineer</option>
+            <option value="tech-lead">Technical Lead & Founder</option>
+            <option value="fullstack">Full-Stack Engineer</option>
+            <option value="enterprise-fintech">Enterprise Fintech Engineer</option>
+        </select>
+        <button onclick="updateResume()">🔄 Generate Resume</button>
+        <button onclick="window.print()">🖨️ Print/Save PDF</button>
+    </div>
+
+    <!-- Resume Header -->
+    <div class="resume-header">
+        <h1>Anderson Reinkordt</h1>
+        <h2 id="resumeTitle">AI-Focused Software Engineer</h2>
+        <p class="resume-summary" id="resumeSummary">AI-focused Rails engineer with 10+ years building high-performance systems from rapid MVPs to enterprise scale. Expert in AI tooling integration, autonomous development, and shipping fast - currently building production AI platforms with Claude Code and modern Rails architecture.</p>
+        <div class="contact-info">
+            <div class="contact-item">📍 Lincoln, NE, USA</div>
+            <div class="contact-item">💼 <a href="https://www.linkedin.com/in/anderson-reinkordt/" target="_blank">LinkedIn</a></div>
+            <div class="contact-item">💻 <a href="https://github.com/son1112" target="_blank">GitHub</a></div>
+            <div class="contact-item">🌐 <a href="https://sonander.dev" target="_blank">Portfolio</a></div>
+            <div class="contact-item">📧 anderson.reinkordt@gmail.com</div>
+        </div>
+    </div>
+
+    <!-- Core Technical Skills -->
+    <div class="section content-section">
+        <h3>Core Technical Skills</h3>
+        <div class="skills-grid" id="skillsGrid">
+            <!-- Dynamic content will be inserted here -->
+        </div>
+    </div>
+
+    <!-- Professional Experience Highlights -->
+    <div class="section content-section">
+        <h3>Professional Experience Highlights</h3>
+        <div id="experienceHighlights">
+            <!-- Dynamic content will be inserted here -->
+        </div>
+    </div>
+
+    <!-- Static Professional Experience (Core roles remain constant) -->
+    <div class="section">
+        <h3>Professional Experience</h3>
+        
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Founder & Technical Lead</h4>
+                    <div class="company">Can.Code</div>
+                </div>
+                <div class="job-duration">Jan 2024 - Present</div>
+            </div>
+            <div class="job-location">Lincoln, NE & Remote</div>
+            <ul class="job-achievements">
+                <li><strong>Founded innovative AI company</strong> specializing in context engineering and intelligent business solutions</li>
+                <li>Built production <strong>🦆 rubberDucky platform</strong> using Next.js 15 with voice integration and real-time streaming</li>
+                <li>Developed comprehensive <strong>context engineering methodology</strong> for optimizing AI development workflows</li>
+                <li>Created 13+ specialized AI agents for business strategy, security, and application development</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Senior Software Engineer (Rails)</h4>
+                    <div class="company">Huntress Labs</div>
+                </div>
+                <div class="job-duration">Aug 2022 - Jan 2024</div>
+            </div>
+            <div class="job-location">Remote</div>
+            <ul class="job-achievements">
+                <li><strong>Engineered Microsoft 365 integration project</strong> enabling threat hunting and malicious actor monitoring</li>
+                <li>Advanced development in Cybersecurity, 3rd party Integrations, and engineering code standards</li>
+                <li>Acted as rotational SRE, monitoring and triaging bugs to maintain development priorities</li>
+            </ul>
+        </div>
+        
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Senior Software Engineer (Rails)</h4>
+                    <div class="company">Stripe</div>
+                </div>
+                <div class="job-duration">Aug 2021 - Aug 2022</div>
+            </div>
+            <div class="job-location">Remote</div>
+            <ul class="job-achievements">
+                <li><strong>Enabled accurate tax compliance for 50,000+ TaxJar users</strong> by integrating Amazon Seller Partner API</li>
+                <li>Produced core discovery work for integration of TaxJar into Stripe systems</li>
+                <li>Advanced development in Fintech, Tax Compliance, and Error Handling</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Senior Software Engineer (Rails)</h4>
+                    <div class="company">TaxJar</div>
+                </div>
+                <div class="job-duration">Mar 2021 - Aug 2021</div>
+            </div>
+            <div class="job-location">Remote</div>
+            <ul class="job-achievements">
+                <li><strong>Saved 100+ developer hours annually</strong> by automating tax remediation analysis with dashboard integration</li>
+                <li>Regular rotation on SRE responsibilities including monitoring Honey Badger, Splunk, Sentry, NewRelic</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Full Stack Software Engineer (Rails)</h4>
+                    <div class="company">PaymentSpring</div>
+                </div>
+                <div class="job-duration">Jul 2019 - Mar 2021</div>
+            </div>
+            <div class="job-location">Lincoln & Remote</div>
+            <ul class="job-achievements">
+                <li>Developed middleware for Account Updater service to AWS SAM state machine</li>
+                <li>Built integrations with S3 to synchronize customer Credentials on File with payment processors</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Software Engineer (Rails Core)</h4>
+                    <div class="company">CardFlight</div>
+                </div>
+                <div class="job-duration">Oct 2016 - Jul 2019</div>
+            </div>
+            <div class="job-location">Lincoln</div>
+            <ul class="job-achievements">
+                <li><strong>Engineered integration libraries for payment systems</strong> achieving certifications with Vantiv and First Data</li>
+                <li>Developed comprehensive testing (RSpec), coverage (SimpleCov), and analysis (RuboCop) practices</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Key Projects & Innovation -->
+    <div class="section content-section">
+        <h3>Key Projects & Innovation</h3>
+        <div id="projectsSection">
+            <!-- Dynamic content will be inserted here -->
+        </div>
+    </div>
+
+    <!-- Education (Static) -->
+    <div class="section">
+        <h3>Education & Certifications</h3>
+        
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Front-End Developer Professional Certificate</h4>
+                    <div class="company">Meta (Facebook)</div>
+                </div>
+                <div class="job-duration">Aug 2024 - Present</div>
+            </div>
+            <ul class="job-achievements">
+                <li>Web Development with React, modern JavaScript, and responsive design</li>
+            </ul>
+        </div>
+        
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Full Stack Ruby on Rails Development</h4>
+                    <div class="company">Viking Code School</div>
+                </div>
+                <div class="job-duration">Jul 2016 - Oct 2016</div>
+            </div>
+            <ul class="job-achievements">
+                <li>Intensive full-stack development bootcamp focusing on Ruby on Rails</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- PDF Action Buttons (Hidden in Print) -->
+    <div class="pdf-actions">
+        <button onclick="toggleRoleSelector()">🎯 Change Role Focus</button>
+        <button onclick="window.print()">🖨️ Print Resume</button>
+        <button onclick="window.close()">❌ Close Window</button>
+    </div>
+
+    <!-- Load the resume builder -->
+    <script src="resume-builder.js"></script>
+    
+    <script>
+        // Initialize the resume with default role or URL parameter
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get role from URL parameter or default to ai-focused
+            const urlParams = new URLSearchParams(window.location.search);
+            const roleParam = urlParams.get('role') || 'ai-focused';
+            
+            // Set the select value and update resume
+            document.getElementById('roleSelect').value = roleParam;
+            updateResume();
+            
+            // Auto-trigger print dialog after content loads
+            setTimeout(function() {
+                if (urlParams.get('print') === 'true') {
+                    window.print();
+                }
+            }, 1000);
+        });
+
+        function updateResume() {
+            const roleSelect = document.getElementById('roleSelect');
+            const selectedRole = roleSelect.value;
+            
+            // Add loading state
+            const contentSections = document.querySelectorAll('.content-section');
+            contentSections.forEach(section => section.classList.add('updating'));
+            
+            // Generate resume content
+            const resumeData = generateResumeForRole(selectedRole);
+            
+            if (resumeData) {
+                // Update header
+                document.getElementById('resumeTitle').textContent = resumeData.title;
+                document.getElementById('resumeSummary').textContent = resumeData.summary;
+                
+                // Update skills
+                document.getElementById('skillsGrid').innerHTML = resumeData.skillsHtml;
+                
+                // Update experience highlights
+                document.getElementById('experienceHighlights').innerHTML = resumeData.experienceHtml;
+                
+                // Update projects
+                document.getElementById('projectsSection').innerHTML = resumeData.projectsHtml;
+                
+                // Update page title
+                document.title = `${resumeData.title} - Anderson Reinkordt Resume`;
+                
+                // Update URL without page reload
+                const url = new URL(window.location);
+                url.searchParams.set('role', selectedRole);
+                window.history.replaceState({}, '', url);
+            }
+            
+            // Remove loading state
+            setTimeout(() => {
+                contentSections.forEach(section => section.classList.remove('updating'));
+            }, 300);
+        }
+
+        function toggleRoleSelector() {
+            const selector = document.getElementById('roleSelector');
+            selector.style.display = selector.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Generate role-specific URLs for sharing
+        function getResumeURLs() {
+            const baseURL = window.location.origin + window.location.pathname;
+            return {
+                'ai-focused': `${baseURL}?role=ai-focused&print=true`,
+                'rails-backend': `${baseURL}?role=rails-backend&print=true`,
+                'tech-lead': `${baseURL}?role=tech-lead&print=true`,
+                'fullstack': `${baseURL}?role=fullstack&print=true`,
+                'enterprise-fintech': `${baseURL}?role=enterprise-fintech&print=true`
+            };
+        }
+
+        // Handle print events
+        window.addEventListener('beforeprint', function() {
+            // Ensure role selector is hidden
+            document.getElementById('roleSelector').style.display = 'none';
+        });
+
+        window.addEventListener('afterprint', function() {
+            // Optionally close window after printing
+            if (new URLSearchParams(window.location.search).get('print') === 'true') {
+                // window.close(); // Uncomment if you want auto-close
+            }
+        });
+    </script>
+</body>
+</html>
