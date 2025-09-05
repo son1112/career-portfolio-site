@@ -202,17 +202,16 @@ body {
     width: 100%;
     height: 100%;
     z-index: 1;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .hero-bg-image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center center;
     filter: brightness(0.8) saturate(1.1);
-    /* Ensure proper scaling for square image in wide container */
-    min-width: 100%;
-    min-height: 100%;
+    /* Show the complete square image while maintaining aspect ratio */
 }
 
 .hero-overlay {
