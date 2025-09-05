@@ -11,7 +11,7 @@ const heroVariants = {
         bio: 'AI-focused Rails engineer with 10+ years building high-performance systems from rapid MVPs to enterprise scale. Expert in AI tooling integration, autonomous development, and shipping fast - currently building production AI platforms with Claude Code and modern Rails architecture.',
         heroImage: {
             webp: 'public/gemini-hero-v3.webp',
-            fallback: 'public/Gemini_Generated_Image_e0qca5e0qca5e0qc.png',
+            fallback: 'public/Gemini_Generated_Image_m1y6hmm1y6hmm1y6.png',
             alt: 'AI-Focused Software Engineer with Natural Problem Solving'
         }
     },
@@ -24,7 +24,7 @@ const heroVariants = {
         bio: 'Senior Rails engineer with 10+ years building scalable backend systems. Expert in API design, database optimization, and payment processing - delivered enterprise solutions serving 50,000+ users with 99%+ uptime.',
         heroImage: {
             webp: 'public/gemini-hero-v3.webp',
-            fallback: 'public/Gemini_Generated_Image_e0qca5e0qca5e0qc.png',
+            fallback: 'public/Gemini_Generated_Image_m1y6hmm1y6hmm1y6.png',
             alt: 'Senior Rails Engineer Backend Architecture Focus'
         }
     },
@@ -37,7 +37,7 @@ const heroVariants = {
         bio: 'Technical leader and founder with 10+ years building teams and products. Expert in scaling from MVP to enterprise, team mentorship, and strategic technical decisions - founded Can.Code and led engineering teams to deliver high-impact solutions.',
         heroImage: {
             webp: 'public/gemini-hero-v3.webp',
-            fallback: 'public/Gemini_Generated_Image_e0qca5e0qca5e0qc.png',
+            fallback: 'public/Gemini_Generated_Image_m1y6hmm1y6hmm1y6.png',
             alt: 'Technical Leader and Engineering Team Builder'
         }
     },
@@ -50,7 +50,7 @@ const heroVariants = {
         bio: 'Full-stack engineer with 10+ years building complete web applications. Expert in Rails backend, modern frontend frameworks, and deployment automation - delivered products from initial concept through production scale.',
         heroImage: {
             webp: 'public/gemini-hero-v3.webp',
-            fallback: 'public/Gemini_Generated_Image_e0qca5e0qca5e0qc.png',
+            fallback: 'public/Gemini_Generated_Image_m1y6hmm1y6hmm1y6.png',
             alt: 'Full-Stack Engineer End-to-End Development'
         }
     },
@@ -63,7 +63,7 @@ const heroVariants = {
         bio: 'Enterprise software engineer with 10+ years in financial technology. Expert in payment processing, tax compliance automation, and PCI-compliant systems - architected solutions for 50,000+ users across multiple processors.',
         heroImage: {
             webp: 'public/gemini-hero-v3.webp',
-            fallback: 'public/Gemini_Generated_Image_e0qca5e0qca5e0qc.png',
+            fallback: 'public/Gemini_Generated_Image_m1y6hmm1y6hmm1y6.png',
             alt: 'Enterprise Fintech Engineer Security and Compliance Focus'
         }
     }
