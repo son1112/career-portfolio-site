@@ -137,7 +137,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center;
+    object-position: center 25%;
 }
 
 .name {
@@ -1623,6 +1623,31 @@ section {
     color: var(--primary);
 }
 
+.company-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.company-link:hover {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.company-link::after {
+    content: ' ↗';
+    font-size: 0.8em;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: var(--accent);
+}
+
+.company-link:hover::after {
+    opacity: 1;
+}
+
 .job-duration {
     font-size: 0.875rem;
     color: var(--text-muted);
@@ -1838,6 +1863,28 @@ section {
         display: none !important;
     }
     
+    /* Override collapsible section behavior for print */
+    .collapsible-section,
+    .collapsible-section.collapsed,
+    .collapsible-section.expanded {
+        max-height: none !important;
+        opacity: 1 !important;
+        padding: inherit !important;
+        margin: inherit !important;
+        transform: none !important;
+        overflow: visible !important;
+    }
+    
+    /* Hide section expand/collapse indicators */
+    .section-header::after {
+        display: none !important;
+    }
+    
+    /* Ensure hero banner doesn't interfere with resume printing */
+    .hero-banner {
+        display: none !important;
+    }
+    
     .resume {
         padding: 0;
         background: white;
@@ -1873,6 +1920,19 @@ section {
     
     .resume-info h2 {
         font-size: 18px;
+    }
+    
+    /* Ensure only resume section prints */
+    .profile-section,
+    .case-studies,
+    .portfolio,
+    .ai-tooling,
+    .achievements,
+    .opportunities,
+    .assessments,
+    .ai-system,
+    .contact {
+        display: none !important;
     }
 }
 
