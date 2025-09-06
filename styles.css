@@ -3187,7 +3187,7 @@ section {
 }
 
 .collapsible-section.expanding {
-    max-height: 5000px;
+    max-height: 200vh;
     opacity: 1;
     transform: translateY(0);
 }

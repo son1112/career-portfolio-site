@@ -2473,7 +2473,10 @@ function initializeCollapsibleSections() {
     // Function to expand a section
     function expandSection(sectionId) {
         const section = document.querySelector(sectionId);
-        if (!section) return;
+        if (!section) {
+            console.warn(`Section not found: ${sectionId}`);
+            return;
+        }
         
         // Collapse all other sections
         sections.forEach(s => {
@@ -2500,20 +2503,29 @@ function initializeCollapsibleSections() {
             activeNavLink.classList.add('active-section');
         }
         
-        // Smooth scroll to section
+        // Smooth scroll to section with error handling
         setTimeout(() => {
-            section.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'start',
-                inline: 'nearest'
-            });
+            try {
+                section.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start',
+                    inline: 'nearest'
+                });
+            } catch (error) {
+                console.warn(`Scroll error for ${sectionId}:`, error);
+                // Fallback scroll
+                section.scrollIntoView();
+            }
         }, 100);
     }
     
     // Function to toggle section
     function toggleSection(sectionId) {
         const section = document.querySelector(sectionId);
-        if (!section) return;
+        if (!section) {
+            console.warn(`Section not found for toggle: ${sectionId}`);
+            return;
+        }
         
         if (section.classList.contains('expanded')) {
             // Collapse if already expanded
@@ -2537,22 +2549,33 @@ function initializeCollapsibleSections() {
             e.preventDefault();
             const href = link.getAttribute('href');
             
-            // Skip hero link (always visible)
+            // Handle hero banner link (always visible) - scroll to top
             if (href === '#profile') {
-                document.querySelector('#profile').scrollIntoView({ 
-                    behavior: 'smooth', 
-                    block: 'start' 
-                });
+                const heroSection = document.querySelector('#profile');
+                if (heroSection) {
+                    try {
+                        heroSection.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start' 
+                        });
+                    } catch (error) {
+                        console.warn('Hero scroll error:', error);
+                        heroSection.scrollIntoView();
+                    }
+                }
                 return;
             }
             
             expandSection(href);
             
             // Track section expansion
-            trackEvent('section_expanded', {
-                section_id: href,
-                trigger: 'navigation'
-            });
+            if (typeof gtag === 'function') {
+                gtag('event', 'section_expanded', {
+                    event_category: 'UX Enhancement',
+                    event_label: href,
+                    section_trigger: 'navigation'
+                });
+            }
         });
     });
     
@@ -2565,10 +2588,13 @@ function initializeCollapsibleSections() {
                 expandSection(href);
                 
                 // Track section expansion
-                trackEvent('section_expanded', {
-                    section_id: href,
-                    trigger: 'hero_button'
-                });
+                if (typeof gtag === 'function') {
+                    gtag('event', 'section_expanded', {
+                        event_category: 'UX Enhancement',
+                        event_label: href,
+                        section_trigger: 'hero_button'
+                    });
+                }
             }
         });
     });
@@ -2583,10 +2609,13 @@ function initializeCollapsibleSections() {
                 toggleSection(sectionId);
                 
                 // Track section toggle
-                trackEvent('section_toggled', {
-                    section_id: sectionId,
-                    trigger: 'header_click'
-                });
+                if (typeof gtag === 'function') {
+                    gtag('event', 'section_toggled', {
+                        event_category: 'UX Enhancement',
+                        event_label: sectionId,
+                        section_trigger: 'header_click'
+                    });
+                }
             });
         }
     });
@@ -2594,17 +2623,26 @@ function initializeCollapsibleSections() {
     // Handle URL hash on page load
     if (window.location.hash) {
         const hash = window.location.hash;
-        if (hash !== '#profile') {
-            setTimeout(() => {
-                expandSection(hash);
-            }, 500); // Wait for page to settle
+        if (hash !== '#profile' && hash !== '') {
+            // Use a more reliable method than fixed timeout
+            const expandWhenReady = () => {
+                if (document.readyState === 'complete') {
+                    expandSection(hash);
+                } else {
+                    // Wait for load event if not complete
+                    window.addEventListener('load', () => {
+                        setTimeout(() => expandSection(hash), 100);
+                    }, { once: true });
+                }
+            };
+            expandWhenReady();
         }
     }
     
     // Handle browser back/forward navigation
     window.addEventListener('hashchange', (e) => {
         const hash = window.location.hash;
-        if (hash && hash !== '#profile') {
+        if (hash && hash !== '#profile' && hash !== '') {
             expandSection(hash);
         }
     });
