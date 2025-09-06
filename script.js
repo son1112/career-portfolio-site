@@ -87,6 +87,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Contact form functionality
     initializeContactForm();
+    
+    // Collapsible sections functionality
+    initializeCollapsibleSections();
 });
 
 /**
@@ -2457,6 +2460,192 @@ function createProjectCard(project) {
     });
     
     return card;
+}
+
+/**
+ * Initialize Collapsible Sections Functionality
+ */
+function initializeCollapsibleSections() {
+    const sections = document.querySelectorAll('.collapsible-section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const heroButtons = document.querySelectorAll('.hero-cta .btn-primary, .hero-cta .btn-secondary');
+    
+    // Function to expand a section
+    function expandSection(sectionId) {
+        const section = document.querySelector(sectionId);
+        if (!section) {
+            console.warn(`Section not found: ${sectionId}`);
+            return;
+        }
+        
+        // Collapse all other sections
+        sections.forEach(s => {
+            if (s !== section) {
+                s.classList.remove('expanded', 'expanding');
+                s.classList.add('collapsed');
+            }
+        });
+        
+        // Expand target section
+        section.classList.remove('collapsed');
+        section.classList.add('expanding');
+        
+        // Add expanded class after animation starts
+        setTimeout(() => {
+            section.classList.remove('expanding');
+            section.classList.add('expanded');
+        }, 50);
+        
+        // Update navigation active states
+        navLinks.forEach(link => link.classList.remove('active-section'));
+        const activeNavLink = document.querySelector(`a[href="${sectionId}"]`);
+        if (activeNavLink) {
+            activeNavLink.classList.add('active-section');
+        }
+        
+        // Smooth scroll to section with error handling
+        setTimeout(() => {
+            try {
+                section.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start',
+                    inline: 'nearest'
+                });
+            } catch (error) {
+                console.warn(`Scroll error for ${sectionId}:`, error);
+                // Fallback scroll
+                section.scrollIntoView();
+            }
+        }, 100);
+    }
+    
+    // Function to toggle section
+    function toggleSection(sectionId) {
+        const section = document.querySelector(sectionId);
+        if (!section) {
+            console.warn(`Section not found for toggle: ${sectionId}`);
+            return;
+        }
+        
+        if (section.classList.contains('expanded')) {
+            // Collapse if already expanded
+            section.classList.remove('expanded');
+            section.classList.add('collapsed');
+            
+            // Remove active state
+            const activeNavLink = document.querySelector(`a[href="${sectionId}"]`);
+            if (activeNavLink) {
+                activeNavLink.classList.remove('active-section');
+            }
+        } else {
+            // Expand section
+            expandSection(sectionId);
+        }
+    }
+    
+    // Add click handlers to navigation links
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const href = link.getAttribute('href');
+            
+            // Handle hero banner link (always visible) - scroll to top
+            if (href === '#profile') {
+                const heroSection = document.querySelector('#profile');
+                if (heroSection) {
+                    try {
+                        heroSection.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start' 
+                        });
+                    } catch (error) {
+                        console.warn('Hero scroll error:', error);
+                        heroSection.scrollIntoView();
+                    }
+                }
+                return;
+            }
+            
+            expandSection(href);
+            
+            // Track section expansion
+            if (typeof gtag === 'function') {
+                gtag('event', 'section_expanded', {
+                    event_category: 'UX Enhancement',
+                    event_label: href,
+                    section_trigger: 'navigation'
+                });
+            }
+        });
+    });
+    
+    // Add click handlers to hero buttons
+    heroButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const href = button.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                e.preventDefault();
+                expandSection(href);
+                
+                // Track section expansion
+                if (typeof gtag === 'function') {
+                    gtag('event', 'section_expanded', {
+                        event_category: 'UX Enhancement',
+                        event_label: href,
+                        section_trigger: 'hero_button'
+                    });
+                }
+            }
+        });
+    });
+    
+    // Add section header click functionality
+    sections.forEach(section => {
+        const sectionTitle = section.querySelector('.section-title');
+        if (sectionTitle) {
+            sectionTitle.classList.add('section-header');
+            sectionTitle.addEventListener('click', () => {
+                const sectionId = `#${section.id}`;
+                toggleSection(sectionId);
+                
+                // Track section toggle
+                if (typeof gtag === 'function') {
+                    gtag('event', 'section_toggled', {
+                        event_category: 'UX Enhancement',
+                        event_label: sectionId,
+                        section_trigger: 'header_click'
+                    });
+                }
+            });
+        }
+    });
+    
+    // Handle URL hash on page load
+    if (window.location.hash) {
+        const hash = window.location.hash;
+        if (hash !== '#profile' && hash !== '') {
+            // Use a more reliable method than fixed timeout
+            const expandWhenReady = () => {
+                if (document.readyState === 'complete') {
+                    expandSection(hash);
+                } else {
+                    // Wait for load event if not complete
+                    window.addEventListener('load', () => {
+                        setTimeout(() => expandSection(hash), 100);
+                    }, { once: true });
+                }
+            };
+            expandWhenReady();
+        }
+    }
+    
+    // Handle browser back/forward navigation
+    window.addEventListener('hashchange', (e) => {
+        const hash = window.location.hash;
+        if (hash && hash !== '#profile' && hash !== '') {
+            expandSection(hash);
+        }
+    });
 }
 
 // Initialize portfolio when DOM is loaded
