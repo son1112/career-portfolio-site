@@ -77,6 +77,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="public/avatar.webp" type="image/webp">
     <link rel="preload" as="image" href="public/gemini-hero-v3.webp" type="image/webp">
     <link rel="preload" as="image" href="public/Gemini_Generated_Image_m1y6hmm1y6hmm1y6.png" type="image/png">
     
@@ -150,7 +151,8 @@
     
     <!-- Service Worker Registration -->
     <script>
-        if ('serviceWorker' in navigator) {
+        // Only register service worker when served from HTTP(S), not file://
+        if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.protocol === 'http:')) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
                     .then(registration => {
@@ -160,6 +162,8 @@
                         console.log('SW registration failed: ', registrationError);
                     });
             });
+        } else if (location.protocol === 'file:') {
+            console.log('Service Worker skipped for local file:// development');
         }
     </script>
 </head>
@@ -176,7 +180,12 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-brand">
-                <span class="logo">AR</span>
+                <div class="logo">
+                    <picture>
+                        <source srcset="public/avatar.webp" type="image/webp">
+                        <img src="public/avatar.png" alt="Anderson Reinkordt - AI-Focused Software Engineer" class="avatar-image">
+                    </picture>
+                </div>
                 <span class="name">Anderson Reinkordt</span>
             </div>
             <ul class="nav-menu" id="nav-menu">
@@ -1646,16 +1655,11 @@
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <p>&copy; 2025 Anderson Reinkordt. Built with modern web technologies.</p>
-                </div>
-                <div class="footer-links">
-                    <a href="https://github.com/son1112" target="_blank">GitHub</a>
-                    <a href="https://github.com/son1112" target="_blank">Code</a>
-                </div>
-            </div>
+        <div class="terminal-banner">
+            <picture>
+                <source srcset="public/footer-banner.webp" type="image/webp">
+                <img src="public/footer-banner.png" alt="# i am the conductor - Memory updated in ~/.claude/CLAUDE.md • /memory to edit" class="terminal-banner-image" loading="lazy">
+            </picture>
         </div>
     </footer>
 
