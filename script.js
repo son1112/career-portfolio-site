@@ -743,10 +743,20 @@ function openDynamicResume(role = 'ai-focused') {
         
         closeResumeModal();
         
-        // Detect mobile device
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        // Enhanced mobile detection (user agent + feature detection)
+        const isMobileByUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const isMobileByFeature = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+        const isMobile = isMobileByUA || isMobileByFeature;
         
         if (isMobile) {
+            // Track mobile print attempt
+            if (typeof gtag === 'function') {
+                gtag('event', 'mobile_resume_download', {
+                    event_category: 'User Experience',
+                    event_label: role,
+                    value: 1
+                });
+            }
             // Mobile-friendly approach: direct navigation with print trigger
             const resumeUrl = `dynamic-resume.html?role=${role}&print=true&mobile=true`;
             showNotification('Opening resume in new tab. Use your browser\'s print function or "Save as PDF" to download.', 'info');
