@@ -2247,7 +2247,7 @@ const portfolioProjects = [
             'Responsive cross-platform design',
             'Real-time story collaboration features'
         ],
-        screenshot: 'screenshots/storytimestar.png',
+        screenshot: 'screenshots/storytime-star-new.png',
         githubUrl: 'https://github.com/son1112/storytimestar',
         liveUrl: 'https://storytimestar.com',
         status: 'active'
@@ -2266,7 +2266,7 @@ const portfolioProjects = [
             'MongoDB-based session data consistency',
             'Interactive result visualization'
         ],
-        screenshot: 'screenshots/replayready.png',
+        screenshot: 'screenshots/replayready-new.png',
         githubUrl: 'https://github.com/son1112/replayready',
         liveUrl: 'https://replayready.com',
         status: 'active'
@@ -2285,7 +2285,7 @@ const portfolioProjects = [
             'Business development insights',
             'Knowledge graph technology'
         ],
-        screenshot: 'screenshots/project-universe.png',
+        screenshot: 'screenshots/project-universe-new.png',
         githubUrl: 'https://github.com/son1112/project-universe',
         liveUrl: 'https://project-universe.com',
         status: 'active'
@@ -2308,6 +2308,25 @@ const portfolioProjects = [
         githubUrl: 'https://github.com/son1112/job-application-automation',
         liveUrl: null,
         status: 'development'
+    },
+    {
+        id: 'rubber-ducky-chrome',
+        title: 'Claude Text Processor',
+        category: 'Browser Extension Platform',
+        technologies: ['Chrome Extension API', 'JavaScript', 'Claude API', 'Browser Storage', 'Content Scripts'],
+        linesOfCode: '3.2K LOC',
+        description: 'Chrome extension that provides AI-powered text analysis and processing directly in the browser, featuring configurable prompts and seamless Claude API integration.',
+        highlights: [
+            'Direct browser integration for text processing',
+            'Configurable default prompts for different use cases',
+            'Anthropic Claude API integration with key management',
+            'Real-time text analysis and enhancement',
+            'Privacy-focused local processing options'
+        ],
+        screenshot: 'screenshots/rubber-ducky-chrome.png',
+        githubUrl: 'https://github.com/son1112/rubber-ducky-chrome',
+        liveUrl: null, // Chrome Web Store link would go here
+        status: 'active'
     },
     {
         id: 'career-portfolio-site',
