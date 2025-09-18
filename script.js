@@ -674,7 +674,7 @@ function downloadResumeAsPDF() {
             </p>
             
             <div style="display: grid; gap: 15px; margin-bottom: 25px;">
-                <button onclick="openDynamicResume('${currentVariant}')" style="
+                <button onclick="openDynamicResume('${currentVariant}')" aria-label="Download role-optimized resume" style="
                     padding: 15px;
                     background: var(--primary);
                     color: white;
@@ -688,7 +688,7 @@ function downloadResumeAsPDF() {
                     🎯 Role-Optimized Resume (${currentVariant.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())})
                 </button>
                 
-                <button onclick="openStaticResume()" style="
+                <button onclick="openStaticResume()" aria-label="Download standard resume" style="
                     padding: 15px;
                     background: var(--secondary);
                     color: white;
@@ -703,7 +703,7 @@ function downloadResumeAsPDF() {
                 </button>
             </div>
             
-            <button id="cancelResumeBtn" onclick="this.closest('div[style*=&quot;position: fixed&quot;]').remove()" style="
+            <button id="cancelResumeBtn" type="button" aria-label="Cancel resume download" style="
                 padding: 8px 16px;
                 background: none;
                 border: 1px solid var(--border);
