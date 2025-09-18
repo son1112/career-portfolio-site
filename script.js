@@ -21,7 +21,7 @@ const heroVariants = {
         taglines: ['Ruby on Rails Expert', 'API Architecture', 'Database Optimization'],
         cta1: 'View Portfolio',
         cta2: 'Discuss Architecture',
-        bio: 'Senior Rails engineer with 10+ years building scalable backend systems. Expert in API design, database optimization, and payment processing - delivered enterprise solutions serving 50,000+ users with 99%+ uptime.',
+        bio: 'Senior Rails engineer with 10+ years building scalable backend systems. Expert in API design, database optimization, and payment processing - delivered enterprise solutions serving 50,000+ users with reliable performance.',
         heroImage: {
             webp: 'public/gemini-hero-v3.webp',
             fallback: 'public/Gemini_Generated_Image_m1y6hmm1y6hmm1y6.png',
@@ -703,7 +703,7 @@ function downloadResumeAsPDF() {
                 </button>
             </div>
             
-            <button onclick="closeResumeModal()" style="
+            <button id="cancelResumeBtn" onclick="this.closest('div[style*=&quot;position: fixed&quot;]').remove()" style="
                 padding: 8px 16px;
                 background: none;
                 border: 1px solid var(--border);
@@ -723,9 +723,19 @@ function downloadResumeAsPDF() {
             closeResumeModal();
         }
     });
-    
+
     document.body.appendChild(modal);
-    
+
+    // Add cancel button event listener
+    const cancelBtn = modal.querySelector('#cancelResumeBtn');
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeResumeModal();
+        });
+    }
+
     // Store modal reference
     window.resumeModal = modal;
 }
@@ -871,11 +881,15 @@ function openStaticResume() {
  * Close resume options modal
  */
 function closeResumeModal() {
+    console.log('closeResumeModal called'); // Debug log
     if (window.resumeModal) {
-        document.body.removeChild(window.resumeModal);
+        window.resumeModal.remove();
         window.resumeModal = null;
     }
 }
+
+// Make function globally accessible
+window.closeResumeModal = closeResumeModal;
 
 /**
  * Show notification helper
@@ -1733,7 +1747,7 @@ function showTimelineModal(timelineItem) {
                 <h3 style="color: var(--accent); margin-bottom: 0.5rem; font-size: 1.2rem; font-weight: 600;">
                     ${company}
                 </h3>
-                <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                <p style="color: #1a1812; font-size: 0.95rem; margin-bottom: 1.5rem;">
                     📍 ${location}
                 </p>
             </div>
@@ -1748,7 +1762,7 @@ function showTimelineModal(timelineItem) {
                             margin-bottom: 0.75rem;
                             padding-left: 1.5rem;
                             position: relative;
-                            color: var(--text-secondary);
+                            color: #1a1812;
                             line-height: 1.6;
                         ">
                             <span style="
@@ -1821,13 +1835,12 @@ function getJobDetails(company, year) {
     const jobData = {
         'Can.Code': {
             achievements: [
-                'Founded innovative AI company specializing in context engineering and intelligent business solutions',
-                'Built production 🦆 rubberDucky platform from concept to deployment in 8-10 days using AI-augmented development',
-                'Developed context engineering methodology enabling rapid AI integration across business domains',
-                'Created autonomous AI agent system processing thousands of requests with Rails-like development velocity',
-                'Shipped MVP-to-production pipelines using modern Rails architecture with real-time AI capabilities'
+                "We're building Rubber Ducky, a voice-enabled AI chat platform that makes conversations with AI more natural and productive. Inspired by the classic rubber duck debugging technique used by programmers, our platform lets you think out loud with AI - whether you're working through problems, brainstorming ideas, or just need someone to talk through your thoughts with.",
+                "Built with modern web technologies and Claude AI, Rubber Ducky combines voice input with traditional text chat to create a more engaging experience. The platform features real-time speech recognition, streaming AI responses, and persistent conversation history, making it easy to have natural, flowing conversations with AI assistants.",
+                "What makes Rubber Ducky different is its focus on conversation quality and user experience. Instead of just another chatbot interface, we've built features like voice waveform visualization, session management, message starring and tagging, and export capabilities. The platform also supports different AI agents for specific use cases - from general conversation to specialized assistants for coding, writing, or brainstorming.",
+                "The platform is built as a full-stack Next.js application with MongoDB for data persistence, real-time audio processing, and a mobile-optimized interface. We're continuously improving the user experience with features like collapsible interfaces, responsive design, and accessibility compliance."
             ],
-            technologies: ['AI Integration', 'Claude Code', 'Ruby on Rails', 'Context Engineering', 'Leadership', 'Entrepreneurship']
+            technologies: ['Next.js', 'React', 'TypeScript', 'MongoDB', 'Node.js', 'Real-time Audio Processing', 'AI Integration', 'Full-Stack Development', 'Mobile-First Design', 'API Development', 'Web Development', 'User Experience (UX)', 'Voice Interface Design']
         },
         'Huntress Labs': {
             achievements: [
@@ -1842,7 +1855,7 @@ function getJobDetails(company, year) {
         'Stripe': {
             achievements: [
                 'Built middleware for Account Updater service to AWS SAM, processing millions of card updates monthly',
-                'Architected payment processing workflows with 99.99% uptime and sub-100ms response times',
+                'Architected reliable payment processing workflows with optimized response times',
                 'Implemented fraud detection algorithms reducing false positives by 40%',
                 'Developed merchant onboarding automation reducing manual review time by 60%',
                 'Collaborated with product teams on global payment method expansion initiatives'
