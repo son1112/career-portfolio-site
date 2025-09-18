@@ -1587,7 +1587,7 @@ function showSkillDetails(skillItem) {
                     ${proficiencyDescription}
                 </p>
             </div>
-            <button onclick="this.closest('div[style*=\"position: fixed\"]').remove()" style="
+            <button class="modal-close-btn" type="button" aria-label="Close skill details" style="
                 padding: 0.75rem 1.5rem;
                 background: var(--primary);
                 color: white;
@@ -1603,14 +1603,24 @@ function showSkillDetails(skillItem) {
     `;
     
     document.body.appendChild(modal);
-    
+
+    // Add close button event listener
+    const closeBtn = modal.querySelector('.modal-close-btn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            modal.remove();
+            document.removeEventListener('keydown', escHandler);
+        });
+    }
+
     // Close on backdrop click
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
             modal.remove();
+            document.removeEventListener('keydown', escHandler);
         }
     });
-    
+
     // Close on escape key
     const escHandler = (e) => {
         if (e.key === 'Escape') {
@@ -1717,7 +1727,7 @@ function showTimelineModal(timelineItem) {
             box-shadow: 0 25px 50px rgba(0,0,0,0.3);
             position: relative;
         ">
-            <button onclick="this.closest('div[style*=\"position: fixed\"]').remove()" style="
+            <button class="modal-close-btn" type="button" aria-label="Close modal" style="
                 position: absolute;
                 top: 1rem;
                 right: 1rem;
@@ -1801,14 +1811,24 @@ function showTimelineModal(timelineItem) {
     `;
     
     document.body.appendChild(modal);
-    
+
+    // Add close button event listener
+    const closeBtn = modal.querySelector('.modal-close-btn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            modal.remove();
+            document.removeEventListener('keydown', escHandler);
+        });
+    }
+
     // Close on backdrop click
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
             modal.remove();
+            document.removeEventListener('keydown', escHandler);
         }
     });
-    
+
     // Close on escape key
     const escHandler = (e) => {
         if (e.key === 'Escape') {
@@ -1817,7 +1837,7 @@ function showTimelineModal(timelineItem) {
         }
     };
     document.addEventListener('keydown', escHandler);
-    
+
     // Track timeline interaction
     if (typeof gtag === 'function') {
         gtag('event', 'timeline_interaction', {
