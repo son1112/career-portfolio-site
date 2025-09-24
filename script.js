@@ -3,12 +3,12 @@
 // A/B Test Hero Message Variants
 const heroVariants = {
     'ai-focused': {
-        title: 'AI-Focused Software Engineer',
-        subtitle: 'Building reliable systems that consistently exceed expectations',
-        taglines: ['Ruby on Rails Expert', 'AI Tooling Specialist', 'Rapid Development'],
-        cta1: 'View Experience',
-        cta2: "Let's Debug Together",
-        bio: 'AI-focused Rails engineer with 10+ years building high-performance systems from rapid MVPs to enterprise scale. Expert in AI tooling integration, autonomous development, and shipping fast - currently building production AI platforms with Claude Code and modern Rails architecture.',
+        title: 'AI Research Engineer',
+        subtitle: 'Investigating LLM capabilities through systematic experimentation',
+        taglines: ['AI Research Methods', 'Experimental Systems', 'Capability Documentation'],
+        cta1: 'View Research',
+        cta2: "Let's Investigate Together",
+        bio: 'AI research engineer with 10+ years building experimental systems and investigating LLM capabilities. Research lead at can.code Labs documenting voice-AI problem-solving effectiveness through 126+ systematic implementations - achieving 73% success rates while honestly documenting critical limitations.',
         heroImage: {
             webp: 'public/gemini-hero-v3.webp',
             fallback: 'public/Gemini_Generated_Image_m1y6hmm1y6hmm1y6.png',
@@ -29,12 +29,12 @@ const heroVariants = {
         }
     },
     'tech-lead': {
-        title: 'Technical Lead & Founder',
-        subtitle: 'Leading teams to consistently deliver beyond expectations',
-        taglines: ['Team Leadership', 'Product Strategy', 'Technical Vision'],
-        cta1: 'View Leadership',
-        cta2: 'Schedule Coffee',
-        bio: 'Technical leader and founder with 10+ years building teams and products. Expert in scaling from MVP to enterprise, team mentorship, and strategic technical decisions - founded Can.Code and led engineering teams to deliver high-impact solutions.',
+        title: 'Research Lead & Founder',
+        subtitle: 'Leading systematic investigation of AI capabilities and limitations',
+        taglines: ['Research Leadership', 'Experimental Design', 'Academic Rigor'],
+        cta1: 'View Research',
+        cta2: 'Discuss Methodology',
+        bio: 'Research leader and founder with 10+ years building experimental systems and investigating LLM capabilities. Founded can.code Research Labs to document AI system boundaries through transparent methodology - leading systematic experimentation rather than making unfounded claims.',
         heroImage: {
             webp: 'public/gemini-hero-v3.webp',
             fallback: 'public/Gemini_Generated_Image_m1y6hmm1y6hmm1y6.png',
@@ -1855,10 +1855,10 @@ function getJobDetails(company, year) {
     const jobData = {
         'Can.Code': {
             achievements: [
-                "We're building Rubber Ducky, a voice-enabled AI chat platform that makes conversations with AI more natural and productive. Inspired by the classic rubber duck debugging technique used by programmers, our platform lets you think out loud with AI - whether you're working through problems, brainstorming ideas, or just need someone to talk through your thoughts with.",
-                "Built with modern web technologies and Claude AI, Rubber Ducky combines voice input with traditional text chat to create a more engaging experience. The platform features real-time speech recognition, streaming AI responses, and persistent conversation history, making it easy to have natural, flowing conversations with AI assistants.",
-                "What makes Rubber Ducky different is its focus on conversation quality and user experience. Instead of just another chatbot interface, we've built features like voice waveform visualization, session management, message starring and tagging, and export capabilities. The platform also supports different AI agents for specific use cases - from general conversation to specialized assistants for coding, writing, or brainstorming.",
-                "The platform is built as a full-stack Next.js application with MongoDB for data persistence, real-time audio processing, and a mobile-optimized interface. We're continuously improving the user experience with features like collapsible interfaces, responsive design, and accessibility compliance."
+                "can.code Research Labs investigates LLM agentic AI systems through systematic experimentation, focusing on what works, what doesn't, and why. Our primary research platform, Rubber Ducky, explores voice-AI problem-solving effectiveness through 126+ experimental implementations, achieving a documented 73% success rate for structured problem-solving sessions.",
+                "Our research methodology emphasizes transparent limitation documentation alongside capabilities. While Rubber Ducky demonstrates promising voice-AI interaction patterns, we've identified significant context switching failures in longer conversations - findings that contribute to understanding AI system boundaries rather than hiding them.",
+                "The experimental platform serves as a research corpus for investigating conversational AI effectiveness. Built with Next.js, MongoDB, and Claude AI integration, it functions as both a working system and a controlled environment for testing hypotheses about human-AI interaction patterns, voice interface design, and agentic specialization.",
+                "Our approach prioritizes academic rigor over marketing claims: documenting failure modes, establishing reproducible methodology, and contributing to the broader research community's understanding of LLM capabilities and limitations in practical applications."
             ],
             technologies: ['Next.js', 'React', 'TypeScript', 'MongoDB', 'Node.js', 'Real-time Audio Processing', 'AI Integration', 'Full-Stack Development', 'Mobile-First Design', 'API Development', 'Web Development', 'User Experience (UX)', 'Voice Interface Design']
         },
@@ -2250,16 +2250,16 @@ const portfolioProjects = [
     {
         id: 'rubber-ducky-live',
         title: 'Rubber Ducky Live',
-        category: 'AI-Powered Development Platform',
+        category: 'Voice-AI Problem-Solving Research',
         technologies: ['Next.js', 'React', 'Node.js', 'Anthropic Claude', 'TypeScript', 'Tailwind CSS'],
         linesOfCode: '24.3K LOC',
-        description: 'AI-powered development companion featuring voice-first technical conversations, Claude 4 integration, and professional export capabilities. Built for software developers and technical professionals.',
+        description: 'Experimental research platform investigating voice-AI problem-solving effectiveness through systematic implementation. Primary research corpus for studying conversational AI limitations and capabilities.',
         highlights: [
-            'Voice-first AI conversations with technical context',
-            'Claude 4 intelligence integration',
-            'Professional export and session management',
-            'Sub-150ms response times',
-            'Enterprise-grade security'
+            '126+ experimental implementations documented',
+            '73% success rate for structured problem-solving sessions',
+            'Context switching failure analysis and documentation',
+            'Research methodology with reproducible results',
+            'Academic rigor over marketing claims'
         ],
         screenshot: 'screenshots/rubber-ducky-live.png',
         githubUrl: 'https://github.com/son1112/rubber-ducky-live',

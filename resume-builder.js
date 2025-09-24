@@ -47,7 +47,7 @@ const resumeVariants = {
         
         experienceHighlights: {
             'Founder & Technical Lead': [
-                'Built production 🦆 rubberDucky platform with 13+ specialized AI agents and Claude 4 integration',
+                'Built experimental 🦆 Rubber Ducky research platform with 126+ implementations documenting AI capabilities and limitations',
                 'Developed comprehensive context engineering methodology for AI prompt optimization',
                 'Implemented voice-enabled AI with AssemblyAI real-time streaming and WebSocket technology',
                 'Created AI-powered business strategy, security, and application development assistants'
