@@ -785,15 +785,20 @@
                 if (urlParams.get('print') === 'true') {
                     const isMobileParam = urlParams.get('mobile') === 'true';
                     const isMobile = isMobileParam || detectMobile;
-                    
+
                     if (isMobile) {
                         // Show mobile-specific instructions
                         showMobileDownloadInstructions();
                     } else {
-                        window.print();
+                        // Ensure all content is rendered before printing
+                        requestAnimationFrame(() => {
+                            setTimeout(() => {
+                                window.print();
+                            }, 500);
+                        });
                     }
                 }
-            }, 1000);
+            }, 2000);
         });
 
         function updateResume() {
