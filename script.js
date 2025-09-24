@@ -726,6 +726,9 @@ function downloadResumeAsPDF() {
 
     document.body.appendChild(modal);
 
+    // Store modal reference globally for closeResumeModal function
+    window.resumeModal = modal;
+
     // Add cancel button event listener
     const cancelBtn = modal.querySelector('#cancelResumeBtn');
     if (cancelBtn) {
@@ -735,9 +738,6 @@ function downloadResumeAsPDF() {
             closeResumeModal();
         });
     }
-
-    // Store modal reference
-    window.resumeModal = modal;
 }
 
 /**
