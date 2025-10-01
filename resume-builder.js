@@ -3,10 +3,16 @@
 
 const resumeVariants = {
     'ai-focused': {
-        title: 'AI-Focused Software Engineer',
-        summary: 'AI-focused Rails engineer with 10+ years building high-performance systems from rapid MVPs to enterprise scale. Expert in AI tooling integration, autonomous development, and shipping fast - currently building production AI platforms with Claude Code and modern Rails architecture.',
-        
+        title: 'Empathy-Driven AI Research Engineer',
+        summary: 'Empathy-driven AI research engineer building accessible intelligence for underserved communities. Founded can.code Research Labs to create PRISM for neurodivergent communication assistance and Rubber Ducky for accessible voice-AI problem-solving. 10+ years professional experience with accessibility-first architecture, achieving 73% success rate through transparent limitation documentation and honest capability assessment.',
+
         skills: {
+            'Accessible AI Engineering': [
+                { name: 'Universal Design Principles', level: 'expert' },
+                { name: 'WCAG 2.1 AA/AAA Compliance', level: 'advanced' },
+                { name: 'Assistive Technology Development', level: 'advanced' },
+                { name: 'Multi-Modal Interfaces', level: 'expert' }
+            ],
             'Backend Development': [
                 { name: 'Ruby on Rails', level: 'expert' },
                 { name: 'Ruby', level: 'expert' },
@@ -46,11 +52,11 @@ const resumeVariants = {
         },
         
         experienceHighlights: {
-            'Founder & Technical Lead': [
-                'Built experimental 🦆 Rubber Ducky research platform with 126+ implementations documenting AI capabilities and limitations',
-                'Developed comprehensive context engineering methodology for AI prompt optimization',
-                'Implemented voice-enabled AI with AssemblyAI real-time streaming and WebSocket technology',
-                'Created AI-powered business strategy, security, and application development assistants'
+            'Founder & Research Lead': [
+                'Created PRISM (Personal Reality Into Shared Meaning) - assistive communication platform for neurodivergent users with voice preservation and perspective refinement',
+                'Built Rubber Ducky accessible voice-AI platform with 126+ experimental implementations achieving 73% documented success rate',
+                'Developed accessibility-first architecture with WCAG compliance, screen reader optimization, and multi-modal interfaces from day one',
+                'Established empathy-first research methodology prioritizing transparent limitation documentation alongside capabilities'
             ],
             'Senior Software Engineer (Rails)': [
                 'Engineered AI-augmented development workflows reducing development time by 60%',
@@ -61,23 +67,25 @@ const resumeVariants = {
         
         projects: [
             {
-                title: '🦆 AI-Powered Career Development System',
-                type: 'Production AI Platform',
+                title: 'PRISM - Empathy-First Communication Assistance',
+                type: 'Assistive Technology Platform',
                 achievements: [
-                    'Built comprehensive AI system generating 500+ documents across multiple career domains',
-                    'Developed 8 specialized AI agents for interview preparation, resume optimization, and technical coaching',
-                    'Achieved 99%+ system reliability with Claude Code integration and intelligent response caching',
-                    'Demonstrated advanced AI integration and natural language processing capabilities'
+                    'Personal Reality Into Shared Meaning: assistive communication for neurodivergent users',
+                    'Voice preservation with perspective refinement for different audiences and contexts',
+                    'Recognition over correction paradigm - honors individual speech methods rather than enforcing conformity',
+                    'Accessibility-first architecture: WCAG compliance, screen reader optimization, keyboard navigation from day one',
+                    'Universal design principles serving neurodivergent and neurotypical users equally'
                 ]
             },
             {
-                title: 'Context Engineering Framework',
-                type: 'AI Development Methodology',
+                title: 'Rubber Ducky - Accessible Voice-AI Research Platform',
+                type: 'Experimental Research System',
                 achievements: [
-                    'Created systematic approach to prompt engineering and AI agent development',
-                    'Developed testing frameworks for AI response quality and consistency',
-                    'Implemented multi-agent coordination systems for complex problem solving',
-                    'Established best practices for AI-augmented development workflows'
+                    '126+ systematic implementations documenting voice-AI problem-solving effectiveness',
+                    'Achieved 73% documented success rate for structured problem-solving sessions',
+                    'Transparent limitation analysis: identified context switching failures in longer conversations',
+                    'Multi-modal interfaces with voice-first design and text fallbacks for accessibility',
+                    'Research methodology prioritizing academic rigor over marketing claims'
                 ]
             }
         ]
@@ -165,10 +173,16 @@ const resumeVariants = {
     },
 
     'tech-lead': {
-        title: 'Technical Lead & Founder',
-        summary: 'Technical leader and founder with 10+ years building teams and products. Expert in scaling from MVP to enterprise, team mentorship, and strategic technical decisions - founded Can.Code and led engineering teams to deliver high-impact solutions.',
-        
+        title: 'Research Lead & Founder - Empathy-First Leadership',
+        summary: 'Research leader and founder with 10+ years building accessible experimental systems for underserved communities. Founded can.code Research Labs on empathy-first philosophy - creating PRISM for neurodivergent communication assistance and documenting AI system boundaries through transparent methodology. Leadership approach prioritizes human flourishing over feature extraction, building technology that serves rather than exploits.',
+
         skills: {
+            'Empathy-First Leadership': [
+                { name: 'Community-Centered Development', level: 'expert' },
+                { name: 'User Thriving Over Productivity', level: 'expert' },
+                { name: 'Transparent Documentation', level: 'expert' },
+                { name: 'Social Impact Focus', level: 'advanced' }
+            ],
             'Leadership & Strategy': [
                 { name: 'Team Leadership', level: 'expert' },
                 { name: 'Technical Strategy', level: 'expert' },
@@ -208,11 +222,11 @@ const resumeVariants = {
         },
         
         experienceHighlights: {
-            'Founder & Technical Lead': [
-                'Founded Can.Code, securing initial funding and building technical team from ground up',
-                'Led development of 13+ specialized AI agents and production platform architecture',
-                'Established engineering culture, processes, and technical standards for scalable growth',
-                'Mentored junior developers and coordinated cross-functional team collaboration'
+            'Founder & Research Lead': [
+                'Founded can.code Research Labs on empathy-first philosophy to build accessible intelligence for underserved communities',
+                'Created PRISM assistive technology platform serving neurodivergent users with voice preservation and perspective refinement',
+                'Led Rubber Ducky research platform development with 126+ implementations achieving 73% documented success rate',
+                'Established research methodology prioritizing transparent limitation documentation and human flourishing over profit extraction'
             ],
             'Technical Leadership Roles': [
                 'Led SRE teams across multiple platforms, establishing monitoring and reliability practices',
@@ -224,32 +238,33 @@ const resumeVariants = {
         
         projects: [
             {
-                title: 'Can.Code Platform Development',
-                type: 'Technical Leadership & Strategy',
+                title: 'can.code Research Labs - Empathy-First Organization',
+                type: 'Leadership & Social Impact',
                 achievements: [
-                    'Led end-to-end platform development from concept to production deployment',
-                    'Coordinated 13+ AI agent development with strategic roadmap planning',
-                    'Established technical architecture supporting voice integration and real-time features',
-                    'Built scalable foundation supporting rapid feature development and user growth'
+                    'Founded research organization on empathy-first philosophy building accessible intelligence for underserved communities',
+                    'Created PRISM for neurodivergent communication assistance and Rubber Ducky for accessible voice-AI problem-solving',
+                    'Established transparent research methodology documenting both successes (73% rate) and limitations honestly',
+                    'Prioritized human flourishing over profit extraction - technology serving users rather than exploiting them',
+                    'Built community-centered development practices with marginalized voices in leadership'
                 ]
             },
             {
-                title: 'Enterprise Team Leadership',
-                type: 'Technical Management',
+                title: 'Accessible Technology Leadership',
+                type: 'Technical & Ethical Innovation',
                 achievements: [
-                    'Led technical teams at Stripe, Huntress, and TaxJar delivering enterprise solutions',
-                    'Mentored 15+ developers across multiple organizations and technology stacks',
-                    'Established engineering best practices improving team velocity by 40%',
-                    'Drove technical innovation while maintaining system reliability and security standards'
+                    'Established accessibility-first architecture standards: WCAG compliance, screen reader optimization from day one',
+                    'Developed recognition over correction paradigm - honoring individual communication methods vs enforcing conformity',
+                    'Created multi-modal interfaces serving neurodivergent and neurotypical users equally through universal design',
+                    'Led teams building assistive technology with real impact on marginalized communities'
                 ]
             }
         ]
     },
 
     'fullstack': {
-        title: 'Full-Stack Engineer',
-        summary: 'Full-stack engineer with 10+ years building complete web applications. Expert in Rails backend, modern frontend frameworks, and deployment automation - delivered products from initial concept through production scale.',
-        
+        title: 'Full-Stack Engineer - Universal Design',
+        summary: 'Full-stack engineer with 10+ years building complete web applications with accessibility-first architecture and universal design principles. Expert in Rails backend, modern frontend frameworks, and deployment automation - delivered products from initial concept through production scale. Built systems that work for all users, not just majority demographics.',
+
         skills: {
             'Backend Development': [
                 { name: 'Ruby on Rails', level: 'expert' },
@@ -257,11 +272,13 @@ const resumeVariants = {
                 { name: 'Node.js', level: 'advanced' },
                 { name: 'API Development', level: 'expert' }
             ],
-            'Frontend Development': [
+            'Frontend Development & Accessibility': [
                 { name: 'JavaScript', level: 'expert' },
                 { name: 'TypeScript', level: 'advanced' },
                 { name: 'React', level: 'advanced' },
-                { name: 'HTML/CSS', level: 'expert' }
+                { name: 'HTML/CSS', level: 'expert' },
+                { name: 'WCAG Compliance', level: 'advanced' },
+                { name: 'Universal Design', level: 'advanced' }
             ],
             'Modern Frameworks': [
                 { name: 'Next.js', level: 'advanced' },
@@ -329,8 +346,8 @@ const resumeVariants = {
     },
 
     'enterprise-fintech': {
-        title: 'Enterprise Fintech Engineer',
-        summary: 'Enterprise software engineer with 10+ years in financial technology. Expert in payment processing, tax compliance automation, and PCI-compliant systems - architected solutions for 50,000+ users across multiple processors.',
+        title: 'Enterprise Fintech Engineer - Inclusive Finance',
+        summary: 'Enterprise software engineer with 10+ years in financial technology, building inclusive financial systems that serve diverse users. Expert in payment processing, tax compliance automation, and PCI-compliant systems - architected accessible solutions for 50,000+ users across multiple processors. Designed financial technology to be usable by all users, not just majority demographics.',
         
         skills: {
             'Financial Systems': [
