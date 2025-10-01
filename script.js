@@ -635,11 +635,15 @@ function initializeResumeActions() {
 
 /**
  * Download resume as PDF with role-specific options
+ * Security: Uses DOM manipulation instead of innerHTML to prevent XSS
  */
 function downloadResumeAsPDF() {
     // Get current hero variant to suggest matching resume role
-    const currentVariant = window.currentHeroVariant || 'ai-focused';
-    
+    // Sanitize by validating against allowed values only
+    const validVariants = ['ai-focused', 'rails-backend', 'tech-lead', 'fullstack', 'enterprise-fintech'];
+    const rawVariant = window.currentHeroVariant || 'ai-focused';
+    const currentVariant = validVariants.includes(rawVariant) ? rawVariant : 'ai-focused';
+
     // Create resume options modal
     const modal = document.createElement('div');
     modal.style.cssText = `
@@ -655,68 +659,108 @@ function downloadResumeAsPDF() {
         z-index: 10000;
         font-family: var(--font-family);
     `;
-    
-    modal.innerHTML = `
-        <div style="
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        ">
-            <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 1.5rem;">
-                📄 Resume Download Options
-            </h3>
-            <p style="margin-bottom: 25px; color: var(--text-secondary); line-height: 1.6;">
-                Choose your preferred resume format:
-            </p>
-            
-            <div style="display: grid; gap: 15px; margin-bottom: 25px;">
-                <button onclick="openDynamicResume('${currentVariant}')" aria-label="Download role-optimized resume" style="
-                    padding: 15px;
-                    background: var(--primary);
-                    color: white;
-                    border: none;
-                    border-radius: 8px;
-                    cursor: pointer;
-                    font-size: 1rem;
-                    font-weight: 600;
-                    transition: var(--transition);
-                ">
-                    🎯 Role-Optimized Resume (${currentVariant.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())})
-                </button>
-                
-                <button onclick="openStaticResume()" aria-label="Download standard resume" style="
-                    padding: 15px;
-                    background: var(--secondary);
-                    color: white;
-                    border: none;
-                    border-radius: 8px;
-                    cursor: pointer;
-                    font-size: 1rem;
-                    font-weight: 600;
-                    transition: var(--transition);
-                ">
-                    📋 Standard Resume
-                </button>
-            </div>
-            
-            <button id="cancelResumeBtn" type="button" aria-label="Cancel resume download" style="
-                padding: 8px 16px;
-                background: none;
-                border: 1px solid var(--border);
-                border-radius: 6px;
-                cursor: pointer;
-                color: var(--text-muted);
-                font-size: 0.9rem;
-            ">
-                Cancel
-            </button>
-        </div>
+
+    // Create modal content container
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = `
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     `;
-    
+
+    // Create heading
+    const heading = document.createElement('h3');
+    heading.style.cssText = 'color: var(--primary); margin-bottom: 20px; font-size: 1.5rem;';
+    heading.textContent = '📄 Resume Download Options';
+
+    // Create description
+    const description = document.createElement('p');
+    description.style.cssText = 'margin-bottom: 25px; color: var(--text-secondary); line-height: 1.6;';
+    description.textContent = 'Choose your preferred resume format:';
+
+    // Create button container
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.cssText = 'display: grid; gap: 15px; margin-bottom: 25px;';
+
+    // Create role-optimized resume button
+    const roleButton = document.createElement('button');
+    roleButton.type = 'button';
+    roleButton.setAttribute('aria-label', 'Download role-optimized resume');
+    roleButton.style.cssText = `
+        padding: 15px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: var(--transition);
+    `;
+    const variantLabel = currentVariant.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
+    roleButton.textContent = `🎯 Role-Optimized Resume (${variantLabel})`;
+    roleButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        openDynamicResume(currentVariant);
+    });
+
+    // Create standard resume button
+    const standardButton = document.createElement('button');
+    standardButton.type = 'button';
+    standardButton.setAttribute('aria-label', 'Download standard resume');
+    standardButton.style.cssText = `
+        padding: 15px;
+        background: var(--secondary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: var(--transition);
+    `;
+    standardButton.textContent = '📋 Standard Resume';
+    standardButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        openStaticResume();
+    });
+
+    // Create cancel button
+    const cancelBtn = document.createElement('button');
+    cancelBtn.id = 'cancelResumeBtn';
+    cancelBtn.type = 'button';
+    cancelBtn.setAttribute('aria-label', 'Cancel resume download');
+    cancelBtn.style.cssText = `
+        padding: 8px 16px;
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        cursor: pointer;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    `;
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeResumeModal();
+    });
+
+    // Assemble modal structure
+    buttonContainer.appendChild(roleButton);
+    buttonContainer.appendChild(standardButton);
+
+    modalContent.appendChild(heading);
+    modalContent.appendChild(description);
+    modalContent.appendChild(buttonContainer);
+    modalContent.appendChild(cancelBtn);
+
+    modal.appendChild(modalContent);
+
     // Add click outside to close
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
@@ -728,16 +772,6 @@ function downloadResumeAsPDF() {
 
     // Store modal reference globally for closeResumeModal function
     window.resumeModal = modal;
-
-    // Add cancel button event listener
-    const cancelBtn = modal.querySelector('#cancelResumeBtn');
-    if (cancelBtn) {
-        cancelBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            closeResumeModal();
-        });
-    }
 }
 
 /**
