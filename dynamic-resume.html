@@ -575,7 +575,7 @@
 <body>
     <!-- Role Selector (Hidden in Print) -->
     <div class="role-selector" id="roleSelector">
-        <button class="close-btn" onclick="toggleRoleSelector()">&times;</button>
+        <button class="close-btn" id="closeRoleSelectorBtn">&times;</button>
         <h3>🎯 Resume Role Focus</h3>
         <select id="roleSelect">
             <option value="ai-focused">AI-Focused Software Engineer</option>
@@ -584,8 +584,8 @@
             <option value="fullstack">Full-Stack Engineer</option>
             <option value="enterprise-fintech">Enterprise Fintech Engineer</option>
         </select>
-        <button onclick="updateResume()">🔄 Generate Resume</button>
-        <button onclick="handlePrintClick()">🖨️ Print/Save PDF</button>
+        <button id="generateResumeBtn">🔄 Generate Resume</button>
+        <button id="printSavePdfBtn">🖨️ Print/Save PDF</button>
     </div>
 
     <!-- Resume Header -->
@@ -761,9 +761,9 @@
 
     <!-- PDF Action Buttons (Hidden in Print) -->
     <div class="pdf-actions">
-        <button onclick="toggleRoleSelector()">🎯 Change Role Focus</button>
-        <button onclick="handlePrintClick()">🖨️ Print Resume</button>
-        <button onclick="window.close()">❌ Close Window</button>
+        <button id="changeRoleFocusBtn">🎯 Change Role Focus</button>
+        <button id="printResumeBtn">🖨️ Print Resume</button>
+        <button id="closeWindowBtn">❌ Close Window</button>
     </div>
 
     <!-- Load the resume builder -->
@@ -923,21 +923,52 @@
                 box-shadow: 0 2px 10px rgba(0,0,0,0.3);
                 animation: slideDown 0.3s ease-out;
             `;
-            instructions.innerHTML = `
-                <strong>📱 Mobile Download Instructions:</strong><br>
-                1. Tap your browser's menu (⋮ or ≡)<br>
-                2. Select "Print" or "Share" → "Save as PDF"<br>
-                3. Choose your download location<br>
-                <button onclick="removeMobileInstructions(); window.print();" style="
-                    margin-top: 8px; padding: 6px 12px; background: #3498db; 
-                    color: white; border: none; border-radius: 4px; cursor: pointer;
-                ">Try Print Dialog</button>
-                <button onclick="removeMobileInstructions();" style="
-                    margin-top: 8px; margin-left: 8px; padding: 6px 12px; 
-                    background: transparent; color: white; border: 1px solid white; 
-                    border-radius: 4px; cursor: pointer;
-                ">Dismiss</button>
+
+            // Create content safely using DOM manipulation instead of innerHTML
+            const heading = document.createElement('strong');
+            heading.textContent = '📱 Mobile Download Instructions:';
+
+            const step1 = document.createElement('br');
+            const step1Text = document.createTextNode('1. Tap your browser\'s menu (⋮ or ≡)');
+            const step2 = document.createElement('br');
+            const step2Text = document.createTextNode('2. Select "Print" or "Share" → "Save as PDF"');
+            const step3 = document.createElement('br');
+            const step3Text = document.createTextNode('3. Choose your download location');
+            const step4 = document.createElement('br');
+
+            const tryPrintBtn = document.createElement('button');
+            tryPrintBtn.textContent = 'Try Print Dialog';
+            tryPrintBtn.style.cssText = `
+                margin-top: 8px; padding: 6px 12px; background: #3498db;
+                color: white; border: none; border-radius: 4px; cursor: pointer;
             `;
+            tryPrintBtn.addEventListener('click', function() {
+                removeMobileInstructions();
+                window.print();
+            });
+
+            const dismissBtn = document.createElement('button');
+            dismissBtn.textContent = 'Dismiss';
+            dismissBtn.style.cssText = `
+                margin-top: 8px; margin-left: 8px; padding: 6px 12px;
+                background: transparent; color: white; border: 1px solid white;
+                border-radius: 4px; cursor: pointer;
+            `;
+            dismissBtn.addEventListener('click', function() {
+                removeMobileInstructions();
+            });
+
+            instructions.appendChild(heading);
+            instructions.appendChild(step1);
+            instructions.appendChild(step1Text);
+            instructions.appendChild(step2);
+            instructions.appendChild(step2Text);
+            instructions.appendChild(step3);
+            instructions.appendChild(step3Text);
+            instructions.appendChild(step4);
+            instructions.appendChild(tryPrintBtn);
+            instructions.appendChild(dismissBtn);
+
             document.body.appendChild(instructions);
 
             // Auto-remove after 15 seconds for better memory management
@@ -960,6 +991,55 @@
                 instructions.remove();
             }
         }
+
+        // Initialize event listeners for UI buttons (CSP-compliant, no inline onclick)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Role selector buttons
+            const closeRoleSelectorBtn = document.getElementById('closeRoleSelectorBtn');
+            const generateResumeBtn = document.getElementById('generateResumeBtn');
+            const printSavePdfBtn = document.getElementById('printSavePdfBtn');
+
+            // PDF action buttons
+            const changeRoleFocusBtn = document.getElementById('changeRoleFocusBtn');
+            const printResumeBtn = document.getElementById('printResumeBtn');
+            const closeWindowBtn = document.getElementById('closeWindowBtn');
+
+            if (closeRoleSelectorBtn) {
+                closeRoleSelectorBtn.addEventListener('click', function() {
+                    toggleRoleSelector();
+                });
+            }
+
+            if (generateResumeBtn) {
+                generateResumeBtn.addEventListener('click', function() {
+                    updateResume();
+                });
+            }
+
+            if (printSavePdfBtn) {
+                printSavePdfBtn.addEventListener('click', function() {
+                    handlePrintClick();
+                });
+            }
+
+            if (changeRoleFocusBtn) {
+                changeRoleFocusBtn.addEventListener('click', function() {
+                    toggleRoleSelector();
+                });
+            }
+
+            if (printResumeBtn) {
+                printResumeBtn.addEventListener('click', function() {
+                    handlePrintClick();
+                });
+            }
+
+            if (closeWindowBtn) {
+                closeWindowBtn.addEventListener('click', function() {
+                    window.close();
+                });
+            }
+        });
     </script>
 </body>
 </html>

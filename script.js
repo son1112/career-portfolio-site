@@ -4,67 +4,67 @@
 const heroVariants = {
     'ai-focused': {
         title: 'AI Research Engineer',
-        subtitle: 'Investigating LLM capabilities through systematic experimentation',
-        taglines: ['AI Research Methods', 'Experimental Systems', 'Capability Documentation'],
+        subtitle: 'Building accessible intelligence through empathy-first design and systematic experimentation',
+        taglines: ['Accessible AI Research', 'Empathy-First Design', 'Communication Systems'],
         cta1: 'View Research',
         cta2: "Let's Investigate Together",
-        bio: 'AI research engineer with 10+ years building experimental systems and investigating LLM capabilities. Research lead at can.code Labs documenting voice-AI problem-solving effectiveness through 126+ systematic implementations - achieving 73% success rates while honestly documenting critical limitations.',
+        bio: 'Empathy-driven AI research engineer with 10+ years building accessible experimental systems for underserved communities. Founded can.code Research Labs to develop assistive communication technology - creating PRISM for neurodivergent communication assistance and Rubber Ducky for accessible voice-AI problem-solving. Research methodology prioritizes transparent limitation documentation and accessibility-first architecture, achieving 73% success rate through honest capability assessment.',
         heroImage: {
             webp: 'public/gemini-hero-v3.webp',
             fallback: 'public/Gemini_Generated_Image_m1y6hmm1y6hmm1y6.png',
-            alt: 'AI-Focused Software Engineer with Natural Problem Solving'
+            alt: 'AI Research Engineer Building Accessible Intelligence'
         }
     },
     'rails-backend': {
         title: 'Senior Rails Engineer',
-        subtitle: 'Architecting dependable backends with proven scalability',
-        taglines: ['Ruby on Rails Expert', 'API Architecture', 'Database Optimization'],
+        subtitle: 'Architecting dependable backends with accessibility-first principles',
+        taglines: ['Ruby on Rails Expert', 'Accessible Architecture', 'Database Optimization'],
         cta1: 'View Portfolio',
         cta2: 'Discuss Architecture',
-        bio: 'Senior Rails engineer with 10+ years building scalable backend systems. Expert in API design, database optimization, and payment processing - delivered enterprise solutions serving 50,000+ users with reliable performance.',
+        bio: 'Senior Rails engineer with 10+ years building scalable backend systems with accessibility-first architecture. Expert in API design, database optimization, and payment processing - delivered enterprise solutions serving 50,000+ users with reliable performance. Built systems where accessibility is a core requirement, not an afterthought.',
         heroImage: {
             webp: 'public/gemini-hero-v3.webp',
             fallback: 'public/Gemini_Generated_Image_m1y6hmm1y6hmm1y6.png',
-            alt: 'Senior Rails Engineer Backend Architecture Focus'
+            alt: 'Senior Rails Engineer with Accessibility-First Architecture'
         }
     },
     'tech-lead': {
         title: 'Research Lead & Founder',
-        subtitle: 'Leading systematic investigation of AI capabilities and limitations',
-        taglines: ['Research Leadership', 'Experimental Design', 'Academic Rigor'],
+        subtitle: 'Leading empathy-driven research for accessible AI systems',
+        taglines: ['Empathy-First Leadership', 'Assistive Technology', 'Social Impact'],
         cta1: 'View Research',
         cta2: 'Discuss Methodology',
-        bio: 'Research leader and founder with 10+ years building experimental systems and investigating LLM capabilities. Founded can.code Research Labs to document AI system boundaries through transparent methodology - leading systematic experimentation rather than making unfounded claims.',
+        bio: 'Research leader and founder with 10+ years building accessible experimental systems for underserved communities. Founded can.code Research Labs on empathy-first philosophy - creating PRISM for neurodivergent communication assistance and documenting AI system boundaries through transparent methodology. Leadership approach prioritizes human flourishing over feature extraction, building technology that serves rather than exploits.',
         heroImage: {
             webp: 'public/gemini-hero-v3.webp',
             fallback: 'public/Gemini_Generated_Image_m1y6hmm1y6hmm1y6.png',
-            alt: 'Technical Leader and Engineering Team Builder'
+            alt: 'Research Leader Building Empathy-Driven Technology'
         }
     },
     'fullstack': {
         title: 'Full-Stack Engineer',
-        subtitle: 'Delivering complete solutions that reliably surpass requirements',
-        taglines: ['Ruby on Rails', 'Modern Frontend', 'DevOps & Deployment'],
+        subtitle: 'Delivering complete solutions with universal design principles',
+        taglines: ['Ruby on Rails', 'Accessible Frontend', 'Universal Design'],
         cta1: 'See Projects',
         cta2: 'Start Building',
-        bio: 'Full-stack engineer with 10+ years building complete web applications. Expert in Rails backend, modern frontend frameworks, and deployment automation - delivered products from initial concept through production scale.',
+        bio: 'Full-stack engineer with 10+ years building complete web applications with accessibility-first architecture and universal design principles. Expert in Rails backend, modern frontend frameworks, and deployment automation - delivered products from initial concept through production scale. Built systems that work for all users, not just majority demographics.',
         heroImage: {
             webp: 'public/gemini-hero-v3.webp',
             fallback: 'public/Gemini_Generated_Image_m1y6hmm1y6hmm1y6.png',
-            alt: 'Full-Stack Engineer End-to-End Development'
+            alt: 'Full-Stack Engineer with Universal Design Focus'
         }
     },
     'enterprise-fintech': {
         title: 'Enterprise Fintech Engineer',
-        subtitle: 'Building secure financial systems with proven compliance excellence',
-        taglines: ['Payment Processing', 'Financial Compliance', 'Enterprise Scale'],
+        subtitle: 'Building inclusive financial systems with proven compliance excellence',
+        taglines: ['Payment Processing', 'Inclusive Finance', 'Enterprise Scale'],
         cta1: 'View Solutions',
         cta2: 'Discuss Compliance',
-        bio: 'Enterprise software engineer with 10+ years in financial technology. Expert in payment processing, tax compliance automation, and PCI-compliant systems - architected solutions for 50,000+ users across multiple processors.',
+        bio: 'Enterprise software engineer with 10+ years in financial technology, building inclusive financial systems that serve diverse users. Expert in payment processing, tax compliance automation, and PCI-compliant systems - architected accessible solutions for 50,000+ users across multiple processors. Designed financial technology to be usable by all users, not just majority demographics.',
         heroImage: {
             webp: 'public/gemini-hero-v3.webp',
             fallback: 'public/Gemini_Generated_Image_m1y6hmm1y6hmm1y6.png',
-            alt: 'Enterprise Fintech Engineer Security and Compliance Focus'
+            alt: 'Enterprise Fintech Engineer Building Inclusive Systems'
         }
     }
 };
@@ -635,11 +635,15 @@ function initializeResumeActions() {
 
 /**
  * Download resume as PDF with role-specific options
+ * Security: Uses DOM manipulation instead of innerHTML to prevent XSS
  */
 function downloadResumeAsPDF() {
     // Get current hero variant to suggest matching resume role
-    const currentVariant = window.currentHeroVariant || 'ai-focused';
-    
+    // Sanitize by validating against allowed values only
+    const validVariants = ['ai-focused', 'rails-backend', 'tech-lead', 'fullstack', 'enterprise-fintech'];
+    const rawVariant = window.currentHeroVariant || 'ai-focused';
+    const currentVariant = validVariants.includes(rawVariant) ? rawVariant : 'ai-focused';
+
     // Create resume options modal
     const modal = document.createElement('div');
     modal.style.cssText = `
@@ -655,68 +659,108 @@ function downloadResumeAsPDF() {
         z-index: 10000;
         font-family: var(--font-family);
     `;
-    
-    modal.innerHTML = `
-        <div style="
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        ">
-            <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 1.5rem;">
-                📄 Resume Download Options
-            </h3>
-            <p style="margin-bottom: 25px; color: var(--text-secondary); line-height: 1.6;">
-                Choose your preferred resume format:
-            </p>
-            
-            <div style="display: grid; gap: 15px; margin-bottom: 25px;">
-                <button onclick="openDynamicResume('${currentVariant}')" aria-label="Download role-optimized resume" style="
-                    padding: 15px;
-                    background: var(--primary);
-                    color: white;
-                    border: none;
-                    border-radius: 8px;
-                    cursor: pointer;
-                    font-size: 1rem;
-                    font-weight: 600;
-                    transition: var(--transition);
-                ">
-                    🎯 Role-Optimized Resume (${currentVariant.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())})
-                </button>
-                
-                <button onclick="openStaticResume()" aria-label="Download standard resume" style="
-                    padding: 15px;
-                    background: var(--secondary);
-                    color: white;
-                    border: none;
-                    border-radius: 8px;
-                    cursor: pointer;
-                    font-size: 1rem;
-                    font-weight: 600;
-                    transition: var(--transition);
-                ">
-                    📋 Standard Resume
-                </button>
-            </div>
-            
-            <button id="cancelResumeBtn" type="button" aria-label="Cancel resume download" style="
-                padding: 8px 16px;
-                background: none;
-                border: 1px solid var(--border);
-                border-radius: 6px;
-                cursor: pointer;
-                color: var(--text-muted);
-                font-size: 0.9rem;
-            ">
-                Cancel
-            </button>
-        </div>
+
+    // Create modal content container
+    const modalContent = document.createElement('div');
+    modalContent.style.cssText = `
+        background: white;
+        padding: 30px;
+        border-radius: 12px;
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     `;
-    
+
+    // Create heading
+    const heading = document.createElement('h3');
+    heading.style.cssText = 'color: var(--primary); margin-bottom: 20px; font-size: 1.5rem;';
+    heading.textContent = '📄 Resume Download Options';
+
+    // Create description
+    const description = document.createElement('p');
+    description.style.cssText = 'margin-bottom: 25px; color: var(--text-secondary); line-height: 1.6;';
+    description.textContent = 'Choose your preferred resume format:';
+
+    // Create button container
+    const buttonContainer = document.createElement('div');
+    buttonContainer.style.cssText = 'display: grid; gap: 15px; margin-bottom: 25px;';
+
+    // Create role-optimized resume button
+    const roleButton = document.createElement('button');
+    roleButton.type = 'button';
+    roleButton.setAttribute('aria-label', 'Download role-optimized resume');
+    roleButton.style.cssText = `
+        padding: 15px;
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: var(--transition);
+    `;
+    const variantLabel = currentVariant.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase());
+    roleButton.textContent = `🎯 Role-Optimized Resume (${variantLabel})`;
+    roleButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        openDynamicResume(currentVariant);
+    });
+
+    // Create standard resume button
+    const standardButton = document.createElement('button');
+    standardButton.type = 'button';
+    standardButton.setAttribute('aria-label', 'Download standard resume');
+    standardButton.style.cssText = `
+        padding: 15px;
+        background: var(--secondary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: var(--transition);
+    `;
+    standardButton.textContent = '📋 Standard Resume';
+    standardButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        openStaticResume();
+    });
+
+    // Create cancel button
+    const cancelBtn = document.createElement('button');
+    cancelBtn.id = 'cancelResumeBtn';
+    cancelBtn.type = 'button';
+    cancelBtn.setAttribute('aria-label', 'Cancel resume download');
+    cancelBtn.style.cssText = `
+        padding: 8px 16px;
+        background: none;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        cursor: pointer;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+    `;
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeResumeModal();
+    });
+
+    // Assemble modal structure
+    buttonContainer.appendChild(roleButton);
+    buttonContainer.appendChild(standardButton);
+
+    modalContent.appendChild(heading);
+    modalContent.appendChild(description);
+    modalContent.appendChild(buttonContainer);
+    modalContent.appendChild(cancelBtn);
+
+    modal.appendChild(modalContent);
+
     // Add click outside to close
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
@@ -728,16 +772,6 @@ function downloadResumeAsPDF() {
 
     // Store modal reference globally for closeResumeModal function
     window.resumeModal = modal;
-
-    // Add cancel button event listener
-    const cancelBtn = modal.querySelector('#cancelResumeBtn');
-    if (cancelBtn) {
-        cancelBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            closeResumeModal();
-        });
-    }
 }
 
 /**
@@ -1855,12 +1889,12 @@ function getJobDetails(company, year) {
     const jobData = {
         'Can.Code': {
             achievements: [
-                "can.code Research Labs investigates LLM agentic AI systems through systematic experimentation, focusing on what works, what doesn't, and why. Our primary research platform, Rubber Ducky, explores voice-AI problem-solving effectiveness through 126+ experimental implementations, achieving a documented 73% success rate for structured problem-solving sessions.",
-                "Our research methodology emphasizes transparent limitation documentation alongside capabilities. While Rubber Ducky demonstrates promising voice-AI interaction patterns, we've identified significant context switching failures in longer conversations - findings that contribute to understanding AI system boundaries rather than hiding them.",
-                "The experimental platform serves as a research corpus for investigating conversational AI effectiveness. Built with Next.js, MongoDB, and Claude AI integration, it functions as both a working system and a controlled environment for testing hypotheses about human-AI interaction patterns, voice interface design, and agentic specialization.",
-                "Our approach prioritizes academic rigor over marketing claims: documenting failure modes, establishing reproducible methodology, and contributing to the broader research community's understanding of LLM capabilities and limitations in practical applications."
+                "Founded can.code Research Labs on empathy-first philosophy to build accessible intelligence for underserved communities. Created PRISM (Personal Reality Into Shared Meaning) - an assistive communication platform born from neurodivergent lived experience, helping people translate their authentic voice across different contexts with voice preservation and perspective refinement.",
+                "Built Rubber Ducky experimental research platform investigating voice-AI problem-solving effectiveness through 126+ systematic implementations, achieving 73% documented success rate for structured sessions while honestly documenting critical limitations. Platform demonstrates accessibility-first architecture with multi-modal interfaces and universal design principles.",
+                "Research methodology prioritizes transparent limitation documentation alongside capabilities - identifying context switching failures in longer conversations and contributing findings to understanding AI system boundaries. Approach values academic rigor over marketing claims, documenting failure modes with reproducible methodology.",
+                "Technology serves human flourishing: PRISM's recognition-over-correction paradigm shifts from 'fixing' communication to honoring individual speech methods. Systems designed with accessibility as core requirement, not afterthought - WCAG compliance, screen reader optimization, keyboard navigation built from day one."
             ],
-            technologies: ['Next.js', 'React', 'TypeScript', 'MongoDB', 'Node.js', 'Real-time Audio Processing', 'AI Integration', 'Full-Stack Development', 'Mobile-First Design', 'API Development', 'Web Development', 'User Experience (UX)', 'Voice Interface Design']
+            technologies: ['Accessible AI', 'PRISM', 'Assistive Technology', 'Universal Design', 'WCAG Compliance', 'Next.js', 'React', 'TypeScript', 'MongoDB', 'Claude AI', 'Voice Preservation', 'Multi-Modal Interfaces', 'Empathy-First Design', 'Neurodivergent Systems']
         },
         'Huntress Labs': {
             achievements: [
@@ -2248,6 +2282,28 @@ function showUpdateNotification() {
 // Portfolio Projects Data
 const portfolioProjects = [
     {
+        id: 'prism',
+        title: 'PRISM',
+        category: 'Empathy-First Communication Assistance',
+        technologies: ['Next.js', 'React', 'Claude AI', 'MongoDB', 'TypeScript', 'AssemblyAI', 'Accessibility APIs'],
+        linesOfCode: 'In Development',
+        description: 'Assistive communication platform born from neurodivergent lived experience, helping people translate their authentic voice across different contexts. Built on three-layer philosophy: Technology (Perspective Refining Intelligent Speech Module), Organization (People Recognizing Individual Speech Methods), Mission (Personal Reality Into Shared Meaning).',
+        highlights: [
+            'Voice preservation with perspective refinement for different audiences',
+            'Layered agent architecture maintains speaker authenticity',
+            'Recognition over correction paradigm shift',
+            'Accessibility-first technical architecture from day one',
+            'Universal design for neurodivergent and neurotypical users',
+            'Community-centered learning from communication patterns'
+        ],
+        screenshot: null, // Will add conceptual diagram
+        githubUrl: 'https://github.com/son1112/prism',
+        liveUrl: null,
+        status: 'development',
+        featured: true,
+        tagline: 'Personal Reality Into Shared Meaning'
+    },
+    {
         id: 'rubber-ducky-live',
         title: 'Rubber Ducky Live',
         category: 'Voice-AI Problem-Solving Research',
@@ -2264,7 +2320,8 @@ const portfolioProjects = [
         screenshot: 'screenshots/rubber-ducky-live.png',
         githubUrl: 'https://github.com/son1112/rubber-ducky-live',
         liveUrl: 'https://rubberducklive.com',
-        status: 'active'
+        status: 'active',
+        featured: true
     },
     {
         id: 'storytimestar',
