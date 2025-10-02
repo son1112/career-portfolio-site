@@ -12,7 +12,7 @@ Visit the live site: [Your GitHub Pages URL will be here]
 - **Comprehensive Career Overview**: 10+ years of Ruby on Rails expertise
 - **Active Interview Pipeline**: Real-time status of ongoing opportunities
 - **Technical Assessment Portfolio**: Completed coding challenges and assessments
-- **Achievement Metrics**: Quantified impact including 50K+ users enabled
+- **Achievement Metrics**: Quantified impact including enterprise-scale systems and 126+ research sessions
 
 ### AI-Powered Career Development System
 - **500+ AI-Generated Documents**: Comprehensive interview preparation materials

@@ -21,7 +21,7 @@ const heroVariants = {
         taglines: ['Ruby on Rails Expert', 'Accessible Architecture', 'Database Optimization'],
         cta1: 'View Portfolio',
         cta2: 'Discuss Architecture',
-        bio: 'Senior Rails engineer with 10+ years building scalable backend systems with accessibility-first architecture. Expert in API design, database optimization, and payment processing - delivered enterprise solutions serving 50,000+ users with reliable performance. Built systems where accessibility is a core requirement, not an afterthought.',
+        bio: 'Senior Rails engineer with 10+ years building scalable backend systems with accessibility-first architecture. Expert in API design, database optimization, and payment processing - delivered enterprise solutions at scale with reliable performance. Built systems where accessibility is a core requirement, not an afterthought.',
         heroImage: {
             webp: 'public/gemini-hero-v3.webp',
             fallback: 'public/Gemini_Generated_Image_m1y6hmm1y6hmm1y6.png',
@@ -60,7 +60,7 @@ const heroVariants = {
         taglines: ['Payment Processing', 'Inclusive Finance', 'Enterprise Scale'],
         cta1: 'View Solutions',
         cta2: 'Discuss Compliance',
-        bio: 'Enterprise software engineer with 10+ years in financial technology, building inclusive financial systems that serve diverse users. Expert in payment processing, tax compliance automation, and PCI-compliant systems - architected accessible solutions for 50,000+ users across multiple processors. Designed financial technology to be usable by all users, not just majority demographics.',
+        bio: 'Enterprise software engineer with 10+ years in financial technology, building inclusive financial systems that serve diverse users. Expert in payment processing, tax compliance automation, and PCI-compliant systems - architected accessible solutions at enterprise scale across multiple processors. Designed financial technology to be usable by all users, not just majority demographics.',
         heroImage: {
             webp: 'public/gemini-hero-v3.webp',
             fallback: 'public/Gemini_Generated_Image_m1y6hmm1y6hmm1y6.png',
