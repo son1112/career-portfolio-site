@@ -93,7 +93,7 @@ const resumeVariants = {
 
     'rails-backend': {
         title: 'Senior Rails Engineer',
-        summary: 'Senior Rails engineer with 10+ years building scalable backend systems. Expert in API design, database optimization, and payment processing - delivered enterprise solutions serving 50,000+ users with 99%+ uptime.',
+        summary: 'Senior Rails engineer with 10+ years building scalable backend systems. Expert in API design, database optimization, and payment processing - delivered enterprise solutions at scale with 99%+ uptime.',
         
         skills: {
             'Backend Development': [
@@ -230,7 +230,7 @@ const resumeVariants = {
             ],
             'Technical Leadership Roles': [
                 'Led SRE teams across multiple platforms, establishing monitoring and reliability practices',
-                'Guided technical decision-making for enterprise-scale systems serving 50,000+ users',
+                'Guided technical decision-making for enterprise-scale fintech and payment systems',
                 'Improved developer onboarding processes and documentation standards across organizations',
                 'Drove adoption of modern development practices including TDD, code reviews, and CI/CD'
             ]
@@ -347,7 +347,7 @@ const resumeVariants = {
 
     'enterprise-fintech': {
         title: 'Enterprise Fintech Engineer - Inclusive Finance',
-        summary: 'Enterprise software engineer with 10+ years in financial technology, building inclusive financial systems that serve diverse users. Expert in payment processing, tax compliance automation, and PCI-compliant systems - architected accessible solutions for 50,000+ users across multiple processors. Designed financial technology to be usable by all users, not just majority demographics.',
+        summary: 'Enterprise software engineer with 10+ years in financial technology, building inclusive financial systems that serve diverse users. Expert in payment processing, tax compliance automation, and PCI-compliant systems - architected accessible solutions at enterprise scale across multiple processors. Designed financial technology to be usable by all users, not just majority demographics.',
         
         skills: {
             'Financial Systems': [
