@@ -7,12 +7,18 @@ Backlog management for career portfolio:
 
 ## Current Backlog
 
-@BACKLOG.md
+Use Read tool to examine BACKLOG.md
+
+Verify file exists:
+```bash
+ls -la BACKLOG.md 2>/dev/null || echo "⚠️ BACKLOG.md not found"
+```
 
 ## Commands
 
-**If argument is "add [item]":**
-- Add $ARGUMENTS to appropriate backlog section
+**If argument starts with "add":**
+- Extract the item text from the argument
+- Add item to appropriate backlog section in BACKLOG.md
 - Use proper markdown formatting
 - Follow existing structure (Priority 1/2/3)
 - Include checkbox [ ] for tracking

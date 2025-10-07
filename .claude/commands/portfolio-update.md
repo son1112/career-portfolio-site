@@ -12,11 +12,18 @@ Update portfolio statistics and achievements:
    - Achievement cards
 
 2. **Files to Check:**
-   - @index.html (profile stats, resume summary, portfolio stats, achievements)
-   - @resume.html (resume summary)
-   - @script.js (hero variants)
-   - @resume-builder.js (resume variants)
-   - @README.md (achievement metrics)
+
+   Use Read tool to examine:
+   - index.html (profile stats, resume summary, portfolio stats, achievements)
+   - resume.html (resume summary)
+   - script.js (hero variants)
+   - resume-builder.js (resume variants)
+   - README.md (achievement metrics)
+
+   Verify files exist:
+   ```bash
+   ls -la index.html resume.html script.js resume-builder.js README.md 2>/dev/null || echo "⚠️ Missing files"
+   ```
 
 3. **Verification:**
    - Ensure no claims for unreleased projects
@@ -25,7 +32,7 @@ Update portfolio statistics and achievements:
    - Validate all 5 resume variants match
 
 4. **If argument provided:**
-   - Update stat: $1
-   - Commit changes with descriptive message
+   - Use the provided argument to update specific stat
+   - After making changes, commit with descriptive message
 
 Follow the principle: Under-promise, over-deliver. Only claim what's released and proven.

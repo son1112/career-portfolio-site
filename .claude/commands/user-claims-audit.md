@@ -21,16 +21,23 @@ Audit portfolio for user count claims on unreleased projects:
 
 ## Scan for User Count Claims
 
-!grep -rn "50,000\|50K\|users enabled\|Users Enabled\|Users Served\|active users" --include="*.html" --include="*.js" . | head -30
+```bash
+grep -rn "50,000\|50K\|users enabled\|Users Enabled\|Users Served\|active users" --include="*.html" --include="*.js" . | head -30
+```
 
 ## Manual Review Required
 
-Check these key files for context:
-- @index.html (search for "50" to find all instances)
-- @resume.html (summary section)
-- @script.js (hero variants)
-- @resume-builder.js (resume variants)
-- @README.md (achievement metrics)
+Use Read tool to check these key files for context:
+- index.html (search for "50" to find all instances)
+- resume.html (summary section)
+- script.js (hero variants)
+- resume-builder.js (resume variants)
+- README.md (achievement metrics)
+
+Verify files exist:
+```bash
+ls -la index.html resume.html script.js resume-builder.js README.md 2>/dev/null || echo "⚠️ Missing files"
+```
 
 ## Acceptable Patterns
 

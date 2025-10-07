@@ -8,36 +8,74 @@ Accessibility compliance check for empathy-first portfolio:
 
 ### 1. Semantic HTML Structure
 Check heading hierarchy (h1 → h2 → h3):
-!grep -n "<h[1-6]" index.html | head -20
+```bash
+grep -n "<h[1-6]" index.html | head -20
+```
 
 ### 2. Image Accessibility
 Check for images without alt text:
-!grep -n '<img' index.html resume.html | grep -v 'alt=' || echo "✓ All images have alt attributes"
+```bash
+grep -n '<img' index.html resume.html | grep -v 'alt=' || echo "✓ All images have alt attributes"
+```
 
 ### 3. Form Labels
 Check for inputs without labels:
-!grep -n '<input\|<textarea\|<select' index.html | head -10
+```bash
+grep -n '<input\|<textarea\|<select' index.html | head -10
+```
 
 ### 4. ARIA Attributes
 Check for ARIA usage:
-!grep -n 'aria-' index.html resume.html dynamic-resume.html | head -10
+```bash
+grep -n 'aria-' index.html resume.html dynamic-resume.html | head -10
+```
 
-### 5. Color Contrast
+### 5. Language Attribute
+Check html element has lang attribute:
+```bash
+grep -n '<html' index.html | grep 'lang=' || echo "⚠️ Missing language attribute"
+```
+
+### 6. Landmark Roles
+Check for semantic landmarks:
+```bash
+grep -n 'role="navigation\|role="main\|role="banner\|<nav\|<main\|<header' index.html | head -10
+```
+
+### 7. Skip Navigation
+Check for skip link:
+```bash
+grep -n 'skip-to-content\|skip-navigation\|skip to main' index.html || echo "⚠️ No skip navigation link"
+```
+
+### 8. Color Contrast
 Check for inline styles that might affect contrast:
-!grep -n 'style.*color' index.html | head -10
+```bash
+grep -n 'style.*color' index.html | head -10
+```
 
-### 6. Keyboard Navigation
+### 9. Keyboard Navigation
 Check for interactive elements:
-!grep -n 'tabindex\|role=' index.html | head -10
+```bash
+grep -n 'tabindex\|role=' index.html | head -10
+```
 
-### 7. External Link Accessibility
+### 10. External Link Accessibility
 Check external links for proper attributes:
-!grep -n 'target="_blank"' index.html | head -10
+```bash
+grep -n 'target="_blank"' index.html | head -10
+```
 
 ## Files to Review
 
-@index.html (philosophy section, forms, buttons)
-@styles.css (color definitions, focus states)
+Use Read tool to examine:
+- index.html (philosophy section, forms, buttons)
+- styles.css (color definitions, focus states)
+
+Verify files exist:
+```bash
+ls -la index.html styles.css 2>/dev/null || echo "⚠️ Missing core files"
+```
 
 ## Accessibility Checklist
 

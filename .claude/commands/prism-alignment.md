@@ -15,22 +15,31 @@ Verify portfolio alignment with PRISM philosophy:
 
 ### Content Alignment Check
 
-!grep -rn "empathy\|accessibility\|PRISM\|inclusive\|neurodivergent" --include="*.html" --include="*.js" . | wc -l
+```bash
+grep -rn "empathy\|accessibility\|PRISM\|inclusive\|neurodivergent" --include="*.html" --include="*.js" . | wc -l
+```
 
 ### Files to Review
 
+Use Read tool to examine:
+
 **Main Portfolio:**
-@index.html (lines 240-320) - Philosophy section
-@index.html (lines 325-345) - Profile bio
+- index.html (philosophy section)
+- index.html (profile bio)
 
 **Hero Variants:**
-@script.js (all 5 variants should have empathy-first language)
+- script.js (all 5 variants should have empathy-first language)
 
 **Resume Variants:**
-@resume-builder.js (all 5 variants should feature PRISM)
+- resume-builder.js (all 5 variants should feature PRISM)
 
 **Static Resume:**
-@resume.html (summary should mention PRISM first)
+- resume.html (summary should mention PRISM first)
+
+Verify files exist:
+```bash
+ls -la index.html script.js resume-builder.js resume.html 2>/dev/null || echo "⚠️ Missing core files"
+```
 
 ## Verification Checklist
 
