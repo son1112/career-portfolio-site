@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anderson Reinkordt - Sr. Applied AI Engineer for Zapier</title>
+    <style>
+        /* PDF-Optimized Resume Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.4;
+            color: #333;
+            font-size: 11pt;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+            background: white;
+        }
+
+        /* Header Section */
+        .resume-header {
+            text-align: center;
+            border-bottom: 2px solid: #2c3e50;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .resume-header h1 {
+            font-size: 24pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .resume-header h2 {
+            font-size: 16pt;
+            color: #666;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        .resume-summary {
+            font-size: 10pt;
+            color: #555;
+            max-width: 6.5in;
+            margin: 0 auto;
+            line-height: 1.3;
+        }
+
+        .contact-info {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 10pt;
+        }
+
+        .contact-item {
+            color: #555;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 18px;
+        }
+
+        .section h3 {
+            font-size: 14pt;
+            color: #2c3e50;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 4px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        /* Experience Items */
+        .experience-item {
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2px;
+        }
+
+        .job-title {
+            flex: 1;
+        }
+
+        .job-title h4 {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 2px;
+        }
+
+        .company {
+            font-size: 11pt;
+            color: #666;
+            font-weight: normal;
+        }
+
+        .job-duration {
+            font-size: 10pt;
+            color: #888;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .job-location {
+            font-size: 9pt;
+            color: #999;
+            margin-bottom: 5px;
+            font-style: italic;
+        }
+
+        .job-achievements {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .job-achievements li {
+            margin-bottom: 3px;
+            padding-left: 12px;
+            position: relative;
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+
+        .job-achievements li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 8px;
+        }
+
+        .skill-category h4 {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .skill {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 9pt;
+            font-weight: 500;
+        }
+
+        .skill.expert {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .skill.advanced {
+            background: #3498db;
+            color: white;
+        }
+
+        .skill.intermediate {
+            background: #95a5a6;
+            color: white;
+        }
+
+        /* Projects */
+        .project-item {
+            margin-bottom: 12px;
+            page-break-inside: avoid;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+        }
+
+        .project-header h4 {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .project-type {
+            font-size: 9pt;
+            color: #888;
+            font-style: italic;
+        }
+
+        .project-achievements {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .project-achievements li {
+            margin-bottom: 2px;
+            padding-left: 12px;
+            position: relative;
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+
+        .project-achievements li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        /* Print-specific styles */
+        @media print {
+            @page {
+                margin: 0.5in;
+                size: letter;
+            }
+
+            body {
+                margin: 0;
+                padding: 0.5in;
+                font-size: 10pt;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+
+            .experience-item {
+                page-break-inside: avoid;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .pdf-actions {
+                display: none !important;
+            }
+        }
+
+        .pdf-actions {
+            text-align: center;
+            margin: 20px 0;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .pdf-actions button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12pt;
+            margin: 0 10px;
+        }
+
+        .pdf-actions button:hover {
+            background: #34495e;
+        }
+
+        @media print {
+            .pdf-actions {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Resume Header -->
+    <div class="resume-header">
+        <h1>Anderson Reinkordt</h1>
+        <h2>Sr. Applied AI Engineer - LLM Production & Agent Architectures</h2>
+        <p class="resume-summary">Applied AI engineer with 10+ years building distributed systems and 1+ year deploying LLMs in production. Architected multi-agent AI systems with systematic evaluation and transparent documentation of capabilities and limitations. Strong expertise in TypeScript/Node.js + Rails, integrating multiple LLM providers (Claude, GPT-4), and building scalable AI infrastructure with real-time streaming and context management. Proven experience designing prompt engineering strategies, RAG-adjacent architectures, and production monitoring for AI systems.</p>
+        <div class="contact-info">
+            <div class="contact-item">📍 Lincoln, NE, USA</div>
+            <div class="contact-item">💼 <a href="https://www.linkedin.com/in/anderson-reinkordt/" target="_blank">LinkedIn</a></div>
+            <div class="contact-item">💻 <a href="https://github.com/son1112" target="_blank">GitHub</a></div>
+            <div class="contact-item">🌐 <a href="https://sonander.dev" target="_blank">Portfolio</a></div>
+            <div class="contact-item">📧 anderson.reinkordt@gmail.com</div>
+        </div>
+    </div>
+
+    <!-- Core Technical Skills -->
+    <div class="section">
+        <h3>Core Technical Skills - Zapier Sr. Applied AI Engineer Role</h3>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h4>LLM Production Engineering</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">Claude API Integration</span>
+                    <span class="skill advanced">OpenAI GPT-4 APIs</span>
+                    <span class="skill advanced">Multi-Agent Architectures</span>
+                    <span class="skill advanced">Prompt Engineering</span>
+                    <span class="skill advanced">Context Management</span>
+                    <span class="skill advanced">LLM Evaluation Frameworks</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>AI Infrastructure & Scalability</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">Real-Time AI Streaming</span>
+                    <span class="skill advanced">Distributed Cloud Systems</span>
+                    <span class="skill advanced">AI System Monitoring</span>
+                    <span class="skill advanced">Production AI Deployment</span>
+                    <span class="skill advanced">Microservices Architecture</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>TypeScript & Full-Stack</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">TypeScript</span>
+                    <span class="skill advanced">Node.js</span>
+                    <span class="skill advanced">Next.js</span>
+                    <span class="skill advanced">React</span>
+                    <span class="skill advanced">Ruby on Rails</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Integration Platforms & APIs</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">API Architecture & Design</span>
+                    <span class="skill advanced">Third-Party Integrations</span>
+                    <span class="skill advanced">Webhook Systems</span>
+                    <span class="skill advanced">RESTful APIs</span>
+                    <span class="skill advanced">Real-Time Data Processing</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Cloud & Data Infrastructure</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">AWS (S3, Lambda, RDS)</span>
+                    <span class="skill advanced">PostgreSQL</span>
+                    <span class="skill advanced">MongoDB</span>
+                    <span class="skill advanced">Redis</span>
+                    <span class="skill intermediate">Vector Databases</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>AI Evaluation & Monitoring</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">Systematic Testing</span>
+                    <span class="skill advanced">Success Rate Analysis</span>
+                    <span class="skill advanced">Production Monitoring (SRE)</span>
+                    <span class="skill advanced">Performance Optimization</span>
+                    <span class="skill advanced">Error Tracking & Analysis</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Why Zapier Section -->
+    <div class="section">
+        <h3>Why I'm Excited About Zapier's Sr. Applied AI Engineer Role</h3>
+        <div class="experience-item">
+            <ul class="job-achievements">
+                <li><strong>Integration Platform Alignment:</strong> Experience building payment processor and enterprise API integrations maps directly to Zapier's mission of connecting apps - I understand the complexities of reliable, scalable third-party integrations</li>
+                <li><strong>Production LLM Experience:</strong> Documented LLM implementations with systematic evaluation frameworks demonstrate real production AI experience, not just theoretical knowledge</li>
+                <li><strong>Multi-Agent Architecture:</strong> Built specialized AI agents with context routing - directly relevant to Zapier's AI Agents team option and LLM-based feature deployment</li>
+                <li><strong>TypeScript + Rails Full-Stack:</strong> Your preferred stack matches my background - extensive TypeScript/Node.js work with AI platforms and 8+ years of production Rails experience</li>
+                <li><strong>AI Infrastructure Builder:</strong> Created real-time streaming infrastructure with production monitoring and failover strategies - ready to build shared AI tools across teams</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Experience Highlights -->
+    <div class="section">
+        <h3>Zapier-Relevant Experience Highlights</h3>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Research Lead & Founder - can.code Labs</h4>
+                </div>
+                <div class="job-duration">Jan 2024 - Present</div>
+            </div>
+            <ul class="job-achievements">
+                <li>Built multi-agent AI architecture with specialized agents, context routing, and mode switching for diverse conversation types</li>
+                <li>Developed comprehensive evaluation framework with systematic documentation of implementation outcomes and transparent limitation analysis</li>
+                <li>Integrated multiple LLM providers (Claude, GPT-4, AssemblyAI) with production monitoring, fallback strategies, and real-time streaming responses</li>
+                <li>Designed prompt engineering strategies for different domains: general chat, code assistance, creative writing, research, and brainstorming modes</li>
+                <li>Created AI infrastructure supporting real-time voice processing, conversation persistence, message tagging/starring, and session management</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Senior Software Engineer - Production AI & Integrations</h4>
+                </div>
+                <div class="job-duration">2016 - 2024</div>
+            </div>
+            <ul class="job-achievements">
+                <li>Architected enterprise-scale integrations connecting complex third-party APIs (Amazon Seller Partner, Microsoft 365, payment processors)</li>
+                <li>Built scalable cloud systems on AWS serving enterprise user bases with distributed architecture and high availability</li>
+                <li>Led SRE rotations monitoring production systems with NewRelic, Splunk, Sentry, and Honey Badger - maintaining high uptime</li>
+                <li>Developed automation systems significantly reducing manual intervention through intelligent workflow design and error handling</li>
+                <li>Strong expertise in TypeScript/Node.js and Ruby on Rails for building distributed, scalable cloud web applications</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Key Projects -->
+    <div class="section">
+        <h3>Key Projects Demonstrating Zapier-Relevant Capabilities</h3>
+
+        <div class="project-item">
+            <div class="project-header">
+                <h4>🦆 Rubber Ducky - Multi-Agent LLM Evaluation Platform</h4>
+                <span class="project-type">Production AI System</span>
+            </div>
+            <ul class="project-achievements">
+                <li><strong>Systematic evaluation framework:</strong> Documented LLM implementation outcomes with transparent analysis of both successes and limitations</li>
+                <li><strong>Multi-agent architecture:</strong> Specialized AI agents with context management, mode switching, and conversation routing</li>
+                <li><strong>Prompt engineering strategies:</strong> Designed domain-specific prompting for chat, code, creative, research, and brainstorming modes</li>
+                <li><strong>Real-time AI infrastructure:</strong> Fast streaming responses with voice integration, WebSocket communication, and session persistence</li>
+                <li><strong>Production monitoring:</strong> Transparent limitation documentation identifying context switching challenges and capability boundaries</li>
+                <li><strong>Tech stack:</strong> Next.js, TypeScript, MongoDB, Node.js, Claude API, GPT-4 API, AssemblyAI, real-time streaming</li>
+            </ul>
+        </div>
+
+        <div class="project-item">
+            <div class="project-header">
+                <h4>PRISM - Context-Aware Communication Assistant</h4>
+                <span class="project-type">RAG-Adjacent AI System</span>
+            </div>
+            <ul class="project-achievements">
+                <li>Built context-aware AI system for perspective refinement with audience-specific adaptation</li>
+                <li>Implemented multi-layered agent architecture maintaining speaker authenticity while adapting communication style</li>
+                <li>Designed RAG-adjacent architecture: voice preservation with contextual perspective refinement</li>
+                <li>Real-time processing: Streaming AI responses with accessible multi-modal interfaces (voice + text)</li>
+                <li><strong>Tech stack:</strong> Next.js, TypeScript, Claude AI, MongoDB, AssemblyAI, WCAG 2.1 AA/AAA compliance</li>
+            </ul>
+        </div>
+
+        <div class="project-item">
+            <div class="project-header">
+                <h4>Enterprise Integration Platform Experience</h4>
+                <span class="project-type">Third-Party API Integration</span>
+            </div>
+            <ul class="project-achievements">
+                <li>Architected integrations connecting complex third-party systems: Amazon Seller Partner API serving large enterprise user bases</li>
+                <li>Built Microsoft 365 integration enabling enterprise-scale threat hunting and monitoring</li>
+                <li>Developed payment processor integration libraries achieving certifications with major processors (Vantiv, First Data)</li>
+                <li>Created scalable middleware systems with high reliability, comprehensive error handling, and production monitoring</li>
+                <li><strong>Relevant to integration platforms:</strong> Deep experience connecting disparate systems with reliability and scale</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Professional Experience -->
+    <div class="section">
+        <h3>Professional Experience</h3>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Research Lead & Founder</h4>
+                    <div class="company">can.code Research Labs</div>
+                </div>
+                <div class="job-duration">Jan 2024 - Present</div>
+            </div>
+            <div class="job-location">Lincoln, NE & Remote</div>
+            <ul class="job-achievements">
+                <li>Founded AI research organization specializing in systematic investigation of LLM agentic capabilities and voice-AI problem-solving effectiveness</li>
+                <li>Built Rubber Ducky experimental research platform with systematic documentation of implementation outcomes and critical context switching limitations</li>
+                <li>Advanced Platform Features: Real-time speech recognition, streaming AI responses, voice waveform visualization, session management</li>
+                <li>Full-Stack Architecture: Next.js with MongoDB persistence, real-time audio processing, mobile-optimized interface</li>
+                <li><strong>Skills: Next.js · React · TypeScript · MongoDB · Node.js · Real-time Audio · AI Integration · Voice Interface Design</strong></li>
+                <li>Daily development with Claude Code for AI-augmented programming, enabling rapid prototyping and production-ready implementation</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Senior Software Engineer (Rails)</h4>
+                    <div class="company">Huntress Labs</div>
+                </div>
+                <div class="job-duration">Aug 2022 - Jan 2024</div>
+            </div>
+            <div class="job-location">Remote</div>
+            <ul class="job-achievements">
+                <li>Engineered Microsoft 365 integration project enabling threat hunting and malicious actor monitoring</li>
+                <li>Advanced development in Cybersecurity, 3rd party Integrations, and engineering code standards</li>
+                <li>Acted as rotational SRE, monitoring and triaging bugs to maintain development priorities</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Senior Software Engineer (Rails)</h4>
+                    <div class="company">Stripe</div>
+                </div>
+                <div class="job-duration">Aug 2021 - Aug 2022</div>
+            </div>
+            <div class="job-location">Remote</div>
+            <ul class="job-achievements">
+                <li>Enabled accurate tax compliance for TaxJar's large user base by integrating Amazon Seller Partner API</li>
+                <li>Produced core discovery work for integration of TaxJar into Stripe systems</li>
+                <li>Advanced development in Fintech, Tax Compliance, and Error Handling</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Senior Software Engineer (Rails)</h4>
+                    <div class="company">TaxJar</div>
+                </div>
+                <div class="job-duration">Mar 2021 - Aug 2021</div>
+            </div>
+            <div class="job-location">Remote</div>
+            <ul class="job-achievements">
+                <li>Significantly reduced developer time annually by automating tax remediation analysis with dashboard integration</li>
+                <li>Regular SRE rotation including monitoring Honey Badger, Splunk, Sentry, NewRelic</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Full Stack Software Engineer (Rails)</h4>
+                    <div class="company">PaymentSpring</div>
+                </div>
+                <div class="job-duration">Jul 2019 - Mar 2021</div>
+            </div>
+            <div class="job-location">Lincoln & Remote</div>
+            <ul class="job-achievements">
+                <li>Developed middleware for Account Updater service to AWS SAM state machine</li>
+                <li>Built integrations with S3 to synchronize customer Credentials on File with payment processors</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Software Engineer (Rails Core)</h4>
+                    <div class="company">CardFlight</div>
+                </div>
+                <div class="job-duration">Oct 2016 - Jul 2019</div>
+            </div>
+            <div class="job-location">Lincoln</div>
+            <ul class="job-achievements">
+                <li>Engineered integration libraries for payment systems achieving certifications with Vantiv and First Data</li>
+                <li>Developed comprehensive testing (RSpec), coverage (SimpleCov), and analysis (RuboCop) practices</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Education - DISABLED until later time per user request
+    <div class="section">
+        <h3>Education & Certifications</h3>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Front-End Developer Professional Certificate</h4>
+                    <div class="company">Meta (Facebook)</div>
+                </div>
+                <div class="job-duration">Aug 2024 - Present</div>
+            </div>
+            <ul class="job-achievements">
+                <li>Web Development with React, modern JavaScript, and responsive design</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Full Stack Ruby on Rails Development</h4>
+                    <div class="company">Viking Code School</div>
+                </div>
+                <div class="job-duration">Jul 2016 - Oct 2016</div>
+            </div>
+            <ul class="job-achievements">
+                <li>Intensive full-stack development bootcamp focusing on Ruby on Rails</li>
+            </ul>
+        </div>
+    </div>
+    -->
+
+    <!-- PDF Action Buttons -->
+    <div class="pdf-actions">
+        <button id="printResumeBtn">🖨️ Print Resume</button>
+        <button id="closeWindowBtn">❌ Close Window</button>
+    </div>
+
+    <script>
+        // Auto-trigger print dialog when page loads
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                window.print();
+            }, 500);
+        });
+
+        // Add event listeners for action buttons
+        document.getElementById('printResumeBtn').addEventListener('click', function() {
+            window.print();
+        });
+
+        document.getElementById('closeWindowBtn').addEventListener('click', function() {
+            window.close();
+        });
+    </script>
+</body>
+</html>

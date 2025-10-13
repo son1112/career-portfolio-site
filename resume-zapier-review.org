@@ -1,0 +1,5 @@
+notes on file:///Users/sonander/projects/career-portfolio-site/dynamic-resume.html?role=zapier-ai-engineer
+
+- reduce metrics claims that aren't founded in concrete data (always do this)
+- reduce claims of 'expert', prefer expertise over expert
+- where does the 73% documented success rate come from?

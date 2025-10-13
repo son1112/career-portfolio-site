@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anderson Reinkordt - Junior Backend Engineer for CardFlight</title>
+    <style>
+        /* PDF-Optimized Resume Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.4;
+            color: #333;
+            font-size: 11pt;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+            background: white;
+        }
+
+        /* Header Section */
+        .resume-header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .resume-header h1 {
+            font-size: 24pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .resume-header h2 {
+            font-size: 16pt;
+            color: #666;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        .resume-summary {
+            font-size: 10pt;
+            color: #555;
+            max-width: 6.5in;
+            margin: 0 auto;
+            line-height: 1.3;
+        }
+
+        .contact-info {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 10pt;
+        }
+
+        .contact-item {
+            color: #555;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 18px;
+        }
+
+        .section h3 {
+            font-size: 14pt;
+            color: #2c3e50;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 4px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        /* Experience Items */
+        .experience-item {
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2px;
+        }
+
+        .job-title {
+            flex: 1;
+        }
+
+        .job-title h4 {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 2px;
+        }
+
+        .company {
+            font-size: 11pt;
+            color: #666;
+            font-weight: normal;
+        }
+
+        .job-duration {
+            font-size: 10pt;
+            color: #888;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .job-location {
+            font-size: 9pt;
+            color: #999;
+            margin-bottom: 5px;
+            font-style: italic;
+        }
+
+        .job-achievements {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .job-achievements li {
+            margin-bottom: 3px;
+            padding-left: 12px;
+            position: relative;
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+
+        .job-achievements li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 8px;
+        }
+
+        .skill-category h4 {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .skill {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 9pt;
+            font-weight: 500;
+        }
+
+        .skill.advanced {
+            background: #3498db;
+            color: white;
+        }
+
+        .skill.intermediate {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .skill.beginner {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+
+        /* Projects */
+        .project-item {
+            margin-bottom: 12px;
+            page-break-inside: avoid;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+        }
+
+        .project-header h4 {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .project-type {
+            font-size: 9pt;
+            color: #888;
+            font-style: italic;
+        }
+
+        .project-achievements {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .project-achievements li {
+            margin-bottom: 2px;
+            padding-left: 12px;
+            position: relative;
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+
+        .project-achievements li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        /* Highlight box for value prop */
+        .value-prop-box {
+            background: #f8f9fa;
+            border-left: 4px solid #2c3e50;
+            padding: 12px 15px;
+            margin: 15px 0;
+            font-size: 10pt;
+            line-height: 1.4;
+        }
+
+        .value-prop-box strong {
+            color: #2c3e50;
+            font-size: 11pt;
+        }
+
+        /* Print-specific styles */
+        @media print {
+            @page {
+                margin: 0.5in;
+                size: letter;
+            }
+
+            body {
+                margin: 0;
+                padding: 0.5in;
+                font-size: 10pt;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+
+            .experience-item {
+                page-break-inside: avoid;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .pdf-actions {
+                display: none !important;
+            }
+        }
+
+        .pdf-actions {
+            text-align: center;
+            margin: 20px 0;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .pdf-actions button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12pt;
+            margin: 0 10px;
+        }
+
+        .pdf-actions button:hover {
+            background: #34495e;
+        }
+
+        @media print {
+            .pdf-actions {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Resume Header -->
+    <div class="resume-header">
+        <h1>Anderson Reinkordt</h1>
+        <h2>Junior Backend Software Engineer - Returning CardFlight Alum</h2>
+        <p class="resume-summary">CardFlight alumni (2016-2019) returning with 10+ years Ruby on Rails expertise and payment processor experience gained at Stripe, Huntress, and enterprise fintech companies. Built payment integration libraries, achieved processor certifications, and contributed to CardFlight's core Rails infrastructure. Seeking junior role to return to familiar environment while bringing senior-level Rails, testing, and payment systems knowledge. You get experienced backend engineering at junior-level commitment.</p>
+        <div class="contact-info">
+            <div class="contact-item">📍 Lincoln, NE, USA</div>
+            <div class="contact-item">💼 <a href="https://www.linkedin.com/in/anderson-reinkordt/" target="_blank">LinkedIn</a></div>
+            <div class="contact-item">💻 <a href="https://github.com/son1112" target="_blank">GitHub</a></div>
+            <div class="contact-item">🌐 <a href="https://sonander.dev" target="_blank">Portfolio</a></div>
+            <div class="contact-item">📧 anderson.reinkordt@gmail.com</div>
+        </div>
+    </div>
+
+    <!-- Value Proposition -->
+    <div class="section">
+        <h3>Why Hire a Boomerang Employee for Junior Role?</h3>
+        <div class="value-prop-box">
+            <strong>The Value Proposition:</strong> You get 10+ years of Rails and payment systems expertise at junior-level commitment and compensation. Zero ramp-up time, proven cultural fit, and immediate productivity on day one. I already know SwipeSimple, your payment processors, testing standards, and company values from my 3 years here (2016-2019). Seeking junior role for work-life balance and familiar remote environment - not because I lack experience, but because CardFlight is where I want to be.
+        </div>
+    </div>
+
+    <!-- Core Technical Skills -->
+    <div class="section">
+        <h3>Core Technical Skills - Perfect Match for Junior Backend Role</h3>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h4>Backend Development</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">Ruby on Rails</span>
+                    <span class="skill advanced">Ruby</span>
+                    <span class="skill advanced">API Development</span>
+                    <span class="skill beginner">C# (Learning)</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Payment Systems Experience</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">Payment Processor Integrations</span>
+                    <span class="skill advanced">Vantiv/Worldpay Certification</span>
+                    <span class="skill advanced">First Data Integration</span>
+                    <span class="skill advanced">PCI Compliance</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Testing & Quality</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">RSpec</span>
+                    <span class="skill advanced">Manual Testing</span>
+                    <span class="skill advanced">Automated Testing</span>
+                    <span class="skill advanced">SimpleCov</span>
+                    <span class="skill advanced">RuboCop</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Database & Infrastructure</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">PostgreSQL</span>
+                    <span class="skill advanced">MySQL</span>
+                    <span class="skill advanced">Redis</span>
+                    <span class="skill advanced">AWS</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Operations & Support</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">Production Support</span>
+                    <span class="skill advanced">Bug Fixes & Troubleshooting</span>
+                    <span class="skill advanced">Third-Party Collaboration</span>
+                    <span class="skill advanced">Technical Documentation</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Collaboration & Process</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">Fast-Paced Environments</span>
+                    <span class="skill advanced">Remote Work</span>
+                    <span class="skill advanced">Cross-Team Communication</span>
+                    <span class="skill advanced">Continuous Learning</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How I Meet Every Requirement -->
+    <div class="section">
+        <h3>How I Exceed Every Junior Role Requirement</h3>
+        <div class="experience-item">
+            <ul class="job-achievements">
+                <li><strong>1+ years backend/API development:</strong> ✓ 10+ years Rails API development (CardFlight, Stripe, Huntress, PaymentSpring)</li>
+                <li><strong>Ruby on Rails experience:</strong> ✓ Expert-level Rails since 2016 - it's my primary language and framework</li>
+                <li><strong>Build/iterate on products:</strong> ✓ Built payment integrations, tax compliance systems, security platforms across multiple companies</li>
+                <li><strong>Backend service/API changes:</strong> ✓ Implemented Amazon Seller API, Microsoft 365 integration, payment processor APIs</li>
+                <li><strong>Execute manual and automated tests:</strong> ✓ Established RSpec/SimpleCov/RuboCop standards at CardFlight, continued at every company</li>
+                <li><strong>Support operations team:</strong> ✓ Rotational SRE at Huntress and TaxJar, production troubleshooting at all companies</li>
+                <li><strong>Third-party code certifications:</strong> ✓ Achieved Vantiv and First Data certifications at CardFlight</li>
+                <li><strong>Strong communication:</strong> ✓ Remote work at 5 companies, cross-team collaboration, processor technical coordination</li>
+                <li><strong>Fast-paced environment:</strong> ✓ Startup and scale-up experience across fintech, cybersecurity, and tax compliance</li>
+                <li><strong>Willingness to learn (C#):</strong> ✓ Learned new stacks at every company, eager to add C# to Rails expertise</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- CardFlight Experience Highlights -->
+    <div class="section">
+        <h3>My CardFlight Experience (2016-2019)</h3>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Software Engineer (Rails Core)</h4>
+                    <div class="company">CardFlight</div>
+                </div>
+                <div class="job-duration">Oct 2016 - Jul 2019</div>
+            </div>
+            <div class="job-location">Lincoln, NE</div>
+            <ul class="job-achievements">
+                <li>Software Engineer on Rails Core team for 3 years building payment processing infrastructure</li>
+                <li>Engineered integration libraries for multiple payment systems achieving certifications with Vantiv (Worldpay) and First Data</li>
+                <li>Developed comprehensive testing practices (RSpec), coverage analysis (SimpleCov), and code quality standards (RuboCop)</li>
+                <li>Collaborated with third-party processors on code certifications and technical integrations</li>
+                <li>Supported operations team with production troubleshooting and technical issue resolution</li>
+                <li>Built maintainable, scalable transaction processing systems serving CardFlight merchants</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Growth Since CardFlight -->
+    <div class="section">
+        <h3>Growth Since Leaving CardFlight (2019-2024)</h3>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Senior Software Engineer (Rails)</h4>
+                    <div class="company">Huntress Labs</div>
+                </div>
+                <div class="job-duration">Aug 2022 - Jan 2024</div>
+            </div>
+            <div class="job-location">Remote</div>
+            <ul class="job-achievements">
+                <li>Engineered Microsoft 365 integration enabling threat hunting and malicious actor monitoring</li>
+                <li>Acted as rotational SRE, monitoring and triaging bugs to maintain development priorities</li>
+                <li>Advanced development in Cybersecurity, 3rd party Integrations, and engineering code standards</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Senior Software Engineer (Rails)</h4>
+                    <div class="company">Stripe (acquired TaxJar)</div>
+                </div>
+                <div class="job-duration">Aug 2021 - Aug 2022</div>
+            </div>
+            <div class="job-location">Remote</div>
+            <ul class="job-achievements">
+                <li>Enabled accurate tax compliance for TaxJar's large user base by integrating Amazon Seller Partner API</li>
+                <li>Produced core discovery work for integration of TaxJar into Stripe systems</li>
+                <li>Advanced development in Fintech, Tax Compliance, and Error Handling</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Senior Software Engineer (Rails)</h4>
+                    <div class="company">TaxJar</div>
+                </div>
+                <div class="job-duration">Mar 2021 - Aug 2021</div>
+            </div>
+            <div class="job-location">Remote</div>
+            <ul class="job-achievements">
+                <li>Significantly reduced developer time annually by automating tax remediation analysis with dashboard integration</li>
+                <li>Regular SRE rotation including monitoring Honey Badger, Splunk, Sentry, NewRelic</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Full Stack Software Engineer (Rails)</h4>
+                    <div class="company">PaymentSpring</div>
+                </div>
+                <div class="job-duration">Jul 2019 - Mar 2021</div>
+            </div>
+            <div class="job-location">Lincoln & Remote</div>
+            <ul class="job-achievements">
+                <li>Developed middleware for Account Updater service to AWS SAM state machine</li>
+                <li>Built integrations with S3 to synchronize customer Credentials on File with payment processors</li>
+                <li>Continued payment systems expertise after leaving CardFlight</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Key Projects -->
+    <div class="section">
+        <h3>Key Projects Demonstrating CardFlight-Relevant Experience</h3>
+
+        <div class="project-item">
+            <div class="project-header">
+                <h4>Payment Processor Integration Libraries at CardFlight</h4>
+                <span class="project-type">CardFlight Core Work (2016-2019)</span>
+            </div>
+            <ul class="project-achievements">
+                <li>Built integration libraries for Vantiv (Worldpay) 610 host achieving processor certification</li>
+                <li>Developed First Data Omaha integration with comprehensive error handling and testing</li>
+                <li>Established testing standards: RSpec for behavior testing, SimpleCov for coverage, RuboCop for code quality</li>
+                <li>Created maintainable, scalable transaction processing systems serving CardFlight merchants</li>
+                <li>Collaborated directly with processor technical teams on certification requirements</li>
+            </ul>
+        </div>
+
+        <div class="project-item">
+            <div class="project-header">
+                <h4>Enterprise-Scale Payment & Compliance Systems</h4>
+                <span class="project-type">Post-CardFlight Growth</span>
+            </div>
+            <ul class="project-achievements">
+                <li>Stripe/TaxJar: Enabled tax compliance by integrating Amazon Seller Partner API with Rails backend</li>
+                <li>PaymentSpring: Built AWS SAM middleware for Account Updater service managing credentials on file</li>
+                <li>Huntress: Engineered Microsoft 365 integration with rotational SRE responsibilities</li>
+                <li>Consistent Rails development across fintech, tax compliance, and cybersecurity domains</li>
+                <li>Operations support experience: monitoring, bug triage, production troubleshooting</li>
+            </ul>
+        </div>
+
+        <div class="project-item">
+            <div class="project-header">
+                <h4>Why Junior Role Makes Sense for Both of Us</h4>
+                <span class="project-type">Value Proposition</span>
+            </div>
+            <ul class="project-achievements">
+                <li><strong>Returning to familiar environment:</strong> Already know SwipeSimple, payment domain, company culture</li>
+                <li><strong>Zero ramp-up time:</strong> Understand CardFlight codebase patterns, testing standards, processor integrations</li>
+                <li><strong>Senior expertise at junior commitment:</strong> 10+ years Rails, payment systems, testing - at junior-level expectations</li>
+                <li><strong>Proven cultural fit:</strong> 3 successful years at CardFlight demonstrates alignment with team and values</li>
+                <li><strong>Growth mindset:</strong> Eager to learn C# and new technologies while contributing Rails expertise immediately</li>
+                <li><strong>Realistic expectations:</strong> Seeking work-life balance and remote flexibility, not climbing career ladder</li>
+                <li><strong>Win-win scenario:</strong> You get experienced engineer who hits ground running, I get comfortable familiar environment</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- PDF Action Buttons -->
+    <div class="pdf-actions">
+        <button id="printResumeBtn">🖨️ Print Resume</button>
+        <button id="closeWindowBtn">❌ Close Window</button>
+    </div>
+
+    <script>
+        // Auto-trigger print dialog when page loads
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                window.print();
+            }, 500);
+        });
+
+        // Add event listeners for action buttons
+        document.getElementById('printResumeBtn').addEventListener('click', function() {
+            window.print();
+        });
+
+        document.getElementById('closeWindowBtn').addEventListener('click', function() {
+            window.close();
+        });
+    </script>
+</body>
+</html>

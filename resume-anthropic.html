@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anderson Reinkordt - Software Engineer, Business Technology for Anthropic</title>
+    <style>
+        /* PDF-Optimized Resume Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.4;
+            color: #333;
+            font-size: 11pt;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+            background: white;
+        }
+
+        /* Header Section */
+        .resume-header {
+            text-align: center;
+            border-bottom: 2px solid #2c3e50;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .resume-header h1 {
+            font-size: 24pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .resume-header h2 {
+            font-size: 16pt;
+            color: #666;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        .resume-summary {
+            font-size: 10pt;
+            color: #555;
+            max-width: 6.5in;
+            margin: 0 auto;
+            line-height: 1.3;
+        }
+
+        .contact-info {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 10pt;
+        }
+
+        .contact-item {
+            color: #555;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 18px;
+        }
+
+        .section h3 {
+            font-size: 14pt;
+            color: #2c3e50;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 4px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        /* Experience Items */
+        .experience-item {
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 2px;
+        }
+
+        .job-title {
+            flex: 1;
+        }
+
+        .job-title h4 {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 2px;
+        }
+
+        .company {
+            font-size: 11pt;
+            color: #666;
+            font-weight: normal;
+        }
+
+        .job-duration {
+            font-size: 10pt;
+            color: #888;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .job-location {
+            font-size: 9pt;
+            color: #999;
+            margin-bottom: 5px;
+            font-style: italic;
+        }
+
+        .job-achievements {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .job-achievements li {
+            margin-bottom: 3px;
+            padding-left: 12px;
+            position: relative;
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+
+        .job-achievements li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 8px;
+        }
+
+        .skill-category h4 {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .skill {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 9pt;
+            font-weight: 500;
+        }
+
+        .skill.advanced {
+            background: #3498db;
+            color: white;
+        }
+
+        .skill.intermediate {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .skill.beginner {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+
+        /* Projects */
+        .project-item {
+            margin-bottom: 12px;
+            page-break-inside: avoid;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 2px;
+        }
+
+        .project-header h4 {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .project-type {
+            font-size: 9pt;
+            color: #888;
+            font-style: italic;
+        }
+
+        .project-achievements {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .project-achievements li {
+            margin-bottom: 2px;
+            padding-left: 12px;
+            position: relative;
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+
+        .project-achievements li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        /* Anthropic-specific highlight box */
+        .anthropic-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #d97706;
+            padding: 15px 20px;
+            margin: 15px 0;
+            font-size: 10pt;
+            line-height: 1.5;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .anthropic-box h4 {
+            color: #d97706;
+            font-size: 12pt;
+            margin-bottom: 8px;
+        }
+
+        .anthropic-box strong {
+            color: #2c3e50;
+        }
+
+        /* Print-specific styles */
+        @media print {
+            @page {
+                margin: 0.5in;
+                size: letter;
+            }
+
+            body {
+                margin: 0;
+                padding: 0.5in;
+                font-size: 10pt;
+            }
+
+            .section {
+                page-break-inside: avoid;
+            }
+
+            .experience-item {
+                page-break-inside: avoid;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .pdf-actions {
+                display: none !important;
+            }
+        }
+
+        .pdf-actions {
+            text-align: center;
+            margin: 20px 0;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .pdf-actions button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12pt;
+            margin: 0 10px;
+        }
+
+        .pdf-actions button:hover {
+            background: #34495e;
+        }
+    </style>
+</head>
+<body>
+    <!-- Resume Header -->
+    <div class="resume-header">
+        <h1>Anderson Reinkordt</h1>
+        <h2>Software Engineer, Business Technology - Accessibility-First Full-Stack</h2>
+        <p class="resume-summary">Full-stack engineer with 10+ years building accessible, empathy-driven applications - currently using Claude API in production to serve neurodivergent users through PRISM and Rubber Ducky. Seeking to transition from research/customer-facing tools to internal business technology at Anthropic, bringing rare accessibility expertise (WCAG 2.1 AA/AAA, screen reader optimization), production Claude integration experience, and full-stack skills (React, TypeScript, Node.js, Rails, AWS). Mission alignment: Built accessible intelligence for underserved communities, want to build internal tools for teams creating beneficial AI.</p>
+        <div class="contact-info">
+            <div class="contact-item">📍 Lincoln, NE, USA</div>
+            <div class="contact-item">💼 <a href="https://www.linkedin.com/in/anderson-reinkordt/" target="_blank">LinkedIn</a></div>
+            <div class="contact-item">💻 <a href="https://github.com/son1112" target="_blank">GitHub</a></div>
+            <div class="contact-item">🌐 <a href="https://sonander.dev" target="_blank">Portfolio</a></div>
+            <div class="contact-item">📧 anderson.reinkordt@gmail.com</div>
+        </div>
+    </div>
+
+    <!-- Why Anthropic Section -->
+    <div class="section">
+        <h3>🎯 Why Anthropic: Mission Alignment & Unique Value</h3>
+        <div class="anthropic-box">
+            <h4>I'm Already Building on Your Product</h4>
+            <p style="margin-bottom: 10px;">I use <strong>Claude API in production</strong> to build Rubber Ducky and PRISM - accessible AI tools serving neurodivergent users. I understand your product from a developer's perspective, which brings a unique advantage to building internal tools for Anthropic's teams.</p>
+
+            <h4 style="margin-top: 12px;">Deep Mission Alignment</h4>
+            <p style="margin-bottom: 10px;"><strong>My mission:</strong> "Accessible intelligence for underserved communities" through empathy-first design.<br>
+            <strong>Anthropic's mission:</strong> "Create reliable, interpretable, and steerable AI systems" that are beneficial for society.<br>
+            This isn't just alignment on paper - it's authentic, lived values driving every technical decision I make.</p>
+
+            <h4 style="margin-top: 12px;">Rare Accessibility Expertise</h4>
+            <p style="margin-bottom: 10px;">Most engineers can build tools. Few can build <strong>accessible</strong> tools. I bring WCAG 2.1 AA/AAA compliance, screen reader optimization, neurodivergent user support, and universal design principles - skills explicitly valued at Anthropic but rarely found in candidates.</p>
+
+            <h4 style="margin-top: 12px;">Honest About the Transition</h4>
+            <p>I've built <strong>research and customer-facing tools</strong>, not internal business systems. But I bring the full-stack foundation (React, TypeScript, Node.js, Rails, AWS), accessibility expertise, and empathy-driven approach to learn the business technology domain while contributing unique perspectives from day one.</p>
+        </div>
+    </div>
+
+    <!-- Core Technical Skills -->
+    <div class="section">
+        <h3>Core Technical Skills for Business Technology Role</h3>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h4>Accessibility Engineering (Rare)</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">WCAG 2.1 AA/AAA</span>
+                    <span class="skill advanced">Screen Readers</span>
+                    <span class="skill advanced">Keyboard Navigation</span>
+                    <span class="skill advanced">Multi-Modal Interfaces</span>
+                    <span class="skill advanced">Neurodivergent Support</span>
+                    <span class="skill advanced">Universal Design</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Full-Stack Development</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">React</span>
+                    <span class="skill advanced">TypeScript</span>
+                    <span class="skill advanced">Node.js</span>
+                    <span class="skill advanced">Next.js</span>
+                    <span class="skill advanced">Ruby on Rails</span>
+                    <span class="skill intermediate">Python</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>AI Integration (Claude API User)</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">Claude API Production</span>
+                    <span class="skill advanced">OpenAI GPT-4</span>
+                    <span class="skill advanced">Multi-Agent Systems</span>
+                    <span class="skill advanced">Real-Time Streaming</span>
+                    <span class="skill advanced">Prompt Engineering</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Cloud & Infrastructure</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">AWS (S3/Lambda/RDS)</span>
+                    <span class="skill advanced">MongoDB</span>
+                    <span class="skill advanced">PostgreSQL</span>
+                    <span class="skill advanced">Redis</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Collaboration & Process</h4>
+                <div class="skills-list">
+                    <span class="skill advanced">Empathetic Communication</span>
+                    <span class="skill advanced">Cross-Team Collaboration</span>
+                    <span class="skill advanced">Remote Work</span>
+                    <span class="skill advanced">Iterative Improvement</span>
+                    <span class="skill advanced">System Reliability</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>Growing Areas (Honest)</h4>
+                <div class="skills-list">
+                    <span class="skill beginner">Internal Business Tools</span>
+                    <span class="skill intermediate">Data Pipelines</span>
+                    <span class="skill intermediate">Python (strengthening)</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Projects -->
+    <div class="section">
+        <h3>Key Projects Demonstrating Anthropic-Relevant Skills</h3>
+
+        <div class="project-item">
+            <div class="project-header">
+                <h4>🦆 Rubber Ducky - Production Claude API Platform</h4>
+                <span class="project-type">Accessible AI Tool (Customer-Facing)</span>
+            </div>
+            <ul class="project-achievements">
+                <li><strong>Production Claude API integration:</strong> Real-time streaming, multi-agent architecture, systematic evaluation framework</li>
+                <li><strong>Accessibility-first:</strong> WCAG 2.1 AA/AAA compliance, screen reader optimization, keyboard navigation from day one</li>
+                <li><strong>Full-stack:</strong> React, TypeScript, Next.js frontend; Node.js, MongoDB backend; AWS infrastructure</li>
+                <li><strong>Documented implementations:</strong> Transparent methodology showing both capabilities and limitations</li>
+                <li><strong>Tech stack:</strong> Next.js, TypeScript, Claude API, MongoDB, Node.js, AWS</li>
+            </ul>
+        </div>
+
+        <div class="project-item">
+            <div class="project-header">
+                <h4>PRISM - Accessible Communication Platform</h4>
+                <span class="project-type">Assistive Technology (Neurodivergent Users)</span>
+            </div>
+            <ul class="project-achievements">
+                <li><strong>Built for underserved community:</strong> Neurodivergent users needing communication assistance with voice preservation</li>
+                <li><strong>Recognition over correction paradigm:</strong> Honors individual communication methods rather than enforcing conformity</li>
+                <li><strong>Multi-modal accessibility:</strong> Voice + text interfaces, screen reader support, universal design principles</li>
+                <li><strong>Real-time Claude API processing:</strong> Streaming responses with accessible interface design</li>
+                <li><strong>Empathy-first architecture:</strong> Every design decision prioritizes user dignity and autonomy</li>
+            </ul>
+        </div>
+
+        <div class="project-item">
+            <div class="project-header">
+                <h4>Enterprise Systems Experience</h4>
+                <span class="project-type">Full-Stack Engineering at Scale</span>
+            </div>
+            <ul class="project-achievements">
+                <li>Stripe/TaxJar: Integrated Amazon Seller Partner API serving large user bases with Rails backend</li>
+                <li>Huntress Labs: Built Microsoft 365 integration with rotational SRE monitoring production systems</li>
+                <li>PaymentSpring: Developed AWS middleware for payment credential synchronization</li>
+                <li>Cross-team collaboration: Worked with operations, product, and third-party technical teams</li>
+                <li>System reliability: Production support, monitoring, bug triage across multiple companies</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Professional Experience -->
+    <div class="section">
+        <h3>Professional Experience</h3>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Research Lead & Founder</h4>
+                    <div class="company">can.code Research Labs</div>
+                </div>
+                <div class="job-duration">Jan 2024 - Present</div>
+            </div>
+            <div class="job-location">Lincoln, NE & Remote</div>
+            <ul class="job-achievements">
+                <li>Founded AI research organization specializing in accessible intelligence for underserved communities</li>
+                <li>Built Rubber Ducky and PRISM using Claude API in production with systematic evaluation frameworks</li>
+                <li>Full-stack architecture: React, TypeScript, Next.js, Node.js, MongoDB, AWS</li>
+                <li>Accessibility-first: WCAG 2.1 AA/AAA compliance, screen reader optimization, universal design from day one</li>
+                <li>Real-time AI integration: Streaming Claude API responses, voice processing, multi-modal interfaces</li>
+                <li>Transparent methodology: Document both successes and limitations, contributing to understanding AI boundaries</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Senior Software Engineer (Rails)</h4>
+                    <div class="company">Huntress Labs</div>
+                </div>
+                <div class="job-duration">Aug 2022 - Jan 2024</div>
+            </div>
+            <div class="job-location">Remote</div>
+            <ul class="job-achievements">
+                <li>Engineered Microsoft 365 integration enabling enterprise-scale threat hunting and monitoring</li>
+                <li>Acted as rotational SRE, monitoring production systems and triaging bugs</li>
+                <li>Advanced development in Cybersecurity, 3rd party Integrations, engineering code standards</li>
+                <li>Cross-team collaboration with operations, product, and security teams</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Senior Software Engineer (Rails)</h4>
+                    <div class="company">Stripe (acquired TaxJar)</div>
+                </div>
+                <div class="job-duration">Aug 2021 - Aug 2022</div>
+            </div>
+            <div class="job-location">Remote</div>
+            <ul class="job-achievements">
+                <li>Enabled tax compliance for TaxJar's large user base by integrating Amazon Seller Partner API</li>
+                <li>Produced core discovery work for integration of TaxJar into Stripe systems</li>
+                <li>Advanced development in Fintech, Tax Compliance, Error Handling</li>
+                <li>Collaborated across multiple teams during acquisition integration period</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Senior Software Engineer (Rails)</h4>
+                    <div class="company">TaxJar</div>
+                </div>
+                <div class="job-duration">Mar 2021 - Aug 2021</div>
+            </div>
+            <div class="job-location">Remote</div>
+            <ul class="job-achievements">
+                <li>Significantly reduced developer time by automating tax remediation analysis with dashboard integration</li>
+                <li>Regular SRE rotation including monitoring Honey Badger, Splunk, Sentry, NewRelic</li>
+                <li>Production support and troubleshooting across distributed systems</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Full Stack Software Engineer (Rails)</h4>
+                    <div class="company">PaymentSpring</div>
+                </div>
+                <div class="job-duration">Jul 2019 - Mar 2021</div>
+            </div>
+            <div class="job-location">Lincoln & Remote</div>
+            <ul class="job-achievements">
+                <li>Developed middleware for Account Updater service to AWS SAM state machine</li>
+                <li>Built integrations with S3 to synchronize customer credentials with payment processors</li>
+                <li>Improved developer onboarding process and documentation</li>
+            </ul>
+        </div>
+
+        <div class="experience-item">
+            <div class="experience-header">
+                <div class="job-title">
+                    <h4>Software Engineer (Rails Core)</h4>
+                    <div class="company">CardFlight</div>
+                </div>
+                <div class="job-duration">Oct 2016 - Jul 2019</div>
+            </div>
+            <div class="job-location">Lincoln</div>
+            <ul class="job-achievements">
+                <li>Engineered integration libraries for payment systems achieving certifications with Vantiv and First Data</li>
+                <li>Developed comprehensive testing (RSpec), coverage (SimpleCov), and analysis (RuboCop) practices</li>
+                <li>Collaborated with third-party processors on technical integrations and certifications</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- PDF Action Buttons -->
+    <div class="pdf-actions">
+        <button id="printResumeBtn">🖨️ Print Resume</button>
+        <button id="closeWindowBtn">❌ Close Window</button>
+    </div>
+
+    <script>
+        // Auto-trigger print dialog when page loads
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                window.print();
+            }, 500);
+        });
+
+        // Add event listeners for action buttons
+        document.getElementById('printResumeBtn').addEventListener('click', function() {
+            window.print();
+        });
+
+        document.getElementById('closeWindowBtn').addEventListener('click', function() {
+            window.close();
+        });
+    </script>
+</body>
+</html>

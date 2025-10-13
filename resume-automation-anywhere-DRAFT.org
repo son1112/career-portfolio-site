@@ -1,0 +1,378 @@
+#+TITLE: Automation Anywhere Backend Engineer (Agentic AI) Resume - DRAFT for Review
+#+AUTHOR: Anderson Reinkordt
+#+DATE: 2025-10-09
+
+* STRATEGIC POSITIONING NOTES
+
+** Core Angle: "Agentic AI Practitioner with Deep Backend Fundamentals"
+
+This role is EXPLICITLY titled "Back-End Engineer (Agentic AI)" - this is the user's wheelhouse.
+
+*** Unique Positioning:
+1. *Agentic AI Experience:* On the forefront of agentic coding (Claude Code power user, building AI-powered applications)
+2. *Production LLM Integration:* Real experience with Claude API, GPT-4, streaming AI responses
+3. *Deep Backend Fundamentals:* 10+ years distributed systems, APIs, microservices (even if not Java-specific)
+4. *Polyglot Capability:* Ruby/Rails mastery + TypeScript/Node.js production + Python intermediate
+5. *AI-Assisted Development Workflows:* Can bring agentic coding practices to engineering team
+
+*** Key Requirements Match:
+- 4+ years backend: ✅ Have 10+
+- RESTful API & microservices: ✅ Strong expertise
+- Cloud platforms (AWS): ✅ Extensive experience
+- CI/CD & containerization: ✅ Docker, GitHub Actions, AWS deployment
+- Node.js: ✅ Production experience (intermediate level)
+- Python: ✅ Intermediate, can ramp up
+- Mentor junior developers: ✅ Experience across multiple roles
+
+*** Honest Gaps:
+- Java/Spring: Not primary expertise (Ruby/Rails is core)
+- Kafka: Limited direct experience
+- Elasticsearch: Some experience but not primary
+- BUT: Proven track record of adopting new technologies (TypeScript, LLM integration)
+
+*** Strategic Approach:
+Lead with AGENTIC AI expertise (job title literally says this), then strong backend fundamentals,
+then honest about Java/Spring learning curve while showing polyglot adaptability.
+
+** Job Details
+- *Company:* Automation Anywhere (AI-powered process automation, 1001+ employees)
+- *Role:* Back-End Engineer (Agentic AI)
+- *Location:* San Francisco Bay Area / Remote (US-based)
+- *Salary:* $155,000 - $180,000 + discretionary bonus + equity
+- *Reports To:* Director of Engineering, AI Agent Studio
+- *Mission:* "Democratize automation and create a better future for everyone"
+
+** Tech Stack:
+Primary: SQL, Java, Spring, REST API, Kafka, Elasticsearch
+Also: Node.js, Python, Cloud platforms (AWS/Azure/GCP)
+
+* RESUME CONTENT DRAFT
+
+** Header Section
+*** Title
+Back-End Engineer (Agentic AI) - Production AI Experience + Deep Backend Fundamentals
+
+*** Summary
+
+Remote backend engineer with 10+ years distributed systems experience and unique agentic AI expertise.
+On the forefront of agentic coding as Claude Code power user, building production LLM-powered applications
+with Claude API and GPT-4. Strong backend fundamentals: RESTful APIs, microservices architecture, cloud
+infrastructure (AWS), CI/CD pipelines. Polyglot engineer with Ruby/Rails mastery, TypeScript/Node.js
+production experience, Python capabilities. Founded can.code Research Labs demonstrating AI-first
+development practices. Proven track record adopting new technologies and mentoring engineers on modern
+development workflows including AI-assisted patterns.
+
+[USER: Does this summary lead with the agentic AI differentiator effectively? Should we mention
+Java/Spring gap upfront or address later?]
+
+*** Contact Info
+📍 Lincoln, NE, USA (Remote)
+💼 LinkedIn: https://www.linkedin.com/in/anderson-reinkordt/
+💻 GitHub: https://github.com/son1112
+🌐 Website: https://sonander.dev
+📧 anderson.reinkordt@gmail.com
+
+** Why Automation Anywhere - The Agentic AI Angle
+
+*** Section Title
+🎯 Why This Role: Agentic AI Expertise Meets Backend Engineering
+
+*** Content Box (Highlight Section)
+
+**** Agentic AI Is My Current Frontier
+The role title says "Agentic AI" - this is literally what I'm building with daily. Heavy Claude Code
+user for AI-assisted development workflows. Built production LLM applications (Rubber Ducky, PRISM)
+with Claude API and GPT-4 integration. Understand agentic patterns, autonomous workflows, AI-powered
+automation at a practical level, not just theoretical.
+
+**** Deep Backend Fundamentals (10+ Years)
+- RESTful API design and microservices architecture across multiple production systems
+- Distributed systems experience: Built scalable backends at TaxJar (enterprise scale), PaymentSpring,
+  CardFlight
+- Cloud infrastructure: Extensive AWS (S3, Lambda, RDS, SQS, EC2), CI/CD, containerization
+- Database expertise: PostgreSQL optimization, Redis caching, NoSQL (MongoDB)
+- Performance & reliability: Systems handling high transaction volumes with 99%+ uptime requirements
+
+**** Polyglot Engineer with Proven Adaptability
+- Ruby/Rails: 10+ years mastery (primary backend expertise)
+- TypeScript/Node.js: Production applications (adopted since 2022, showing learning ability)
+- Python: Intermediate, can ramp up quickly for AI/ML workflows
+- Java/Spring: Can learn (honest about gap, but proven track record adopting new stacks)
+
+**** Production AI/LLM Integration Experience
+- Built real LLM-powered applications with streaming responses, not just POCs
+- Claude API & GPT-4: Production integration with systematic evaluation frameworks
+- Agentic workflows: Understand autonomous agent patterns, context management, task decomposition
+- Real-time AI features: Server-sent events, WebSocket integration for streaming AI
+- Can bring AI-assisted development practices to team
+
+**** Mentoring & Technical Leadership
+- Guided engineers on architecture, testing, API design across multiple roles
+- Can mentor team on agentic coding patterns and AI-assisted workflows
+- Founded can.code Research Labs showing initiative and ownership beyond assigned work
+- Collaborative mindset for cross-functional teams
+
+[USER: Does this positioning work? The agentic AI angle is so strong for this specific role.
+Should we be more upfront about Java/Spring gap or is leading with strengths better?]
+
+** Core Technical Skills
+
+*** Agentic AI & LLM Integration (THE DIFFERENTIATOR)
+- Claude Code (advanced - heavy user for agentic development workflows)
+- Claude API Integration (advanced - production LLM features)
+- OpenAI GPT-4 APIs (advanced)
+- Agentic Coding Patterns (intermediate - autonomous workflows, task decomposition)
+- LLM Application Architecture (intermediate)
+- Prompt Engineering (intermediate)
+- AI-Assisted Development Workflows (advanced)
+
+*** Backend Engineering Fundamentals (10+ Years)
+- RESTful API Design & Architecture (advanced)
+- Microservices Architecture (advanced)
+- Distributed Systems (advanced)
+- API Gateway Patterns (advanced)
+- Message Queues (intermediate - SQS, can learn Kafka)
+- Event-Driven Architecture (intermediate)
+
+*** Languages & Frameworks (Polyglot)
+- Ruby on Rails (10+ years, advanced)
+- Ruby (advanced)
+- TypeScript (intermediate - production experience)
+- Node.js (intermediate - production experience)
+- Python (intermediate - can ramp up for AI/ML)
+- Java/Spring (beginner - can learn, proven track record adopting new stacks)
+
+*** Database & Data Processing
+- PostgreSQL (advanced - optimization, query tuning, sharding)
+- MongoDB (advanced - NoSQL patterns)
+- Redis Caching (advanced)
+- Database Schema Design (advanced)
+- Elasticsearch (beginner/intermediate - can ramp up)
+- Data Pipeline Design (intermediate)
+
+*** Cloud & Infrastructure (AWS Focus)
+- AWS (S3, Lambda, RDS, SQS, EC2) (advanced)
+- CI/CD Pipelines (advanced - GitHub Actions, etc.)
+- Docker (intermediate)
+- Kubernetes (beginner - can ramp up)
+- Infrastructure as Code (intermediate)
+- Monitoring & Observability (advanced)
+
+*** Software Engineering Practices
+- Test-Driven Development (advanced)
+- RSpec, Jest, testing frameworks (advanced)
+- Code Review & Mentoring (advanced)
+- Agile/Scrum workflows (advanced)
+- Technical Documentation (advanced)
+
+[USER: Skills organization - does this work? Should we de-emphasize the "beginner" Java/Spring or
+keep it honest? The polyglot angle shows adaptability.]
+
+** Production AI & Agentic Coding Experience
+
+*** Rubber Ducky - AI-Powered Development Assistant
+*Built with extensive Claude Code usage for agentic development workflows*
+- Production Claude API integration: Streaming LLM responses, real-time AI features
+- Agentic patterns in practice: Context management, autonomous task handling, conversation routing
+- TypeScript/Next.js/Node.js: Modern backend demonstrating polyglot capability
+- PostgreSQL backend: Schema design for conversation history, AI context storage
+- Real users: Production deployment with actual usage, not just POC
+
+*** PRISM - Context-Aware AI Communication System
+- Multi-layered agent architecture: Agentic patterns for autonomous communication assistance
+- Dynamic task generation: AI workflows adapting to user needs and conversation state
+- LLM provider integration: Claude API + GPT-4 with fallback strategies
+- Context routing: Intelligent delegation to specialized agents
+- Voice preservation: Maintaining user identity while augmenting communication
+
+*** can.code Research Labs - AI-First Development
+- Founded AI research initiative: Demonstrates ownership and thought leadership
+- Agentic coding workflows: Heavy Claude Code user, on forefront of AI-assisted development
+- Systematic documentation: Implementation learnings, evaluation frameworks
+- Shows initiative: Building beyond assigned work, exploring cutting-edge AI patterns
+
+[USER: This section establishes the agentic AI credibility. Should we add more technical depth
+about the agentic patterns used?]
+
+** Backend Engineering Experience (10+ Years)
+
+*** TaxJar (2021-2022) - Enterprise SaaS Backend
+- Enterprise tax compliance automation: Contributed to platform serving large user bases (99%+ uptime)
+- OAuth upgrade project: Led Amazon Seller Partner API authentication modernization
+- PostgreSQL at scale: Worked with sharded databases, S3 Glacier archival, query optimization
+- Rails microservices: Background jobs with SQS, Lambda integration, distributed processing
+- RESTful API design: Financial data processing APIs with comprehensive error handling
+- Enterprise security: Handled sensitive financial data with audit compliance
+
+*** PaymentSpring (2019-2021) - Payment Processing Middleware
+- AWS-based microservices: State machines managing payment credential synchronization
+- Multi-tenant architecture: Secure financial data handling across multiple clients
+- API gateway patterns: Routing, rate limiting, authentication for payment processors
+- Lambda & SQS: Event-driven architecture for asynchronous processing
+- PostgreSQL/RDS: Database optimization for high-volume transaction processing
+
+*** CardFlight (2016-2019) - Payment Processor Integrations
+- Built Ruby gems: Payment processor integration libraries (Vantiv/Worldpay, First Data)
+- RESTful API development: Secure transaction processing APIs meeting PCI compliance
+- Microservices architecture: Distributed payment processing systems
+- High-reliability systems: Maintained uptime for production merchant payment processing
+- Testing excellence: RSpec, SimpleCov, comprehensive test coverage
+
+[USER: Does this backend experience section show enough depth even though it's not Java-based?
+The fundamentals are the same across languages.]
+
+** Mentoring & Technical Leadership
+
+*** Technical Mentorship
+- Mentored junior engineers on API design, testing patterns, backend architecture
+- Code review leadership: Established patterns for constructive feedback and knowledge transfer
+- Pair programming: Guided engineers through complex distributed systems challenges
+- Can mentor on agentic coding: AI-assisted workflows, Claude Code usage, modern AI patterns
+
+*** Cross-Functional Collaboration
+- Worked with product, design, frontend teams on complex features
+- Technical communication: Explaining backend architecture to non-technical stakeholders
+- Agile/Scrum: Participated in sprint planning, retrospectives, technical decision-making
+- Documentation: Created comprehensive technical documentation for APIs and systems
+
+*** Ownership & Initiative
+- Founded can.code Research Labs: Shows initiative beyond assigned work
+- Architectural contributions: Participated in system design discussions and technical planning
+- Process improvement: Identified and implemented better development workflows
+- AI-first mindset: Can bring modern AI-assisted development practices to engineering team
+
+[USER: Mentoring section - important for the role requirements. Does this cover it adequately?]
+
+** Adaptability & Technology Adoption
+
+*** Proven Track Record Learning New Technologies
+- *TypeScript/Node.js (2022-Present):* Adopted from zero to production applications in ~2 years
+  - Built Rubber Ducky and PRISM with modern TypeScript patterns
+  - Demonstrates ability to ramp up on new backend technologies
+  - Similar learning curve expected for Java/Spring
+
+- *LLM Integration (2022-Present):* Early adopter of production AI/LLM technologies
+  - Claude API, GPT-4 integration when many engineers still exploring
+  - Shows initiative staying on cutting edge of technology
+
+- *AWS Expansion (2019-Present):* Deepened cloud infrastructure expertise
+  - Started with basic AWS, now advanced (Lambda, SQS, complex architectures)
+  - Can apply same learning approach to other cloud platforms (Azure, GCP) if needed
+
+- *Agentic Coding (2024-Present):* Early adopter of AI-assisted development
+  - Heavy Claude Code user before widespread adoption
+  - Understands agentic patterns practically, not just theoretically
+
+[USER: This section addresses the Java/Spring gap indirectly by showing adaptability.
+Should we be more explicit about Java learning plan?]
+
+** Why This Is A Strong Fit
+
+*** Agentic AI Alignment (Primary Differentiator)
+- Role title explicitly says "Agentic AI" - this is literally my current technical frontier
+- Heavy Claude Code user: AI-assisted development workflows daily
+- Production LLM applications: Built real agentic systems (Rubber Ducky, PRISM)
+- Understand autonomous agent patterns: Task decomposition, context management, decision-making
+- Can bring cutting-edge AI development practices to Automation Anywhere's AI Agent Studio
+
+*** Backend Engineering Fundamentals
+- 10+ years distributed systems: RESTful APIs, microservices, cloud infrastructure
+- Scalability experience: Built systems handling high transaction volumes (TaxJar enterprise scale)
+- Database expertise: PostgreSQL optimization, NoSQL, caching strategies
+- AWS proficiency: Extensive experience with cloud infrastructure and services
+- CI/CD & DevOps: Docker, GitHub Actions, infrastructure automation
+
+*** Polyglot Engineering Mindset
+- Not tied to single language/framework: Ruby/Rails, TypeScript/Node.js, Python
+- Proven adaptability: Successfully adopted TypeScript/Node.js for production (2022-present)
+- Can learn Java/Spring: Track record shows ability to ramp up on new backend stacks
+- Backend principles transcend languages: API design, architecture, performance optimization
+
+*** Mission Alignment
+- "Democratize automation": Resonates with can.code mission (accessible AI tools)
+- AI-powered automation: Building exactly this with Rubber Ducky and PRISM
+- Process automation through AI: Understand the value proposition practically
+
+*** Cultural & Operational Fit
+- Remote work: 5+ years distributed team collaboration
+- Mentoring ready: Can guide engineers on backend architecture and agentic coding patterns
+- Cross-functional collaboration: Experience working with product, design, frontend teams
+- Ownership mindset: Founded can.code showing initiative and entrepreneurial thinking
+
+[USER: Final "why it's a match" section. Does this balance the agentic AI strength with the
+Java/Spring gap appropriately?]
+
+** Honest Gaps & Mitigation
+
+*** Java/Spring Not Primary Expertise
+*Gap:* Ruby/Rails is core backend expertise, not Java/Spring
+*Mitigation:*
+- Strong backend fundamentals transfer across languages/frameworks
+- Proven track record: Adopted TypeScript/Node.js to production level in ~2 years
+- Similar learning curve for Java/Spring (both statically-typed, mature ecosystems)
+- Can ramp up quickly with focused learning and pair programming
+
+*** Kafka Limited Experience
+*Gap:* Experience with SQS message queues but not Kafka specifically
+*Mitigation:*
+- Understand message queue patterns and event-driven architecture
+- SQS experience translates to Kafka concepts (producers, consumers, topics)
+- Can learn Kafka specifics quickly (similar to learning any new tool)
+
+*** Elasticsearch Beginner
+*Gap:* Some exposure but not deep Elasticsearch experience
+*Mitigation:*
+- Strong database fundamentals (PostgreSQL, MongoDB)
+- Understand search/indexing concepts
+- Can ramp up with focused learning
+
+*Overall:* Agentic AI expertise and deep backend fundamentals outweigh specific technology gaps.
+Proven adaptability learning new stacks. Backend engineering principles transcend languages.
+
+[USER: Should we include this "honest gaps" section or is it better to address indirectly
+through the "adaptability" section? Does being this upfront help or hurt?]
+
+* NEXT STEPS AFTER YOUR REVIEW
+
+1. *Review this entire document* - Add notes, questions, edits anywhere with [USER: ...] markers
+2. *Strategic direction approval:* Does the "Agentic AI Practitioner" angle work for this role?
+3. *Java/Spring positioning:* Should we be more/less upfront about the gap?
+4. *Sections to adjust:* Mark anything that needs expansion/contraction
+5. *I'll revise based on your feedback* - Update this org file with changes
+6. *Final approval* - Once satisfied, I'll generate:
+   - resume-automation-anywhere.html (standalone PDF-ready)
+   - resume-builder.js variant
+   - dynamic-resume.html dropdown update
+
+* YOUR REVIEW NOTES
+
+[Add your notes, questions, and requested changes below. I'll address each one in the next revision.]
+
+** Summary Section
+[Your notes here]
+
+** Why Automation Anywhere Section
+[Your notes here]
+
+** Skills Section
+[Your notes here]
+
+** AI/Agentic Coding Section
+[Your notes here]
+
+** Backend Experience Section
+[Your notes here]
+
+** Adaptability Section (Java/Spring Gap)
+[Your notes here]
+
+** Honest Gaps Section (Include or Remove?)
+[Your notes here]
+
+** Overall Strategic Angle
+[Your notes here]
+
+** Other Feedback
+[Your notes here]
+
+#+END

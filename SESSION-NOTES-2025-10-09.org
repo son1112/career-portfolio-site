@@ -1,0 +1,381 @@
+#+TITLE: Career Portfolio Site - Session Notes October 9, 2025
+#+AUTHOR: Anderson Reinkordt
+#+DATE: 2025-10-09
+
+* Session Overview
+** Date: October 9, 2025
+** Duration: Extended session
+** Branch: feature/add-slash-commands
+** Focus: Resume generation for multiple job applications + CardFlight senior role
+
+* Major Accomplishments
+
+** 1. Completed Multiple Job-Specific Resume Variants
+
+*** FullStack AI Solutions Architect Resume
+- *Company:* FullStack (consultancy)
+- *Role:* AI Solutions Architect (remote)
+- *Strategic Angle:* "Builder Transitioning to Strategic Consulting"
+- *Key Positioning:*
+  - Production AI experience provides consulting credibility
+  - Founded can.code Research Labs shows thought leadership potential
+  - Honest about gaps: limited sales/BD track record but strong technical depth
+  - 7+ years AI consulting requirement (this is a reach role)
+- *Files Created:*
+  - resume-fullstack.html (standalone)
+  - resume-builder.js variant: 'fullstack-ai-architect'
+  - dynamic-resume.html dropdown entry
+- *Salary:* Not disclosed in posting
+
+*** Huzi.ai Full Stack Engineer Resume
+- *Company:* Huzi.ai (Clackamas, Oregon - REMOTE, not local)
+- *Role:* Full Stack Engineer (Mid-Senior level)
+- *Strategic Angle:* Advanced TypeScript + Production LLM + Multi-Tenant SaaS
+- *Key Requirements Match:*
+  - Expert-level TypeScript/Next.js (job explicitly requires "expert")
+  - Production LLM integration experience (Claude API, GPT-4)
+  - Multi-tenant SaaS background (Stripe/TaxJar, PaymentSpring)
+  - PostgreSQL schema design expertise
+  - "Intelligence Layer" architecture (PRISM is literally this)
+- *Location Correction:* Initially thought Lincoln, NE was local office - WRONG
+  - Huzi.ai is in Clackamas, Oregon
+  - This is a fully remote role
+  - Removed all "local Lincoln" references
+- *Files Created:*
+  - resume-huzi.html (standalone)
+  - resume-builder.js variant: 'huzi-fullstack'
+  - dynamic-resume.html dropdown entry
+- *Critical Feedback Applied:* Pulled back from "expert" claims
+  - Changed TypeScript/Node.js from "advanced" to "intermediate"
+  - More honest positioning while maintaining credibility
+- *Assessment:* VERY STRONG MATCH - high priority application
+
+*** CardFlight Senior Backend Engineer Resume (PRIMARY FOCUS)
+- *Company:* CardFlight (former employer 2016-2019)
+- *Role:* Senior Backend Software Engineer (remote)
+- *Salary:* $150,000 - $180,000 base ($160k-$190k OTE with bonus + equity)
+- *Strategic Angle:* "Boomerang with Exponential Growth"
+- *Unique Value Proposition:*
+  - Already know CardFlight systems, culture, mission (2016-2019 tenure)
+  - Achieved Vantiv (Worldpay) and First Data certifications AT CardFlight
+  - Zero ramp-up time = immediate productivity
+  - Proven cultural fit (3 years successful collaboration)
+  - Significant growth since leaving:
+    - TaxJar enterprise experience
+    - TypeScript adoption (job requirement didn't have in 2016)
+    - Production LLM/AI integration (Claude API, GPT-4)
+    - Agentic coding forefront (Claude Code power user)
+    - Founded can.code Research Labs (ownership mentality)
+  - PaymentSpring connection: Founders Bryan Thompson & Jesse Angel were CardFlight colleagues
+
+**** Process Innovation: Draft-Review-Revise Workflow
+- Created comprehensive .org file draft FIRST (resume-cardflight-senior-DRAFT.org)
+- User reviewed and left detailed notes throughout
+- I revised based on all feedback
+- User approved → generated final HTML + resume-builder.js variant
+- This prevented wasted effort on wrong direction
+
+**** Key Feedback Incorporated:
+1. ✅ Added AI/agentic coding emphasis throughout
+   - New "AI/LLM Development & Agentic Coding" skills section
+   - Emphasized Claude Code usage as power user
+   - "On forefront of agentic coding" positioning
+   - Can mentor team on AI-assisted workflows
+
+2. ✅ Pulled back TypeScript/Node.js claims
+   - "advanced" → "intermediate" with "production experience" qualifier
+   - Honest positioning
+
+3. ✅ Removed all Stripe references
+   - "Stripe/TaxJar" → "TaxJar" throughout
+   - Focus on TaxJar components only (accurate to actual work)
+
+4. ✅ Corrected TaxJar experience claims
+   - "Built" → "Contributed to" (more accurate)
+   - Removed PostgreSQL schema design claim ("I did not design this")
+   - "Worked with" sharded databases rather than claiming ownership
+
+5. ✅ Highlighted OAuth upgrade project
+   - Featured prominently: "Led OAuth upgrade project for Amazon Seller Partner API"
+   - Emphasized tax reporting, compliance automation, autofiling sales taxes
+   - Called out in Greenfield/Legacy Balance section
+
+6. ✅ Added PaymentSpring/CardFlight connection
+   - Bryan Thompson and Jesse Angel were CardFlight colleagues
+   - Strengthens the "CardFlight network" familiarity angle
+
+7. ✅ Added website URL
+   - https://sonander.dev in contact info
+
+8. ✅ Enhanced Rubber Ducky project
+   - Note about building with Claude Code extensively
+   - Positioned as demonstration of agentic development expertise
+
+**** Files Created:
+- resume-cardflight-senior-DRAFT.org (comprehensive draft with notes)
+- resume-cardflight-senior.html (standalone PDF-ready)
+- resume-builder.js variant: 'cardflight-senior'
+- dynamic-resume.html dropdown: "Senior Backend Engineer (CardFlight) - Boomerang w/ Growth"
+
+** 2. Location Correction Pattern Identified
+
+*** Avantos.ai Location Error (Previous Session)
+- Initially assumed Lincoln, NE based on LinkedIn listing
+- WRONG: Actually New York, NY (122 East 42nd Street)
+- Had to remove all "local Lincoln" references
+
+*** Huzi.ai Location Error (This Session)
+- Initially assumed Lincoln, NE based on LinkedIn listing
+- WRONG: Actually Clackamas, Oregon
+- Remote role, not local office
+- Had to remove all "local Lincoln" references
+
+*** Lesson Learned:
+- LinkedIn job listings may show "Lincoln, NE" because that's MY location
+- ALWAYS verify actual company headquarters before claiming "local" advantage
+- Default to "Remote" positioning unless explicitly confirmed local office
+
+** 3. Resume Generation Process Improvements
+
+*** Established Draft-Review-Revise Workflow
+1. Create comprehensive .org draft with strategic notes
+2. User reviews and adds feedback directly in org file
+3. Revise org based on feedback
+4. User approves strategic direction
+5. Generate final HTML + resume-builder.js variant
+6. Further refinements possible on generated versions
+
+*** Benefits:
+- Prevents wasted effort generating wrong direction
+- User has visibility into strategic positioning before implementation
+- Allows for detailed feedback on content before formatting
+- Org format easier to review/edit than HTML
+- Can iterate on strategy before committing to final version
+
+** 4. Honest Positioning Refinements
+
+*** "Expert" Claims Removal
+- User feedback: "pull away from claiming expert"
+- Applied across all resumes:
+  - Huzi.ai: TypeScript/Node.js "expert" → "advanced" → "intermediate"
+  - Maintained credibility with "production experience" qualifier
+- Builds on previous feedback about reducing unfounded metrics
+
+*** Contribution vs Ownership
+- TaxJar: "Built tax compliance platform" → "Contributed to"
+- PostgreSQL: "Schema design" → "Worked with complex multi-tenant data model"
+- More accurate representation of actual role
+
+** 5. Technical Skills Organization
+
+*** New Category Added: "AI/LLM Development & Agentic Coding"
+Skills included:
+- Claude API Integration (advanced - production LLM features)
+- OpenAI GPT-4 APIs (advanced)
+- Claude Code (advanced - AI-assisted development workflows)
+- Agentic Coding Patterns (intermediate)
+- LLM Application Architecture (intermediate)
+- Prompt Engineering (intermediate)
+
+*** Rationale:
+- Differentiates from typical backend engineers
+- Shows modern development practices
+- Positions for future of software engineering
+- Can mentor others on AI-assisted workflows
+
+* Files Modified/Created This Session
+
+** New Files
+- resume-fullstack.html (FullStack AI Solutions Architect)
+- resume-huzi.html (Huzi.ai Full Stack Engineer)
+- resume-cardflight-senior-DRAFT.org (comprehensive draft with user notes)
+- resume-cardflight-senior.html (standalone PDF-ready)
+- SESSION-NOTES-2025-10-09.org (this file)
+
+** Modified Files
+- resume-builder.js
+  - Added 'fullstack-ai-architect' variant
+  - Added 'huzi-fullstack' variant
+  - Added 'cardflight-senior' variant
+  - Removed "expert" claims, replaced with "advanced" or "intermediate"
+  - Removed Stripe references from TaxJar experience
+  - Removed "local Lincoln" references for Huzi.ai and Avantos.ai
+
+- dynamic-resume.html
+  - Added dropdown: "AI Solutions Architect (FullStack) - Consulting Transition"
+  - Added dropdown: "Full Stack Engineer (Huzi.ai) - TypeScript/Next.js + Production LLM"
+  - Added dropdown: "Senior Backend Engineer (CardFlight) - Boomerang w/ Growth"
+  - Updated URL mappings for all new variants
+
+** Files From Previous Sessions (Corrected This Session)
+- resume-avantos.html (removed "local Lincoln" references)
+- resume-huzi.html (removed "local Lincoln" references)
+
+* Resume Portfolio Summary (All Variants)
+
+** Current Resume Variants Available:
+1. ai-focused: AI-Focused Software Engineer
+2. huzi-fullstack: Full Stack Engineer (Huzi.ai) - TypeScript/Next.js + Production LLM
+3. avantos-ai-fintech: AI Team (Avantos.ai) - AI + FinTech Specialist
+4. anthropic-business-tech: Business Technology (Anthropic) - Dream Job
+5. zapier-ai-engineer: Sr. Applied AI Engineer (Zapier)
+6. cardflight-junior: Junior Backend Engineer (CardFlight Alum)
+7. cardflight-senior: Senior Backend Engineer (CardFlight) - Boomerang w/ Growth
+8. fullstack-ai-architect: AI Solutions Architect (FullStack) - Consulting Transition
+9. rails-backend: Senior Rails Engineer
+10. tech-lead: Technical Lead & Founder
+11. fullstack: Full-Stack Engineer
+12. enterprise-fintech: Enterprise Fintech Engineer
+
+** Application Priority Assessment:
+
+*** Tier 1: Very Strong Matches
+1. *Huzi.ai Full Stack Engineer*
+   - Perfect stack match (TypeScript/Next.js/PostgreSQL)
+   - Production LLM experience (rare)
+   - Multi-tenant SaaS background
+   - Intelligence Layer architecture alignment (PRISM)
+   - Mid-senior level appropriate
+
+2. *CardFlight Senior Backend Engineer*
+   - Zero risk for them (proven cultural fit)
+   - Payment processor expertise from CardFlight era
+   - 10+ years Ruby on Rails (core requirement)
+   - Significant growth to show (not just returning same engineer)
+   - Salary appropriate ($150-180k)
+   - Personal connection (know the systems, people, mission)
+
+*** Tier 2: Strong Matches (Some Gaps)
+3. *Avantos.ai AI Team*
+   - Rare AI + FinTech combination
+   - Production LLM experience
+   - Payment domain expertise
+   - Remote (not local as initially thought)
+
+4. *Zapier Sr. Applied AI Engineer*
+   - Production LLM experience
+   - Integration expertise
+   - TypeScript preferred (have production experience)
+   - Honest about not having 7+ years AI consulting
+
+*** Tier 3: Reach Roles
+5. *Anthropic Business Technology*
+   - Dream job positioning
+   - Accessibility expertise (WCAG 2.1 AA/AAA)
+   - Production Claude API user (meta advantage)
+   - Honest about transition from research to business tools
+   - Salary $320k-$405k (significant jump)
+
+6. *FullStack AI Solutions Architect*
+   - Requires sales/BD experience (limited track record)
+   - 7+ years AI consulting (don't have)
+   - Production AI provides credibility
+   - Thought leadership potential (can.code)
+
+*** Tier 4: Already Applied (Previous)
+7. *CardFlight Junior Backend Engineer*
+   - "Senior trying for junior" angle
+   - May be superseded by Senior Backend application
+
+* Strategic Insights & Patterns
+
+** 1. The "Boomerang" Advantage
+Returning to former employer (CardFlight) provides unique value:
+- Zero onboarding cost (know systems, culture, mission)
+- Proven cultural fit (3 years 2016-2019)
+- Show significant growth (not just same engineer returning)
+- Can articulate specific value: "I achieved X while here, since grew Y capability"
+- Low risk hire for them
+- PaymentSpring connection reinforces CardFlight network
+
+** 2. Production LLM Experience Is Rare & Valuable
+Most candidates have:
+- Tutorials or POCs
+- API integrations without production deployment
+- Theory without practice
+
+We have:
+- Real users (Rubber Ducky, PRISM)
+- Streaming responses
+- Systematic evaluation
+- Production debugging and monitoring
+- This differentiates significantly
+
+** 3. Agentic Coding Positions for Future
+Emphasizing Claude Code usage and agentic workflows:
+- Shows adoption of cutting-edge development practices
+- Demonstrates continuous learning
+- Can mentor others (valuable for senior roles)
+- Positions as forward-thinking engineer
+- Differentiates from traditional backend engineers
+
+** 4. Honesty Over Hyperbole Builds Trust
+Pattern of pulling back claims:
+- "Expert" → "Advanced" or "Intermediate"
+- "Built" → "Contributed to"
+- Removing unfounded metrics (73%, 126+, etc.)
+- Accurate location info (not claiming "local" incorrectly)
+
+Result: More credible, trustworthy resume that doesn't oversell
+
+** 5. Domain Expertise + Modern Skills = Powerful Combination
+CardFlight positioning shows:
+- Deep payment processing domain knowledge (Vantiv, First Data)
+- +
+- Modern capabilities (TypeScript, AI/LLM, agentic coding)
+- =
+- Senior engineer who brings both depth and modern perspective
+
+* Technical Learnings
+
+** 1. LinkedIn Location Can Be Misleading
+- Job listings may show YOUR location, not company location
+- Always verify company headquarters
+- Don't assume "Lincoln, NE" listing means local office
+- Default to "Remote" unless explicitly confirmed
+
+** 2. Org Format Effective for Draft-Review
+- Easier to read/edit than HTML
+- Can include strategic notes inline
+- User can comment directly
+- Faster iteration on content before formatting
+- Better for collaborative refinement
+
+** 3. Resume Builder Architecture Scales Well
+- Adding new variants is straightforward
+- Consistent structure across all resumes
+- Easy to maintain and update
+- Dynamic dropdown handles growing list
+
+* Next Steps / Open Items
+
+** Immediate
+1. Review generated CardFlight resume for any final refinements
+2. Consider if additional job applications warrant custom resumes
+3. Prioritize applications based on strength of match
+
+** Process Improvements
+1. Document the draft-review-revise workflow for future resume generation
+2. Create checklist for verifying company location
+3. Consider template for .org draft files
+
+** Portfolio Enhancements
+1. Test all resume variants for PDF generation
+2. Verify print styling across all variants
+3. Consider analytics on which variants are viewed most
+
+* Open Pull Requests
+- PR #19: Document October 2, 2025 session accomplishments (docs/session-notes-oct-2)
+- PR #18: Add custom slash commands for portfolio management (feature/add-slash-commands)
+
+Current branch: feature/add-slash-commands
+
+* Session Metrics
+- Resume variants created: 3 (FullStack, Huzi.ai, CardFlight Senior)
+- Files created: 5 new files
+- Files modified: 2 major files (resume-builder.js, dynamic-resume.html)
+- Lines of code added: ~500+ (resume variants)
+- Iterations: Multiple based on user feedback
+- Key feedback patterns addressed: Honesty over hyperbole, location verification, agentic coding emphasis
+
+#+END

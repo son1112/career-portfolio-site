@@ -1,0 +1,490 @@
+#+TITLE: CompanyCam Senior Software Engineer (Ruby on Rails) Resume - DRAFT for Review
+#+AUTHOR: Anderson Reinkordt
+#+DATE: 2025-10-09
+
+* STRATEGIC POSITIONING NOTES
+
+** IMPORTANT: Direct Recruitment Context
+*Cait Naberhaus is reaching out directly* - this is a warm intro with higher success rate!
+Email: "We have another opportunity...wondering if you might still be interested"
+This suggests they know your background and are specifically recruiting you.
+
+** Core Angle: "Rails Master + AI Pioneer + T-Shaped Full-Stack"
+
+This role is an **EXCEPTIONAL match** - possibly one of your strongest:
+
+*** Perfect Alignment:
+1. *Ruby on Rails Mastery:* 10+ years (their primary requirement, your core strength)
+2. *AI/LLM Integration (MUST-HAVE):* They explicitly require "demonstrated experience leveraging AI to build/enhance products" - you have Rubber Ducky + PRISM with Claude API/GPT-4
+3. *Agentic Coding:* Can bring cutting-edge AI-assisted development practices
+4. *T-Shaped Full-Stack:* Deep backend expertise, can contribute React frontend
+5. *Scaling & Mentoring:* Experience with growing teams, scaling codebases
+6. *Direct Recruitment:* Cait reaching out = warm intro advantage
+
+*** Key Requirements Match:
+- 5+ years professional development: ✅ Have 10+
+- Advanced Ruby on Rails proficiency: ✅ 10+ years mastery
+- PostgreSQL, Redis, Sidekiq production: ✅ Extensive experience (TaxJar, PaymentSpring, CardFlight)
+- Full-stack contribution: ✅ React, TypeScript production experience
+- *AI experience (must-have):* ✅ Rubber Ducky, PRISM with Claude API/GPT-4 integration
+- Complex tasks without guidance: ✅ Founded can.code, senior-level work
+- Business trade-offs communication: ✅ Product manager collaboration
+- Mentorship & collaboration: ✅ Multiple roles mentoring engineers
+- U.S.-based: ✅ Lincoln, NE
+
+*** Nice-to-Haves (Strong Coverage):
+- AWS (S3, EC2): ✅ Extensive
+- MongoDB: ✅ Production experience
+- React: ✅ Production (Rubber Ducky, PRISM)
+- GraphQL: ✅ Intermediate experience
+- *LLM integration (OpenAI, Gemini):* ✅ Claude API + GPT-4 production integration
+- ElasticSearch: Some exposure
+- React Native: Can learn (have React foundation)
+- Terraform: Limited but can learn
+
+*** Cultural Fit:
+- "Laid-back but hardworking, genuine, kickass" → can.code founder, collaborative engineer
+- "Not an a**hole, good at what you do" → 5+ years remote work, proven collaboration
+- Growth mindset → Continuous learner (TypeScript adoption, AI integration)
+- Remote-first → 5+ years distributed teams
+
+** Job Details
+- *Company:* CompanyCam (photo documentation app for contractors)
+- *Role:* Senior Software Engineer (Ruby on Rails)
+- *Hiring Manager:* Angela Lindow (Engineering Manager)
+- *Recruiter:* Cait Naberhaus (reaching out directly)
+- *Location:* Remote-first (U.S. all time zones)
+- *Salary:* $175,000 - $200,000 + meaningful equity
+- *Team:* Product manager, designer, tech lead, engineers
+- *Philosophy:* Continuous discovery habits (CDH - Teresa Torres), Agile/Scrum/Kanban/Shape Up mix
+
+** Tech Stack:
+Primary: Ruby on Rails, PostgreSQL, GraphQL, REST, React, React Native
+Also: Redis, Sidekiq, AWS, ElasticSearch, MongoDB, Terraform
+
+** Mission:
+"Help hard-working folks save time" - building tools for contractors
+Photo documentation and productivity app for commercial/home services industries
+
+* RESUME CONTENT DRAFT
+
+** Header Section
+*** Title
+Senior Software Engineer (Ruby on Rails) - Rails Master + AI Integration + T-Shaped Full-Stack
+
+*** Summary
+
+Senior backend engineer with 10+ years Ruby on Rails mastery and proven AI integration expertise.
+Built production LLM-powered applications (Rubber Ducky, PRISM) with Claude API and GPT-4 integration,
+demonstrating the "leveraging AI to build/enhance products" requirement. On forefront of agentic coding
+as Claude Code power user, bringing modern AI-assisted development practices. T-shaped full-stack
+engineer: deep backend expertise (Rails, PostgreSQL, Redis, Sidekiq) with frontend contributions
+(React, TypeScript). Extensive experience scaling codebases at enterprise SaaS companies (TaxJar,
+PaymentSpring, CardFlight). Founded can.code Research Labs showing ownership mentality and growth
+mindset. Proven mentorship and collaboration across remote-first teams.
+
+[USER: Does this summary hit the key requirements? Should we emphasize the direct recruitment
+context or save for cover letter?]
+
+*** Contact Info
+📍 Lincoln, NE, USA (Remote)
+💼 LinkedIn: https://www.linkedin.com/in/anderson-reinkordt/
+💻 GitHub: https://github.com/son1112
+🌐 Website: https://sonander.dev
+📧 anderson.reinkordt@gmail.com
+
+** Why CompanyCam - Perfect Alignment
+
+*** Section Title
+🎯 Why This Is An Exceptional Match
+
+*** Content Box (Highlight Section)
+
+**** Ruby on Rails Mastery (Your Core Strength = Their Core Requirement)
+10+ years advanced proficiency in Ruby on Rails across multiple production systems:
+- TaxJar: Enterprise SaaS serving large user bases, Rails microservices with SQS/Lambda
+- PaymentSpring: AWS-based payment processing middleware, state machines, multi-tenant architecture
+- CardFlight: Payment processor integration libraries (Vantiv, First Data), PCI compliance
+
+PostgreSQL, Redis, Sidekiq in production: Extensive experience with sharded databases, caching
+strategies, background job processing, query optimization.
+
+**** AI Integration Experience (Critical Must-Have Requirement)
+CompanyCam explicitly requires: "Demonstrated experience leveraging AI to build/enhance products"
+
+You have exactly this:
+- *Rubber Ducky:* Production LLM application with Claude API integration, streaming responses,
+  systematic evaluation frameworks
+- *PRISM:* AI-powered communication system with GPT-4, multi-layered agent architecture, context-aware
+  workflows
+- *LLM Integration Expertise:* Experience with OpenAI GPT-4 and Claude API (job nice-to-have
+  explicitly mentions OpenAI/Gemini experience)
+- *Agentic Coding:* Heavy Claude Code user, can bring AI-assisted development practices to team
+- *Production Deployment:* Real users, not just POCs - understand production AI challenges
+
+**** T-Shaped Full-Stack Engineer
+Deep backend expertise with ability to contribute across stack:
+- *Backend Deep:* Ruby/Rails, PostgreSQL, Redis, Sidekiq, microservices, APIs (GraphQL, REST)
+- *Frontend Contributions:* React production experience (Rubber Ducky, PRISM), TypeScript
+- *Can Learn:* React Native (have React foundation), Terraform (limited but can ramp)
+- Exactly what job describes: "T-shaped, bringing deep expertise in one area while being comfortable
+  contributing in others"
+
+**** Scaling Codebases & Growing Teams
+Experience the role specifically calls for:
+- Scaling at enterprise level: TaxJar serving large user bases with 99%+ uptime
+- Technical debt management: OAuth upgrade project at TaxJar (modernizing legacy while maintaining
+  compatibility)
+- Process iteration: Worked across Agile/Scrum environments
+- Mentoring: Guided engineers on architecture, testing, Rails best practices across multiple roles
+
+**** Cultural & Values Fit
+- "Show up, grow up, do good" → Founded can.code (ownership), continuous learner (TypeScript adoption,
+  AI integration), collaborative remote engineer
+- "Not an a**hole, good at what you do" → 5+ years remote collaboration, proven technical delivery
+- Growth mindset → Continuously learning new technologies (TypeScript, LLM integration, agentic coding)
+- Mission alignment: Building tools that help hard-working folks (contractors) save time
+
+**** Direct Recruitment Advantage
+Cait Naberhaus reaching out directly suggests CompanyCam already sees potential fit. Ready to discuss
+early next week as requested.
+
+[USER: Does this "Why CompanyCam" section work? The AI integration requirement is critical and
+you have perfect examples.]
+
+** Core Technical Skills
+
+*** Ruby on Rails & Backend (10+ Years Mastery)
+- Ruby on Rails (10+ years, advanced)
+- Ruby (advanced)
+- RESTful API Design & Architecture (advanced)
+- GraphQL (intermediate)
+- Microservices Architecture (advanced)
+- Background Jobs (Sidekiq) (advanced)
+- API Gateway Patterns (advanced)
+
+*** Database & Data Layer (Production Experience)
+- PostgreSQL (advanced - optimization, sharding, query tuning)
+- Redis Caching (advanced)
+- MongoDB (advanced - NoSQL patterns)
+- Database Schema Design (advanced)
+- Sidekiq (advanced - background job processing)
+- ElasticSearch (beginner/intermediate - some experience)
+
+*** AI/LLM Integration (Must-Have Requirement)
+- Claude API Integration (advanced - production LLM features)
+- OpenAI GPT-4 APIs (advanced - job explicitly mentions OpenAI)
+- LLM Application Architecture (intermediate)
+- Prompt Engineering (intermediate)
+- Agentic Coding Patterns (intermediate)
+- Claude Code (advanced - AI-assisted development workflows)
+
+*** Full-Stack Capabilities (T-Shaped)
+- React (intermediate - production experience)
+- TypeScript (intermediate - production applications)
+- React Native (beginner - can learn, have React foundation)
+- JavaScript (advanced)
+- Frontend/Backend Integration (advanced)
+
+*** Cloud & Infrastructure (AWS Focus)
+- AWS (S3, EC2, Lambda, RDS, SQS) (advanced)
+- CI/CD Pipelines (advanced - GitHub Actions)
+- Docker (intermediate)
+- Terraform (beginner - limited but can learn)
+- Infrastructure as Code (intermediate)
+- Monitoring & Observability (advanced)
+
+*** Software Engineering Practices
+- Test-Driven Development (advanced)
+- RSpec (advanced - Rails testing)
+- Code Review & Mentoring (advanced)
+- Technical Documentation (advanced)
+- Agile/Scrum/Kanban (advanced)
+- Continuous Discovery Habits (familiar with Teresa Torres concepts)
+
+[USER: Skills section - does this cover all their requirements and nice-to-haves effectively?]
+
+** Ruby on Rails Production Experience (10+ Years)
+
+*** TaxJar (2021-2022) - Enterprise Rails at Scale
+- Enterprise tax compliance automation: Contributed to Rails platform serving large user bases (99%+ uptime)
+- OAuth upgrade project: Led Amazon Seller Partner API authentication modernization
+- PostgreSQL at scale: Worked with sharded databases, S3 Glacier archival, complex query optimization
+- Rails microservices: Background jobs with Sidekiq, SQS, Lambda integration, distributed processing
+- GraphQL & REST APIs: Financial data processing APIs with comprehensive error handling
+- Technical debt management: Modernizing legacy authentication while maintaining backward compatibility
+- Redis caching: Performance optimization strategies for high-volume data processing
+- Enterprise security: Handled sensitive financial data with audit compliance
+
+*** PaymentSpring (2019-2021) - Rails Payment Processing Middleware
+- AWS-based Rails microservices: State machines managing payment credential synchronization
+- Multi-tenant architecture: Secure financial data handling across multiple merchant accounts
+- PostgreSQL/RDS: Database optimization for high-volume transaction processing
+- Sidekiq background jobs: Asynchronous processing for payment workflows
+- API design: RESTful services with authentication, rate limiting, error handling
+- Redis integration: Caching strategies for payment processor communications
+- Production reliability: Maintained high uptime for critical payment processing systems
+
+*** CardFlight (2016-2019) - Rails Gems & Payment Processors
+- Built Ruby gems: Payment processor integration libraries (Vantiv/Worldpay, First Data certifications)
+- RESTful API development: Secure transaction processing meeting PCI compliance requirements
+- Microservices architecture: Distributed payment processing systems
+- RSpec testing: Comprehensive test coverage, SimpleCov, RuboCop standards
+- PostgreSQL: Database design for payment transaction processing
+- Production deployment: Maintained high uptime for merchant payment systems
+- Code quality: Contributed to architectural decisions and code review practices
+
+[USER: Does this Rails experience section show enough depth and production expertise?
+Should we add more specific technical details about scaling/optimization?]
+
+** AI/LLM Integration Experience (Critical Must-Have)
+
+*** Rubber Ducky - Production LLM Application
+*Demonstrates "leveraging AI to build/enhance products" requirement*
+- Production Claude API integration: Streaming LLM responses, real-time AI features
+- Built with TypeScript/Next.js/React: Shows full-stack T-shaped capability
+- PostgreSQL backend: Schema design for conversation history, AI context storage
+- Agentic coding in practice: Built extensively using Claude Code for AI-assisted development
+- Real users in production: Not just POC, actual deployment with user base
+- Systematic evaluation: Documented AI capabilities and limitations with testing frameworks
+
+*** PRISM - AI-Powered Communication System
+- Multi-LLM integration: Claude API + OpenAI GPT-4 (job explicitly mentions OpenAI)
+- Multi-layered agent architecture: Agentic patterns for autonomous communication assistance
+- Dynamic AI workflows: Context-aware task generation adapting to user needs
+- Production deployment: Real users benefiting from AI-enhanced communication
+- LLM provider management: Fallback strategies, cost optimization, performance monitoring
+
+*** can.code Research Labs - AI-First Development
+- Founded AI research initiative: Demonstrates ownership, growth mindset, initiative
+- Agentic coding workflows: Heavy Claude Code user, on forefront of AI-assisted development
+- Can bring modern practices: AI-assisted development workflows to CompanyCam engineering team
+- Systematic documentation: Implementation learnings, AI evaluation frameworks
+- Shows "grow up" value: Take ownership, learn continuously, growth mindset
+
+[USER: This section addresses the AI requirement directly. Is this compelling enough?
+They explicitly require this as a must-have.]
+
+** T-Shaped Full-Stack Contributions
+
+*** Backend Deep Expertise (Primary)
+- Ruby on Rails: 10+ years mastery across multiple production systems
+- PostgreSQL: Advanced optimization, sharding, query tuning, schema design
+- Redis: Caching strategies, performance optimization
+- Sidekiq: Background job processing, queue management
+- GraphQL & REST: API design and architecture
+- Microservices: Distributed systems, service communication, scalability
+
+*** Frontend Contributions (T-Shaped Width)
+- React: Production experience (Rubber Ducky, PRISM applications)
+- TypeScript: Modern frontend patterns with type safety
+- React/Rails integration: Full-stack feature development
+- UI/UX collaboration: Worked with designers on user-facing features
+- Can contribute: React Native (have React foundation, can learn quickly)
+
+*** Comfortable Contributing Across Stack
+Exactly what job describes: "Whether that means diving into frontend code, supporting mobile efforts,
+or lending an extra set of eyes in discovery, you'll collaborate with your teammates to move work
+forward."
+
+Examples:
+- Built full-stack features: End-to-end ownership from database to UI
+- Cross-functional collaboration: Product managers, designers, frontend engineers
+- Discovery participation: Technical feasibility, architecture planning, trade-off analysis
+- Flexible team player: Can pick up tasks across the stack as needed
+
+[USER: T-shaped section - does this communicate the backend depth + frontend willingness
+effectively?]
+
+** Scaling Codebases & Growing Teams
+
+*** Experience Scaling Rails Applications
+- TaxJar enterprise scale: Contributed to platform serving large user bases
+- Microservices evolution: Worked on systems transitioning from monolith to distributed architecture
+- Performance optimization: Database query tuning, caching strategies, background job optimization
+- Technical debt management: OAuth upgrade project - modernizing legacy while maintaining compatibility
+
+*** Process Iteration & Team Growth
+- Worked across methodologies: Agile, Scrum, Kanban (job mentions flexibility across these)
+- Continuous improvement: Iterating on team processes for better delivery
+- Collaborative refinement: Working with teams to establish best practices
+- Familiar with Continuous Discovery: Understanding of Teresa Torres' CDH concepts (job mentions this)
+
+*** Mentorship & Code Quality
+- Guided engineers: Rails best practices, testing patterns, API design, architecture
+- Code review leadership: Constructive feedback, knowledge transfer, quality standards
+- Pair programming: Supporting teammates through complex challenges
+- Documentation: Technical documentation, architectural decision records
+- Setting standards: Code quality, testing coverage, documentation practices
+
+[USER: Does this section address the "senior devs with experience scaling codebases and
+iterating on processes" requirement adequately?]
+
+** Collaboration & Communication
+
+*** Cross-Functional Partnership
+Job requirement: "Partner closely with product managers, designers, and engineers, shaping feature
+direction by identifying technical opportunities, risks, and trade-offs early in discovery"
+
+Experience:
+- Product collaboration: Worked with PMs on feature planning, technical feasibility, roadmap prioritization
+- Design partnership: Collaborated with designers on UI/UX, technical constraints, implementation approaches
+- Engineering teamwork: Paired with engineers, code reviews, architectural discussions
+- Discovery participation: Early involvement in feature planning, identifying technical risks/opportunities
+
+*** Technical Communication
+Job requirement: "Understanding of business trade-offs and ability to effectively communicate risks
+and benefits of various technical approaches"
+
+Experience:
+- Technical trade-offs: Communicated database design decisions, API architecture choices, performance vs complexity
+- Business impact: Explained technical decisions in business terms for stakeholders
+- Risk communication: Identified and articulated technical risks early in planning
+- Facilitating discussions: Helping teams navigate trade-offs and align on solutions
+
+*** Remote Collaboration Excellence
+- 5+ years remote work: Distributed teams across time zones (matches CompanyCam remote-first)
+- Asynchronous communication: Effective written communication, documentation, async collaboration
+- Virtual pair programming: Remote mentoring and code collaboration
+- Team building: Building relationships and trust in remote environments
+
+[USER: Collaboration section - important for the role. Does this cover it well?]
+
+** Why This Is A Perfect Match
+
+*** Technical Requirements: 100% Coverage
+- Ruby on Rails mastery: ✅ 10+ years (their primary requirement)
+- PostgreSQL, Redis, Sidekiq: ✅ Production experience across multiple companies
+- AI integration (must-have): ✅ Rubber Ducky, PRISM with Claude API/GPT-4
+- Full-stack contribution: ✅ React, TypeScript production experience
+- AWS: ✅ Extensive (S3, EC2, Lambda, RDS, SQS)
+- GraphQL: ✅ Intermediate experience
+- LLM integration: ✅ OpenAI GPT-4, Claude API production (job mentions OpenAI specifically)
+- 5+ years experience: ✅ Have 10+
+- U.S.-based: ✅ Lincoln, NE
+
+*** Nice-to-Haves: Strong Coverage
+- MongoDB: ✅ Production experience
+- React: ✅ Production applications
+- ElasticSearch: Some exposure (can ramp up)
+- React Native: Can learn quickly (have React foundation)
+- Terraform: Limited but can learn
+
+*** Cultural & Values Alignment
+- "Show up, grow up, do good": ✅ Ownership (can.code founder), growth mindset, collaborative
+- "Not an a**hole, good at what you do": ✅ 5+ years remote collaboration, proven delivery
+- Laid-back but hardworking: ✅ Remote engineer balancing productivity and life
+- Genuine and kickass: ✅ Honest about capabilities, strong technical delivery
+
+*** Mission Resonance
+- Help hard-working folks save time: Building tools for contractors resonates
+- Photo documentation for contractors: Understand the value proposition
+- Meaningful outcomes over feature dumps: Align with thoughtful development approach
+- Continuous discovery habits: Interested in Teresa Torres' CDH methodology
+
+*** Direct Recruitment Context
+- Cait reaching out directly: Shows CompanyCam sees potential fit
+- "Another opportunity": Suggests awareness of background
+- Ready to chat early next week: Timing aligns with recruitment outreach
+
+[USER: Final match section - does this tie everything together effectively?
+Should we emphasize the direct recruitment angle more?]
+
+** Application Questions Preparation
+
+CompanyCam's application asks specific questions. Draft responses:
+
+*** Why do you want to work at CompanyCam?
+
+The role is an exceptional technical fit - Ruby on Rails is my core strength with 10+ years mastery,
+and you explicitly require AI integration experience, which I have through building production
+LLM applications (Rubber Ducky, PRISM). But beyond the technical match, I'm drawn to the mission:
+helping hard-working contractors save time through thoughtful tools. The engineering culture
+resonates - remote-first, T-shaped engineers, continuous discovery habits, flexible methodology.
+And honestly, being recruited by Cait suggests you already see potential alignment. I want to work
+somewhere I can bring my Rails expertise and AI integration experience while learning from a team
+that values both deep expertise and collaborative contribution.
+
+[USER: Does this answer work? Should we adjust tone or emphasis?]
+
+*** Why should CompanyCam want to work with you?
+
+I bring exactly what the role requires: 10+ years Rails mastery with proven AI integration experience.
+I've built production LLM applications (Rubber Ducky with Claude API, PRISM with GPT-4) - the
+"demonstrated AI experience" you list as a must-have. I can contribute immediately to your Rails
+codebase while bringing modern AI-assisted development practices (I'm a heavy Claude Code user).
+I'm T-shaped: deep backend expertise with ability to contribute React frontend. I've scaled
+codebases at enterprise SaaS (TaxJar) and mentored engineers on Rails best practices. And I embody
+your values: I show up (founded can.code), grow up (continuous learner who adopted TypeScript and
+AI integration), and do good (5+ years collaborative remote engineering).
+
+[USER: Does this answer highlight the key differentiators effectively?]
+
+*** Tell us about your experience working with AI professionally or personally.
+
+Professionally: I've built two production LLM applications. Rubber Ducky integrates Claude API for
+AI-powered development assistance with streaming responses, systematic evaluation frameworks, and
+real production users. PRISM uses both Claude API and OpenAI GPT-4 for AI-enhanced communication
+with multi-layered agent architecture and context-aware workflows. Both demonstrate integrating
+LLMs to enhance products - exactly what you require.
+
+Personally: I'm on the forefront of agentic coding as a heavy Claude Code user, bringing AI-assisted
+development workflows to my daily practice. I founded can.code Research Labs to explore AI
+applications systematically, documenting learnings and building evaluation frameworks. I understand
+AI's capabilities and limitations through hands-on production experience, not just tutorials.
+
+This combination of professional product-integrated AI and personal AI-assisted development practices
+means I can both build AI features for CompanyCam and help the team adopt modern AI development
+workflows.
+
+[USER: This answer is critical since AI experience is a must-have. Does it cover both aspects
+well?]
+
+* NEXT STEPS AFTER YOUR REVIEW
+
+1. *Review this entire document* - Add notes, questions, edits anywhere with [USER: ...] markers
+2. *Application questions:* Review the draft answers, adjust tone/content as needed
+3. *Strategic direction approval:* Does the emphasis on Rails mastery + AI integration work?
+4. *Sections to adjust:* Mark anything that needs expansion/contraction
+5. *I'll revise based on your feedback* - Update this org file with changes
+6. *Final approval* - Once satisfied, I'll generate:
+   - resume-companycam.html (standalone PDF-ready)
+   - resume-builder.js variant
+   - dynamic-resume.html dropdown update
+7. *Respond to Cait:* You'll want to reply to her email confirming interest and availability
+
+* YOUR REVIEW NOTES
+
+[Add your notes, questions, and requested changes below. I'll address each one in the next revision.]
+
+** Summary Section
+[Your notes here]
+
+** Why CompanyCam Section
+[Your notes here]
+
+** Skills Section
+[Your notes here]
+
+** Rails Experience Section
+[Your notes here]
+
+** AI Integration Section (Critical Must-Have)
+[Your notes here]
+
+** T-Shaped Full-Stack Section
+[Your notes here]
+
+** Scaling/Mentoring Section
+[Your notes here]
+
+** Application Questions
+[Your notes here]
+
+** Overall Strategic Angle
+[Your notes here]
+
+** Other Feedback
+[Your notes here]
+
+#+END

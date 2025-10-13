@@ -579,6 +579,13 @@
         <h3>🎯 Resume Role Focus</h3>
         <select id="roleSelect">
             <option value="ai-focused">AI-Focused Software Engineer</option>
+            <option value="huzi-fullstack">Full Stack Engineer (Huzi.ai) - TypeScript/Next.js + Production LLM</option>
+            <option value="avantos-ai-fintech">AI Team (Avantos.ai) - AI + FinTech Specialist</option>
+            <option value="anthropic-business-tech">Business Technology (Anthropic) - Dream Job</option>
+            <option value="zapier-ai-engineer">Sr. Applied AI Engineer (Zapier)</option>
+            <option value="cardflight-junior">Junior Backend Engineer (CardFlight Alum)</option>
+            <option value="cardflight-senior">Senior Backend Engineer (CardFlight) - Boomerang w/ Growth</option>
+            <option value="fullstack-ai-architect">AI Solutions Architect (FullStack) - Consulting Transition</option>
             <option value="rails-backend">Senior Rails Engineer</option>
             <option value="tech-lead">Technical Lead & Founder</option>
             <option value="fullstack">Full-Stack Engineer</option>
@@ -728,10 +735,10 @@
         </div>
     </div>
 
-    <!-- Education (Static) -->
+    <!-- Education (Static) - DISABLED until later time per user request
     <div class="section">
         <h3>Education & Certifications</h3>
-        
+
         <div class="experience-item">
             <div class="experience-header">
                 <div class="job-title">
@@ -744,7 +751,7 @@
                 <li>Web Development with React, modern JavaScript, and responsive design</li>
             </ul>
         </div>
-        
+
         <div class="experience-item">
             <div class="experience-header">
                 <div class="job-title">
@@ -758,6 +765,7 @@
             </ul>
         </div>
     </div>
+    -->
 
     <!-- PDF Action Buttons (Hidden in Print) -->
     <div class="pdf-actions">
@@ -851,6 +859,13 @@
             const baseURL = window.location.origin + window.location.pathname;
             return {
                 'ai-focused': `${baseURL}?role=ai-focused&print=true`,
+                'huzi-fullstack': `${baseURL}?role=huzi-fullstack&print=true`,
+                'avantos-ai-fintech': `${baseURL}?role=avantos-ai-fintech&print=true`,
+                'anthropic-business-tech': `${baseURL}?role=anthropic-business-tech&print=true`,
+                'zapier-ai-engineer': `${baseURL}?role=zapier-ai-engineer&print=true`,
+                'cardflight-junior': `${baseURL}?role=cardflight-junior&print=true`,
+                'cardflight-senior': `${baseURL}?role=cardflight-senior&print=true`,
+                'fullstack-ai-architect': `${baseURL}?role=fullstack-ai-architect&print=true`,
                 'rails-backend': `${baseURL}?role=rails-backend&print=true`,
                 'tech-lead': `${baseURL}?role=tech-lead&print=true`,
                 'fullstack': `${baseURL}?role=fullstack&print=true`,

@@ -1,0 +1,338 @@
+#+TITLE: Career Portfolio Site - Session Notes October 13, 2025
+#+AUTHOR: Anderson Reinkordt
+#+DATE: 2025-10-13
+
+* Session Overview
+** Date: October 13, 2025
+** Duration: Morning session (~11am)
+** Branch: main (after merging PR #18)
+** Focus: PR cleanup, CompanyCam draft resume completion, branch organization
+
+* Major Accomplishments
+
+** 1. Merged PR #18: Custom Slash Commands
+
+*** Context
+- PR #18 was open from previous week's work
+- Claude Code review had identified issues (shell syntax, file references, etc.)
+- Commit 6a7bd6b addressed ALL review feedback
+
+*** Review Fixes Applied (Commit 6a7bd6b)
+**** Critical Fixes:
+1. Shell Command Syntax - Removed "!" prefix from all bash commands
+2. File Reference Syntax - Replaced @filename with Read tool instructions
+3. Variable Usage - Fixed undefined $1 and $ARGUMENTS
+
+**** Enhancements:
+4. Error Handling - Added file existence checks
+5. Security Audit - Added HTTPS verification, SRI checks
+6. Accessibility Check - Added language attribute, landmark roles, skip nav
+
+*** Merge Status
+- ✅ PR #18 merged to main
+- ✅ All review comments addressed
+- ✅ 7 slash commands now available:
+  - /portfolio-update - Audit stats across variants
+  - /security-audit - XSS, CSP, external link security
+  - /deploy-check - Pre-deployment verification
+  - /user-claims-audit - Released vs unreleased project claims
+  - /accessibility-check - WCAG 2.1 AA/AAA compliance
+  - /prism-alignment - Philosophy integration verification
+  - /backlog-update - Backlog management
+
+** 2. CompanyCam Senior Software Engineer Resume (DRAFT COMPLETED)
+
+*** Strategic Context
+*Direct Recruitment Opportunity*
+- Cait Naberhaus (recruiter) reaching out directly
+- "Another opportunity" suggests awareness of background
+- Warm intro = higher success rate
+
+*** This Is An EXCEPTIONAL MATCH
+**** Perfect Technical Alignment:
+1. *Ruby on Rails Mastery (10+ years):* Their primary requirement = your core strength
+2. *AI Integration (MUST-HAVE):* "Demonstrated experience leveraging AI to build/enhance
+   products" - you have Rubber Ducky + PRISM with Claude API/GPT-4
+3. *T-Shaped Full-Stack:* Deep backend, can contribute React frontend
+4. *Salary:* $175k-$200k + equity
+5. *Remote-first:* Matches 5+ years distributed team experience
+
+**** Requirements Coverage:
+- 5+ years professional: ✅ Have 10+
+- Advanced Rails proficiency: ✅ 10+ years mastery
+- PostgreSQL, Redis, Sidekiq: ✅ Extensive production experience
+- Full-stack contribution: ✅ React, TypeScript production
+- AI experience (must-have): ✅ Rubber Ducky, PRISM
+- Complex tasks without guidance: ✅ Founded can.code, senior-level work
+- Mentorship: ✅ Multiple roles mentoring engineers
+- U.S.-based: ✅ Lincoln, NE
+
+**** Nice-to-Haves Coverage:
+- AWS (S3, EC2): ✅ Extensive
+- MongoDB: ✅ Production experience
+- React: ✅ Production applications
+- GraphQL: ✅ Intermediate
+- LLM integration (OpenAI, Gemini): ✅ Claude API + GPT-4 production
+- ElasticSearch: Some exposure
+- React Native: Can learn (have React foundation)
+- Terraform: Limited but can learn
+
+*** Draft File: resume-companycam-DRAFT.org
+
+**** Structure:
+- Comprehensive strategic positioning notes
+- Core technical skills organized by category
+- Rails production experience (TaxJar, PaymentSpring, CardFlight)
+- AI/LLM integration section (critical must-have)
+- T-shaped full-stack contributions
+- Scaling codebases & growing teams
+- Collaboration & communication
+- Why this is a perfect match section
+- **Draft application question responses:**
+  - Why do you want to work at CompanyCam?
+  - Why should CompanyCam want to work with you?
+  - Tell us about your experience working with AI professionally or personally
+
+**** Status: AWAITING USER REVIEW
+- User needs to review draft with [USER: ...] feedback markers
+- Ready for revision based on feedback
+- Final HTML generation after approval
+
+** 3. Branch Organization & Cleanup
+
+*** Problem Identified
+- User noticed: "we are on the add-slash-commands branch, but we aren't working on that anymore"
+- Resume work (SESSION-NOTES-2025-10-09.org, multiple resume files) was on wrong branch
+- PR #18 (slash commands) was complete but needed merge
+
+*** Resolution Steps
+1. ✅ Checked PR #18 status and review comments
+2. ✅ Confirmed all review issues addressed (commit 6a7bd6b)
+3. ✅ Merged PR #18 to main
+4. 🔄 Need to move resume work to new branch: feature/resume-variants-oct-2025
+5. 🔄 Commit all resume-related files to new branch
+
+*** Files to Move to New Branch
+**** Resume Drafts:
+- resume-companycam-DRAFT.org (current work)
+- resume-automation-anywhere-DRAFT.org (waiting for user decision)
+- resume-cardflight-senior-DRAFT.org (previous session)
+
+**** Generated Resume HTML:
+- resume-anthropic.html
+- resume-avantos.html
+- resume-cardflight.html
+- resume-cardflight-senior.html
+- resume-fullstack.html
+- resume-huzi.html
+- resume-zapier.html
+
+**** Review Files:
+- resume-zapier-review.org
+
+**** Modified Files:
+- dynamic-resume.html (new resume variant dropdowns)
+- resume-builder.js (new resume variant data)
+- resume.html (modifications)
+
+**** Session Documentation:
+- SESSION-NOTES-2025-10-09.org (previous session)
+- SESSION-NOTES-2025-10-13.org (this file)
+
+**** Screenshots:
+- Screenshot_2025-10-07 14.53.30_dCcFzo.png
+- screenshots/Screenshot_2025-10-06 09.35.00_1SUOqq.png
+- screenshots/Screenshot_2025-10-07 14.32.50_o9hat5.png
+- screenshots/Screenshot_2025-10-08 10.03.16_kRedz2.png
+
+**** Other:
+- .jot.ids.json (development tool file)
+- .jot.json (development tool file)
+
+* Resume Portfolio Status
+
+** Resume Variants Created (Recent Sessions)
+1. resume-anthropic.html - Business Technology (Anthropic) - Dream Job
+2. resume-avantos.html - AI Team (Avantos.ai) - AI + FinTech Specialist
+3. resume-cardflight.html - Junior Backend Engineer (CardFlight Alum)
+4. resume-cardflight-senior.html - Senior Backend Engineer (CardFlight) - Boomerang w/ Growth
+5. resume-fullstack.html - AI Solutions Architect (FullStack) - Consulting Transition
+6. resume-huzi.html - Full Stack Engineer (Huzi.ai) - TypeScript/Next.js + Production LLM
+7. resume-zapier.html - Sr. Applied AI Engineer (Zapier)
+
+** Resume Drafts Pending Review
+1. resume-companycam-DRAFT.org - *CURRENT PRIORITY* (Direct recruitment, exceptional match)
+2. resume-automation-anywhere-DRAFT.org - Backlog (Agentic AI role)
+
+** Application Priority Assessment
+
+*** Tier 1: Very Strong Matches (Immediate Priority)
+1. *CompanyCam Senior Software Engineer* (CURRENT FOCUS)
+   - Direct recruitment by Cait Naberhaus
+   - Ruby on Rails mastery = core requirement
+   - AI integration must-have = you have production LLM experience
+   - Perfect cultural fit
+   - Salary: $175k-$200k
+   - *Action:* Respond to Cait confirming interest for early next week chat
+
+2. *Huzi.ai Full Stack Engineer*
+   - TypeScript/Next.js + production LLM (rare combination)
+   - Intelligence Layer architecture alignment
+   - Already have resume ready
+
+3. *CardFlight Senior Backend Engineer*
+   - Former employer (zero risk for them)
+   - Boomerang with significant growth
+   - Already have resume ready
+
+*** Tier 2: Strong Matches
+4. Avantos.ai AI Team (AI + FinTech specialist)
+5. Zapier Sr. Applied AI Engineer (production LLM experience)
+
+*** Tier 3: Reach Roles
+6. Anthropic Business Technology (dream job, significant salary jump)
+7. FullStack AI Solutions Architect (requires sales/BD experience)
+8. Automation Anywhere Backend Engineer (Java/Spring gap, but agentic AI expertise)
+
+* Process Improvements & Patterns
+
+** 1. Draft-Review-Revise Workflow (Established)
+Proven effective from CardFlight resume:
+1. Create comprehensive .org draft with strategic notes
+2. User reviews and adds [USER: ...] feedback markers
+3. Revise based on all feedback
+4. User approves strategic direction
+5. Generate final HTML + resume-builder.js variant + dynamic-resume.html update
+
+Benefits:
+- Prevents wasted effort on wrong direction
+- User visibility into strategic positioning before implementation
+- Faster iteration on content vs formatting
+- More thoughtful strategic refinement
+
+** 2. Honest Positioning Pattern (Consistent)
+Ongoing refinement based on user feedback:
+- "Expert" → "Advanced" or "Intermediate" with qualifiers
+- "Built" → "Contributed to" (more accurate)
+- Verify company locations (don't assume local)
+- Remove unfounded metrics
+- Accurate contributions vs ownership claims
+
+Result: More credible, trustworthy resumes
+
+** 3. Branch Organization Discipline
+Lesson learned:
+- Keep work focused to branch purpose
+- Don't mix unrelated work (slash commands vs resume generation)
+- Regularly check branch status and PR progress
+- Clean up merged branches promptly
+
+* Technical Learnings
+
+** 1. PR Review Process
+- Claude Code can review PRs and provide detailed feedback
+- Reviews identify: syntax issues, security gaps, best practices
+- Commit 6a7bd6b showed proper response to review:
+  - Fixed all critical issues
+  - Enhanced with additional checks
+  - Tested changes
+  - Clear commit message documenting fixes
+
+** 2. Git Branch Management
+- Divergent branches require reconciliation strategy
+- Options: merge, rebase, fast-forward only
+- Configure preference: `git config pull.rebase false` (merge)
+- Check PR status regularly: `gh pr list`, `gh pr view <number>`
+
+** 3. GitHub CLI Usage
+- `gh pr list` - List open PRs
+- `gh pr view <number>` - View PR details
+- `gh pr view <number> --comments` - View PR with review comments
+- `gh pr merge <number> --squash` - Merge PR with squash strategy
+- Clean interface for PR management without leaving terminal
+
+* Open Pull Requests & Branch Status
+
+** Merged This Session
+- ✅ PR #18: Add custom slash commands for portfolio management (feature/add-slash-commands)
+
+** Still Open
+- PR #19: Document October 2, 2025 session accomplishments (docs/session-notes-oct-2)
+
+** Planned
+- New PR: Resume variants October 2025 (feature/resume-variants-oct-2025)
+  - Will contain all resume work from October 9-13 sessions
+  - SESSION-NOTES-2025-10-09.org
+  - SESSION-NOTES-2025-10-13.org
+  - All new resume variants and drafts
+
+* Next Steps
+
+** Immediate (This Session)
+1. 🔄 Create new branch: feature/resume-variants-oct-2025
+2. 🔄 Move all resume work to new branch
+3. 🔄 Commit resume work with descriptive message
+4. 🔄 Push new branch to origin
+5. 🔄 Create PR for resume work
+
+** After User Review of CompanyCam Draft
+1. User reviews resume-companycam-DRAFT.org
+2. User adds [USER: ...] feedback markers
+3. Revise draft based on feedback
+4. User approves
+5. Generate final resume-companycam.html
+6. Update resume-builder.js with 'companycam-senior' variant
+7. Update dynamic-resume.html dropdown
+8. Update PR with final changes
+
+** Application Actions (User)
+1. *HIGH PRIORITY:* Respond to Cait Naberhaus (CompanyCam recruiter)
+   - Confirm interest in Senior Software Engineer role
+   - Availability for early next week chat (10 minutes)
+   - Express excitement about direct recruitment
+2. Consider applying to Huzi.ai (resume ready)
+3. Consider applying to CardFlight Senior (resume ready)
+
+** Open Items
+1. Review resume-automation-anywhere-DRAFT.org (currently on backlog)
+2. Shopra Senior Full Stack Developer (Ruby on Rails / React) - backlogged last session
+3. Consider closing or merging PR #19 (docs/session-notes-oct-2)
+
+* Session Metrics
+- Duration: Morning session (~11am)
+- PR merged: 1 (PR #18 - slash commands)
+- Resume drafts completed: 1 (CompanyCam - awaiting review)
+- Branch cleanup: In progress
+- Files to commit: 20+ (resume variants, drafts, session notes, screenshots)
+- Key decision: Organized branch structure (separate resume work from other features)
+
+* Key Insights
+
+** 1. Direct Recruitment Advantage
+CompanyCam reaching out directly (Cait Naberhaus) shows:
+- They've already identified you as potential fit
+- Higher success rate than cold applications
+- Warm intro means faster interview process
+- Worth prioritizing over cold applications
+
+** 2. Ruby on Rails + AI Integration = Rare Combination
+CompanyCam role explicitly requires BOTH:
+- Advanced Rails proficiency (you have 10+ years)
+- Demonstrated AI experience (you have production LLM apps)
+This combination is uncommon and positions you strongly.
+
+** 3. Branch Hygiene Matters
+Keeping work organized by branch purpose:
+- Makes PRs clearer and easier to review
+- Prevents confusion about what's ready to merge
+- Cleaner git history
+- Easier to track progress on different initiatives
+
+** 4. Draft-Review-Revise Workflow Value
+CompanyCam draft demonstrates workflow benefits:
+- Strategic positioning thoughtfully considered
+- Application questions drafted ahead of time
+- User has clear visibility before final generation
+- Can iterate on messaging before committing to format
+
+#+END
